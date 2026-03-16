@@ -1,10 +1,19 @@
+aid: oracle-integration
 name: Oracle Integration
-description: Oracle Integration provides native connectivity to Oracle and non-Oracle Software as a Service (SaaS) and On-premises applications, such as Oracle ERP Cloud, Oracle Service Cloud, HCM Cloud, Salesforce, Workday, EBS, SAP, NetSuite and others.
-image: https://www.oracle.com/assets/ocom-logo-og-1200x628-1-5046771.jpg
-created: 2024-01-15 00:00:00+00:00
-modified: 2024-01-15 00:00:00+00:00
-specificationVersion: '0.18'
-url: https://www.oracle.com/integration/apis.json
+description: >-
+  Oracle Integration provides native connectivity to Oracle and non-Oracle
+  Software as a Service (SaaS) and On-premises applications, such as Oracle ERP
+  Cloud, Oracle Service Cloud, HCM Cloud, Salesforce, Workday, EBS, SAP,
+  NetSuite and others.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+created: '2024-01-15'
+modified: '2026-03-16'
+specificationVersion: '0.19'
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/oracle-integration/refs/heads/main/apis.yml
 tags:
 - Integration
 - iPaaS
@@ -96,7 +105,5 @@ common:
 - type: x-sdks
   url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/SDKs.html
 maintainers:
-- FN: Oracle Integration Team
-  email: integration-pm_us@oracle.com
-  x-twitter: Oracle
-  x-github: oracle
+  - FN: Kin Lane
+    email: kin@apievangelist.com
