@@ -15,95 +15,116 @@ specificationVersion: '0.19'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/oracle-integration/refs/heads/main/apis.yml
 tags:
-- Integration
-- iPaaS
-- Automation
-- API Management
-- Cloud Integration
+  - Integration
+  - iPaaS
+  - Automation
+  - API Management
+  - Cloud Integration
 apis:
-- name: Oracle Integration REST API
-  description: REST API for managing integrations, connections, adapters, and monitoring integration instances
-  image: https://www.oracle.com/assets/ocom-logo-og-1200x628-1-5046771.jpg
-  humanURL: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
-  baseURL: https://<instance-name>.integration.ocp.oraclecloud.com/ic/api/integration/v1
-  tags:
-  - Integration Management
-  - REST API
-  - Orchestration
-  properties:
-  - type: x-documentation
-    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
-  - type: x-openapi
-    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/openapi.json
-  - type: x-authentication
-    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/Authentication.html
-  - type: x-rate-limits
-    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/integration-cloud-service-limits.html
-  - type: x-pricing
-    url: https://www.oracle.com/cloud/integration/pricing.html
-  contact:
-  - FN: Oracle Integration Support
-    email: oracle-integration-support@oracle.com
-    x-twitter: Oracle
-- name: Oracle Integration Monitoring API
-  description: API for monitoring integration flows, tracking messages, and viewing activity streams
-  image: https://www.oracle.com/assets/ocom-logo-og-1200x628-1-5046771.jpg
-  humanURL: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/op-ic-api-integration-v1-monitoring-integrations-get.html
-  baseURL: https://<instance-name>.integration.ocp.oraclecloud.com/ic/api/integration/v1/monitoring
-  tags:
-  - Monitoring
-  - Analytics
-  - Logging
-  properties:
-  - type: x-documentation
-    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/integration-monitoring.html
-  - type: x-openapi
-    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/openapi-monitoring.json
-- name: Oracle Integration Connections API
-  description: API for creating and managing connections to various applications and services
-  image: https://www.oracle.com/assets/ocom-logo-og-1200x628-1-5046771.jpg
-  humanURL: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/Connections.html
-  baseURL: https://<instance-name>.integration.ocp.oraclecloud.com/ic/api/integration/v1/connections
-  tags:
-  - Connections
-  - Adapters
-  - Configuration
-  properties:
-  - type: x-documentation
-    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/Connections.html
-- name: Oracle Integration Process Automation API
-  description: API for Oracle Process Automation workflows and approvals
-  image: https://www.oracle.com/assets/ocom-logo-og-1200x628-1-5046771.jpg
-  humanURL: https://docs.oracle.com/en/cloud/paas/process-automation/
-  baseURL: https://<instance-name>.integration.ocp.oraclecloud.com/ic/api/process/v1
-  tags:
-  - Process Automation
-  - Workflows
-  - BPM
-  properties:
-  - type: x-documentation
-    url: https://docs.oracle.com/en/cloud/paas/process-automation/user-process-automation/
+  - name: Oracle Integration REST API
+    description: >-
+      REST API for managing integrations, connections, adapters, and monitoring integration
+      instances.
+    image: https://www.oracle.com/assets/ocom-logo-og-1200x628-1-5046771.jpg
+    humanURL: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
+    baseURL: 
+      https://<instance-name>.integration.ocp.oraclecloud.com/ic/api/integration/v1
+    tags:
+      - Integration Management
+      - REST API
+      - Orchestration
+    properties:
+      - type: x-documentation
+        url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
+      - type: x-openapi
+        url: 
+          https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/openapi.json
+      - type: x-authentication
+        url: 
+          https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/Authentication.html
+      - type: x-rate-limits
+        url: 
+          https://docs.oracle.com/en/cloud/paas/integration-cloud/integration-cloud-service-limits.html
+      - type: x-pricing
+        url: https://www.oracle.com/cloud/integration/pricing.html
+    contact:
+      - FN: Oracle Integration Support
+        email: oracle-integration-support@oracle.com
+        x-twitter: Oracle
+  - name: Oracle Integration Monitoring API
+    description: >-
+      API for monitoring integration flows, tracking messages, and viewing activity
+      streams.
+    image: https://www.oracle.com/assets/ocom-logo-og-1200x628-1-5046771.jpg
+    humanURL: 
+      https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/op-ic-api-integration-v1-monitoring-integrations-get.html
+    baseURL: 
+      https://<instance-name>.integration.ocp.oraclecloud.com/ic/api/integration/v1/monitoring
+    tags:
+      - Monitoring
+      - Analytics
+      - Logging
+    properties:
+      - type: x-documentation
+        url: 
+          https://docs.oracle.com/en/cloud/paas/integration-cloud/integration-monitoring.html
+      - type: x-openapi
+        url: 
+          https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/openapi-monitoring.json
+  - name: Oracle Integration Connections API
+    description: >-
+      API for creating and managing connections to various applications and services.
+    image: https://www.oracle.com/assets/ocom-logo-og-1200x628-1-5046771.jpg
+    humanURL: 
+      https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/Connections.html
+    baseURL: 
+      https://<instance-name>.integration.ocp.oraclecloud.com/ic/api/integration/v1/connections
+    tags:
+      - Connections
+      - Adapters
+      - Configuration
+    properties:
+      - type: x-documentation
+        url: 
+          https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/Connections.html
+  - name: Oracle Integration Process Automation API
+    description: >-
+      API for Oracle Process Automation workflows and approvals.
+    image: https://www.oracle.com/assets/ocom-logo-og-1200x628-1-5046771.jpg
+    humanURL: https://docs.oracle.com/en/cloud/paas/process-automation/
+    baseURL: 
+      https://<instance-name>.integration.ocp.oraclecloud.com/ic/api/process/v1
+    tags:
+      - Process Automation
+      - Workflows
+      - BPM
+    properties:
+      - type: x-documentation
+        url: 
+          https://docs.oracle.com/en/cloud/paas/process-automation/user-process-automation/
 common:
-- type: x-portal
-  url: https://cloud.oracle.com/integration
-- type: x-getting-started
-  url: https://docs.oracle.com/en/cloud/paas/integration-cloud/integration-get-started.html
-- type: x-tutorials
-  url: https://docs.oracle.com/en/cloud/paas/integration-cloud/tutorials.html
-- type: x-blog
-  url: https://blogs.oracle.com/integration/
-- type: x-change-log
-  url: https://docs.oracle.com/en/cloud/paas/integration-cloud/whats-new/
-- type: x-support
-  url: https://www.oracle.com/support/
-- type: x-terms-of-service
-  url: https://www.oracle.com/legal/terms.html
-- type: x-privacy-policy
-  url: https://www.oracle.com/legal/privacy/
-- type: x-status
-  url: https://ocistatus.oraclecloud.com/
-- type: x-sdks
-  url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/SDKs.html
+  - type: x-portal
+    url: https://cloud.oracle.com/integration
+  - type: x-getting-started
+    url: 
+      https://docs.oracle.com/en/cloud/paas/integration-cloud/integration-get-started.html
+  - type: x-tutorials
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/tutorials.html
+  - type: x-blog
+    url: https://blogs.oracle.com/integration/
+  - type: x-change-log
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/whats-new/
+  - type: x-support
+    url: https://www.oracle.com/support/
+  - type: x-terms-of-service
+    url: https://www.oracle.com/legal/terms.html
+  - type: x-privacy-policy
+    url: https://www.oracle.com/legal/privacy/
+  - type: x-status
+    url: https://ocistatus.oraclecloud.com/
+  - type: x-sdks
+    url: 
+      https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/SDKs.html
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
