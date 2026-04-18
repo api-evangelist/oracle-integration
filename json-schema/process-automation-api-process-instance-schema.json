@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/oracle-integration/refs/heads/main/json-schema/process-automation-api-process-instance-schema.json",
+  "title": "ProcessInstance",
+  "description": "ProcessInstance schema from Oracle Integration Process Automation API.",
+  "type": "object",
+  "properties": {
+    "processId": {"type": "string", "description": "Process instance identifier."},
+    "processName": {"type": "string", "description": "Process name."},
+    "processDefId": {"type": "string", "description": "Process definition identifier."},
+    "state": {"type": "string", "description": "Process state.", "enum": ["OPEN", "COMPLETED", "FAULTED", "ABORTED"]},
+    "priority": {"type": "integer", "description": "Process priority."},
+    "title": {"type": "string", "description": "Process title."},
+    "createdBy": {"type": "string", "description": "User who created the instance."},
+    "createdDate": {"type": "string", "format": "date-time", "description": "Creation timestamp."}
+  }
+}

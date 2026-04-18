@@ -1,0 +1,348 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: Oracle Integration
+  description: >-
+    Unified taxonomy mapping operational API resources and capability workflows
+    for Oracle Integration Cloud, covering integration management, process
+    automation, B2B trading partners, monitoring, and decision modeling.
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+operational:
+  apis:
+    - name: Oracle Integration Developer API
+      namespace: oracle-developer-api
+      version: "1.0.0"
+      baseUrl: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+      status: active
+    - name: Oracle Integration Process Automation API
+      namespace: oracle-process-api
+      version: "1.0.0"
+      baseUrl: https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1
+      status: active
+    - name: Oracle Integration File Server API
+      namespace: oracle-fileserver-api
+      version: "1.0.0"
+      baseUrl: https://{instance}.integration.ocp.oraclecloud.com/ic/api/fileserver/v1
+      status: active
+    - name: Oracle Integration Administrative API
+      namespace: oracle-admin-api
+      version: "20190131"
+      baseUrl: https://integration.{region}.oci.oraclecloud.com
+      status: active
+
+  resources:
+    - name: Connections
+      api: oracle-developer-api
+      actions: [list, get, update, delete, test, refresh-metadata]
+    - name: Integrations
+      api: oracle-developer-api
+      actions: [list, get, activate, deactivate, clone, export, import, delete]
+    - name: Monitoring Instances
+      api: oracle-developer-api
+      actions: [list, get, abort, get-activity-stream]
+    - name: Errored Instances
+      api: oracle-developer-api
+      actions: [list, get, resubmit, discard]
+    - name: Packages
+      api: oracle-developer-api
+      actions: [list, get, clone, export, import, delete]
+    - name: Libraries
+      api: oracle-developer-api
+      actions: [list, get, export, import, delete]
+    - name: Lookups
+      api: oracle-developer-api
+      actions: [list, get, create, update, delete, clone]
+    - name: Certificates
+      api: oracle-developer-api
+      actions: [list, upload, delete]
+    - name: Projects
+      api: oracle-developer-api
+      actions: [list, get, create, clone, delete]
+    - name: Adapter Bundles
+      api: oracle-developer-api
+      actions: [list, get, register, update, delete]
+    - name: B2B Documents
+      api: oracle-developer-api
+      actions: [list, get, create, update, delete, clone]
+    - name: B2B Schemas
+      api: oracle-developer-api
+      actions: [list, get, create, update, delete, clone]
+    - name: Trading Partners
+      api: oracle-developer-api
+      actions: [list, get, create, update, delete, export, import]
+    - name: Business Messages
+      api: oracle-developer-api
+      actions: [list, get, download-payload]
+    - name: Wire Messages
+      api: oracle-developer-api
+      actions: [list, get, download-payload]
+    - name: Process Definitions
+      api: oracle-process-api
+      actions: [list, get-metadata]
+    - name: Process Instances
+      api: oracle-process-api
+      actions: [list, get, create, update-state, add-comment, add-attachment]
+    - name: Tasks
+      api: oracle-process-api
+      actions: [list, get, approve, reject, reassign, escalate, get-payload, get-history]
+    - name: Decision Models
+      api: oracle-process-api
+      actions: [list, get, create, delete, deploy, invoke]
+    - name: Spaces
+      api: oracle-process-api
+      actions: [list, get, create, delete, add-user, remove-user]
+    - name: Analytics Queries
+      api: oracle-process-api
+      actions: [list, get, create, execute, update, delete]
+    - name: Dynamic Process Instances
+      api: oracle-process-api
+      actions: [list, get, create, control]
+
+  actions:
+    - name: list
+      method: GET
+      pattern: read
+      description: Retrieve a collection of resources.
+    - name: get
+      method: GET
+      pattern: read
+      description: Retrieve a single resource by identifier.
+    - name: create
+      method: POST
+      pattern: write
+      description: Create a new resource.
+    - name: update
+      method: PUT
+      pattern: write
+      description: Update an existing resource.
+    - name: delete
+      method: DELETE
+      pattern: destructive
+      description: Delete a resource.
+    - name: clone
+      method: POST
+      pattern: write
+      description: Clone an existing resource.
+    - name: export
+      method: GET
+      pattern: read
+      description: Export a resource as an archive.
+    - name: import
+      method: POST
+      pattern: write
+      description: Import a resource from an archive.
+    - name: activate
+      method: POST
+      pattern: write
+      description: Activate a resource.
+    - name: deactivate
+      method: POST
+      pattern: write
+      description: Deactivate a resource.
+    - name: test
+      method: POST
+      pattern: read
+      description: Test a resource for connectivity.
+    - name: abort
+      method: POST
+      pattern: destructive
+      description: Abort a running instance.
+    - name: resubmit
+      method: POST
+      pattern: write
+      description: Resubmit a failed instance.
+    - name: approve
+      method: PUT
+      pattern: write
+      description: Approve a task.
+    - name: reject
+      method: PUT
+      pattern: write
+      description: Reject a task.
+    - name: invoke
+      method: POST
+      pattern: write
+      description: Invoke a decision service.
+    - name: deploy
+      method: PUT
+      pattern: write
+      description: Deploy a resource to runtime.
+
+  schemas:
+    core:
+      - name: Connection
+        api: oracle-developer-api
+        properties: [id, name, description, status, adapterType, percentageComplete, lockedFlag, testStatus]
+      - name: Integration
+        api: oracle-developer-api
+        properties: [id, code, version, name, description, status, pattern, style, packageName]
+      - name: MonitoringInstance
+        api: oracle-developer-api
+        properties: [id, integrationId, status, startTime, endTime, businessIdentifier]
+      - name: Package
+        api: oracle-developer-api
+        properties: [code, name, description, lastUpdatedBy, lastUpdated]
+    b2b:
+      - name: TradingPartner
+        api: oracle-developer-api
+        properties: [id, name, description, status, contactName, contactEmail]
+      - name: B2BDocument
+        api: oracle-developer-api
+        properties: [id, name, standard, version, transactionType, direction]
+    process:
+      - name: ProcessInstance
+        api: oracle-process-api
+        properties: [processId, processName, processDefId, state, priority, title, createdBy, createdDate]
+      - name: Task
+        api: oracle-process-api
+        properties: [id, title, assignee, state, priority, createdDate, dueDate, processId, outcome]
+      - name: DecisionModel
+        api: oracle-process-api
+        properties: [name, description, spaceId]
+
+  parameters:
+    pagination:
+      - name: limit
+        type: integer
+        description: Maximum number of items to return.
+      - name: offset
+        type: integer
+        description: Number of items to skip.
+    identifiers:
+      - name: id
+        type: string
+        description: Resource identifier.
+      - name: packagename
+        type: string
+        description: Package name identifier.
+      - name: tpId
+        type: string
+        description: Trading partner identifier.
+      - name: processId
+        type: string
+        description: Process instance identifier.
+      - name: spaceId
+        type: string
+        description: Space identifier.
+    filters:
+      - name: q
+        type: string
+        description: Filter query string.
+
+  enums:
+    states:
+      - name: ConnectionStatus
+        values: [CONFIGURED, DRAFT, ERROR]
+      - name: IntegrationStatus
+        values: [CONFIGURED, ACTIVATED, DRAFT]
+      - name: InstanceStatus
+        values: [COMPLETED, FAILED, ABORTED, IN_PROGRESS]
+      - name: ProcessState
+        values: [OPEN, COMPLETED, FAULTED, ABORTED]
+      - name: TaskState
+        values: [ASSIGNED, COMPLETED, EXPIRED, INFO_REQUESTED, SUSPENDED, WITHDRAWN]
+      - name: PartnerStatus
+        values: [ACTIVE, INACTIVE]
+    types:
+      - name: B2BDirection
+        values: [INBOUND, OUTBOUND]
+      - name: CertificateType
+        values: [trust, identity]
+      - name: TaskAction
+        values: [APPROVE, REJECT, REASSIGN, ESCALATE, WITHDRAW, SUSPEND, RESUME]
+
+  authentication:
+    schemes:
+      - type: oauth2
+        description: OAuth 2.0 via Oracle Identity Cloud Service
+        apis: [oracle-developer-api, oracle-process-api, oracle-admin-api]
+      - type: basic
+        description: Basic authentication with instance credentials
+        apis: [oracle-developer-api, oracle-process-api]
+
+capability:
+  workflows:
+    - name: Integration Management
+      file: capabilities/integration-management.yaml
+      description: Unified management of integrations, connections, monitoring, B2B, processes, and tasks.
+      apis: [oracle-developer-api, oracle-process-api]
+      tools: 17
+      personas: [Integration Developer, Platform Administrator]
+      domains: [Integration, Monitoring, B2B, Process Automation]
+
+  personas:
+    - id: integration-developer
+      name: Integration Developer
+      description: Builds and manages integration flows, connections, and adapters.
+      workflows: [Integration Management]
+    - id: platform-administrator
+      name: Platform Administrator
+      description: Manages the Oracle Integration platform including monitoring, users, and configuration.
+      workflows: [Integration Management]
+    - id: process-designer
+      name: Process Designer
+      description: Designs and manages business process definitions and decision models.
+      workflows: [Integration Management]
+    - id: b2b-administrator
+      name: B2B Administrator
+      description: Manages B2B trading partners, agreements, and document exchange.
+      workflows: [Integration Management]
+
+  domains:
+    - name: Integration
+      description: Integration flow design, deployment, and lifecycle management.
+      resources: [Connections, Integrations, Packages, Libraries, Lookups, Projects]
+    - name: Monitoring
+      description: Real-time monitoring of integration instances and error handling.
+      resources: [Monitoring Instances, Errored Instances, Audit Records, Agent Groups]
+    - name: B2B
+      description: B2B trading partner management and document exchange.
+      resources: [Trading Partners, B2B Documents, B2B Schemas, Business Messages, Wire Messages]
+    - name: Process Automation
+      description: Business process management with tasks and decision models.
+      resources: [Process Definitions, Process Instances, Tasks, Decision Models, Spaces]
+
+  namespaces:
+    consumed:
+      - oracle-developer-api
+      - oracle-process-api
+    rest:
+      - namespace: oracle-integration-api
+        port: 8080
+    mcp:
+      - namespace: oracle-integration-mcp
+        port: 9090
+
+  binds:
+    - name: ORACLE_INTEGRATION_USERNAME
+      workflows: [Integration Management]
+    - name: ORACLE_INTEGRATION_PASSWORD
+      workflows: [Integration Management]
+
+crossReference:
+  - resource: Connections
+    operations: [listConnections, getConnection, updateConnection, deleteConnection, testConnection]
+    workflows: [Integration Management]
+    personas: [Integration Developer, Platform Administrator]
+  - resource: Integrations
+    operations: [listIntegrations, getIntegration, updateIntegrationStatus, cloneIntegration, deleteIntegration]
+    workflows: [Integration Management]
+    personas: [Integration Developer, Platform Administrator]
+  - resource: Monitoring Instances
+    operations: [listMonitoringInstances, getMonitoringInstance, abortMonitoringInstance]
+    workflows: [Integration Management]
+    personas: [Platform Administrator]
+  - resource: Trading Partners
+    operations: [listTradingPartners, getTradingPartner, createTradingPartner, deleteTradingPartner]
+    workflows: [Integration Management]
+    personas: [B2B Administrator]
+  - resource: Process Instances
+    operations: [listProcessInstances, getProcessInstance, createProcessInstance]
+    workflows: [Integration Management]
+    personas: [Process Designer, Platform Administrator]
+  - resource: Tasks
+    operations: [listTasks, getTask, performTaskAction]
+    workflows: [Integration Management]
+    personas: [Process Designer, Platform Administrator]

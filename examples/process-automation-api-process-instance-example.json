@@ -1,0 +1,10 @@
+{
+  "processId": "300456",
+  "processName": "Order Approval",
+  "processDefId": "default~OrderApproval~1.0",
+  "state": "OPEN",
+  "priority": 3,
+  "title": "Order #12345 Approval",
+  "createdBy": "admin@example.com",
+  "createdDate": "2026-04-18T10:00:00Z"
+}

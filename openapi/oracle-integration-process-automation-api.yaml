@@ -1,0 +1,1375 @@
+openapi: 3.0.3
+info:
+  title: Oracle Integration Process Automation API
+  description: >-
+    REST API for Oracle Cloud Infrastructure Process Automation enabling
+    management of process definitions, process instances, tasks, decision
+    models, dynamic processes, identities, spaces, analytics, and QuickStart
+    applications.
+  version: '1.0.0'
+  contact:
+    name: Oracle Integration Support
+    email: oracle-integration-support@oracle.com
+    url: https://www.oracle.com/support/
+  license:
+    name: Oracle Terms of Service
+    url: https://www.oracle.com/legal/terms.html
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+  - url: https://{instance}.integration.ocp.oraclecloud.com
+    description: Oracle Integration Cloud Instance
+    variables:
+      instance:
+        default: myinstance
+        description: Oracle Integration instance name
+security:
+  - oauth2: []
+  - basicAuth: []
+tags:
+  - name: Process Definitions
+    description: Retrieve process definition metadata and configurations.
+  - name: Process Instances
+    description: Manage process instances and related data.
+  - name: Tasks
+    description: Manage user tasks and task actions.
+  - name: Decision Models
+    description: Manage DMN decision models and services.
+  - name: Spaces
+    description: Manage workspace spaces.
+  - name: Identities
+    description: Manage users, groups, and roles.
+  - name: Analytics
+    description: Process analytics queries and data.
+  - name: Deployed Projects
+    description: Manage deployed BPM projects.
+  - name: Designtime Projects
+    description: Create and manage BPM projects.
+  - name: Dynamic Processes
+    description: Manage dynamic process definitions and instances.
+  - name: Preferences
+    description: Manage user and application preferences.
+paths:
+  /ic/api/process/v1/process-definitions:
+    get:
+      operationId: listProcessDefinitions
+      summary: Oracle Integration List Process Definitions
+      description: Retrieve a list of all process definitions.
+      tags:
+        - Process Definitions
+      responses:
+        '200':
+          description: Process definitions retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessDefinitionList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/process-definitions/{processDefId}/process-metadata:
+    get:
+      operationId: getProcessMetadata
+      summary: Oracle Integration Get Process Metadata
+      description: Retrieve metadata for a specific process definition.
+      tags:
+        - Process Definitions
+      parameters:
+        - name: processDefId
+          in: path
+          required: true
+          description: Process definition identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Process metadata retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessMetadata'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/processes:
+    get:
+      operationId: listProcessInstances
+      summary: Oracle Integration List Process Instances
+      description: Retrieve a list of process instances.
+      tags:
+        - Process Instances
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - name: q
+          in: query
+          description: Filter query string.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Process instances retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessInstanceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createProcessInstance
+      summary: Oracle Integration Create Process Instance
+      description: Create a new process instance.
+      tags:
+        - Process Instances
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProcessInstanceCreate'
+      responses:
+        '201':
+          description: Process instance created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessInstance'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/processes/{processId}:
+    get:
+      operationId: getProcessInstance
+      summary: Oracle Integration Get Process Instance
+      description: Retrieve a specific process instance.
+      tags:
+        - Process Instances
+      parameters:
+        - $ref: '#/components/parameters/processIdParam'
+      responses:
+        '200':
+          description: Process instance details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessInstance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateProcessState
+      summary: Oracle Integration Update Process State
+      description: Update the state of a process instance.
+      tags:
+        - Process Instances
+      parameters:
+        - $ref: '#/components/parameters/processIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProcessStateUpdate'
+      responses:
+        '200':
+          description: Process state updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessInstance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/processes/{processId}/comments:
+    get:
+      operationId: listProcessComments
+      summary: Oracle Integration List Process Comments
+      description: Retrieve comments for a process instance.
+      tags:
+        - Process Instances
+      parameters:
+        - $ref: '#/components/parameters/processIdParam'
+      responses:
+        '200':
+          description: Comments retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: addProcessComment
+      summary: Oracle Integration Add Process Comment
+      description: Add a comment to a process instance.
+      tags:
+        - Process Instances
+      parameters:
+        - $ref: '#/components/parameters/processIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentCreate'
+      responses:
+        '201':
+          description: Comment added.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/processes/{processId}/attachments:
+    get:
+      operationId: listProcessAttachments
+      summary: Oracle Integration List Process Attachments
+      description: Retrieve attachments for a process instance.
+      tags:
+        - Process Instances
+      parameters:
+        - $ref: '#/components/parameters/processIdParam'
+      responses:
+        '200':
+          description: Attachments retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttachmentList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/processes/instance-metrics:
+    get:
+      operationId: getInstanceMetrics
+      summary: Oracle Integration Get Instance Metrics
+      description: Retrieve process instance metrics.
+      tags:
+        - Process Instances
+      responses:
+        '200':
+          description: Instance metrics retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceMetrics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/tasks:
+    get:
+      operationId: listTasks
+      summary: Oracle Integration List Tasks
+      description: Retrieve a list of user tasks.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Tasks retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/tasks/{id}:
+    get:
+      operationId: getTask
+      summary: Oracle Integration Get Task
+      description: Retrieve a specific task by identifier.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/taskIdParam'
+      responses:
+        '200':
+          description: Task details retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: performTaskAction
+      summary: Oracle Integration Perform Task Action
+      description: Perform an action on a task such as approve, reject, or reassign.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/taskIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskAction'
+      responses:
+        '200':
+          description: Task action performed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/tasks/{id}/payload:
+    get:
+      operationId: getTaskPayload
+      summary: Oracle Integration Get Task Payload
+      description: Retrieve the payload data for a task.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/taskIdParam'
+      responses:
+        '200':
+          description: Task payload retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/tasks/{id}/history:
+    get:
+      operationId: getTaskHistory
+      summary: Oracle Integration Get Task History
+      description: Retrieve the history of a task.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/taskIdParam'
+      responses:
+        '200':
+          description: Task history retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskHistoryList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/tasks/task-metrics:
+    get:
+      operationId: getTaskMetrics
+      summary: Oracle Integration Get Task Metrics
+      description: Retrieve task metrics.
+      tags:
+        - Tasks
+      responses:
+        '200':
+          description: Task metrics retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskMetrics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/dmn/spaces:
+    get:
+      operationId: listDmnSpaces
+      summary: Oracle Integration List DMN Spaces
+      description: Retrieve a list of all DMN spaces.
+      tags:
+        - Decision Models
+      responses:
+        '200':
+          description: Spaces retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpaceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/dmn/spaces/{spaceId}/decision-models:
+    get:
+      operationId: listDecisionModels
+      summary: Oracle Integration List Decision Models
+      description: List decision model names in a space.
+      tags:
+        - Decision Models
+      parameters:
+        - $ref: '#/components/parameters/spaceIdParam'
+      responses:
+        '200':
+          description: Decision models retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DecisionModelList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/dmn/spaces/{spaceId}/decision-models/{decisionModelName}:
+    get:
+      operationId: getDecisionModel
+      summary: Oracle Integration Get Decision Model
+      description: Retrieve a specific decision model.
+      tags:
+        - Decision Models
+      parameters:
+        - $ref: '#/components/parameters/spaceIdParam'
+        - $ref: '#/components/parameters/decisionModelNameParam'
+      responses:
+        '200':
+          description: Decision model retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DecisionModel'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: createDecisionModel
+      summary: Oracle Integration Create Decision Model
+      description: Create an empty decision model.
+      tags:
+        - Decision Models
+      parameters:
+        - $ref: '#/components/parameters/spaceIdParam'
+        - $ref: '#/components/parameters/decisionModelNameParam'
+      responses:
+        '201':
+          description: Decision model created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DecisionModel'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteDecisionModel
+      summary: Oracle Integration Delete Decision Model
+      description: Delete a decision model and all its snapshots.
+      tags:
+        - Decision Models
+      parameters:
+        - $ref: '#/components/parameters/spaceIdParam'
+        - $ref: '#/components/parameters/decisionModelNameParam'
+      responses:
+        '204':
+          description: Decision model deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/spaces:
+    get:
+      operationId: listSpaces
+      summary: Oracle Integration List Spaces
+      description: Retrieve a list of all workspace spaces.
+      tags:
+        - Spaces
+      responses:
+        '200':
+          description: Spaces retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceSpaceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createSpace
+      summary: Oracle Integration Create Space
+      description: Create a new workspace space.
+      tags:
+        - Spaces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpaceCreate'
+      responses:
+        '201':
+          description: Space created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceSpace'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/spaces/{spaceId}:
+    get:
+      operationId: getSpace
+      summary: Oracle Integration Get Space
+      description: Retrieve a specific workspace space.
+      tags:
+        - Spaces
+      parameters:
+        - $ref: '#/components/parameters/spaceIdParam'
+      responses:
+        '200':
+          description: Space details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceSpace'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteSpace
+      summary: Oracle Integration Delete Space
+      description: Delete a workspace space.
+      tags:
+        - Spaces
+      parameters:
+        - $ref: '#/components/parameters/spaceIdParam'
+      responses:
+        '204':
+          description: Space deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/identities:
+    get:
+      operationId: listIdentities
+      summary: Oracle Integration List Identities
+      description: Retrieve a list of users, groups, and roles.
+      tags:
+        - Identities
+      responses:
+        '200':
+          description: Identities retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/identities/loggedInUser:
+    get:
+      operationId: getLoggedInUser
+      summary: Oracle Integration Get Logged in User
+      description: Retrieve the currently logged in user.
+      tags:
+        - Identities
+      responses:
+        '200':
+          description: User details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/analyticsqueries:
+    get:
+      operationId: listAnalyticsQueries
+      summary: Oracle Integration List Analytics Queries
+      description: Retrieve a list of all analytics queries.
+      tags:
+        - Analytics
+      responses:
+        '200':
+          description: Analytics queries retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsQueryList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createOrExecuteAnalyticsQuery
+      summary: Oracle Integration Create or Execute Analytics Query
+      description: Create or execute an analytics query.
+      tags:
+        - Analytics
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalyticsQueryCreate'
+      responses:
+        '200':
+          description: Query result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsQueryResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/dp-definitions:
+    get:
+      operationId: listDynamicProcessDefinitions
+      summary: Oracle Integration List Dynamic Process Definitions
+      description: Retrieve a list of dynamic process definitions.
+      tags:
+        - Dynamic Processes
+      responses:
+        '200':
+          description: Dynamic process definitions retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DynamicProcessDefinitionList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/dp-instances:
+    get:
+      operationId: listDynamicProcessInstances
+      summary: Oracle Integration List Dynamic Process Instances
+      description: Retrieve a list of dynamic process instances.
+      tags:
+        - Dynamic Processes
+      responses:
+        '200':
+          description: Dynamic process instances retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DynamicProcessInstanceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createDynamicProcessInstance
+      summary: Oracle Integration Create Dynamic Process Instance
+      description: Create a new dynamic process instance.
+      tags:
+        - Dynamic Processes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DynamicProcessInstanceCreate'
+      responses:
+        '201':
+          description: Dynamic process instance created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DynamicProcessInstance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/quickStartApps:
+    get:
+      operationId: listQuickStartApps
+      summary: Oracle Integration List QuickStart Apps
+      description: Retrieve a list of QuickStart applications.
+      tags:
+        - Deployed Projects
+      responses:
+        '200':
+          description: QuickStart apps retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuickStartAppList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Oracle Identity Cloud Service.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
+          tokenUrl: https://{idcs-url}/oauth2/v1/token
+          scopes:
+            urn:opc:resource:consumer::all: Full access
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with Oracle Integration credentials.
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 20
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip.
+      schema:
+        type: integer
+        default: 0
+    processIdParam:
+      name: processId
+      in: path
+      required: true
+      description: Process instance identifier.
+      schema:
+        type: string
+    taskIdParam:
+      name: id
+      in: path
+      required: true
+      description: Task identifier.
+      schema:
+        type: string
+    spaceIdParam:
+      name: spaceId
+      in: path
+      required: true
+      description: Space identifier.
+      schema:
+        type: string
+    decisionModelNameParam:
+      name: decisionModelName
+      in: path
+      required: true
+      description: Decision model name.
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+        title:
+          type: string
+          example: Not Found
+        detail:
+          type: string
+          example: Process instance not found.
+        status:
+          type: integer
+          example: 404
+    ProcessDefinition:
+      type: object
+      properties:
+        processDefId:
+          type: string
+          description: Process definition identifier.
+          example: default~OrderApproval~1.0
+        processName:
+          type: string
+          description: Process name.
+          example: Order Approval
+        revision:
+          type: string
+          description: Process revision.
+          example: '1.0'
+        status:
+          type: string
+          description: Definition status.
+          example: ACTIVE
+    ProcessDefinitionList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessDefinition'
+    ProcessMetadata:
+      type: object
+      properties:
+        processDefId:
+          type: string
+          example: default~OrderApproval~1.0
+        activities:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: ReviewOrder
+              type:
+                type: string
+                example: HUMAN_TASK
+    ProcessInstance:
+      type: object
+      properties:
+        processId:
+          type: string
+          description: Process instance identifier.
+          example: '300456'
+        processName:
+          type: string
+          description: Process name.
+          example: Order Approval
+        processDefId:
+          type: string
+          description: Process definition identifier.
+          example: default~OrderApproval~1.0
+        state:
+          type: string
+          description: Process state.
+          enum:
+            - OPEN
+            - COMPLETED
+            - FAULTED
+            - ABORTED
+          example: OPEN
+        priority:
+          type: integer
+          description: Process priority.
+          example: 3
+        title:
+          type: string
+          description: Process title.
+          example: Order #12345 Approval
+        createdBy:
+          type: string
+          description: User who created the instance.
+          example: admin@example.com
+        createdDate:
+          type: string
+          format: date-time
+          description: Creation timestamp.
+          example: '2026-04-18T10:00:00Z'
+    ProcessInstanceCreate:
+      type: object
+      properties:
+        processDefId:
+          type: string
+          description: Process definition identifier.
+          example: default~OrderApproval~1.0
+        serviceName:
+          type: string
+          description: Service name.
+          example: OrderApprovalService
+        title:
+          type: string
+          description: Instance title.
+          example: Order #12345 Approval
+        payload:
+          type: object
+          description: Process input payload.
+    ProcessStateUpdate:
+      type: object
+      properties:
+        state:
+          type: string
+          description: New process state.
+          enum:
+            - COMPLETED
+            - ABORTED
+          example: ABORTED
+    ProcessInstanceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessInstance'
+        totalResults:
+          type: integer
+          example: 150
+        hasMore:
+          type: boolean
+          example: true
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Task identifier.
+          example: '400789'
+        title:
+          type: string
+          description: Task title.
+          example: Review Order #12345
+        assignee:
+          type: string
+          description: Current assignee.
+          example: jsmith@example.com
+        state:
+          type: string
+          description: Task state.
+          enum:
+            - ASSIGNED
+            - COMPLETED
+            - EXPIRED
+            - INFO_REQUESTED
+            - SUSPENDED
+            - WITHDRAWN
+          example: ASSIGNED
+        priority:
+          type: integer
+          description: Task priority.
+          example: 3
+        createdDate:
+          type: string
+          format: date-time
+          description: Task creation timestamp.
+          example: '2026-04-18T10:00:00Z'
+        dueDate:
+          type: string
+          format: date-time
+          description: Task due date.
+          example: '2026-04-20T17:00:00Z'
+        processId:
+          type: string
+          description: Parent process instance identifier.
+          example: '300456'
+        processName:
+          type: string
+          description: Parent process name.
+          example: Order Approval
+        outcome:
+          type: string
+          description: Task outcome.
+          example: APPROVE
+    TaskAction:
+      type: object
+      properties:
+        action:
+          type: string
+          description: Action to perform.
+          enum:
+            - APPROVE
+            - REJECT
+            - REASSIGN
+            - ESCALATE
+            - WITHDRAW
+            - SUSPEND
+            - RESUME
+          example: APPROVE
+        comment:
+          type: string
+          description: Comment for the action.
+          example: Approved as per policy.
+        assignee:
+          type: string
+          description: New assignee for reassign action.
+          example: manager@example.com
+    TaskList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        totalResults:
+          type: integer
+          example: 25
+        hasMore:
+          type: boolean
+          example: false
+    TaskHistoryList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              action:
+                type: string
+                example: ASSIGN
+              user:
+                type: string
+                example: admin@example.com
+              timestamp:
+                type: string
+                format: date-time
+                example: '2026-04-18T10:00:00Z'
+              comment:
+                type: string
+                example: Task assigned to reviewer.
+    TaskMetrics:
+      type: object
+      properties:
+        totalTasks:
+          type: integer
+          example: 150
+        assignedTasks:
+          type: integer
+          example: 25
+        completedTasks:
+          type: integer
+          example: 120
+        expiredTasks:
+          type: integer
+          example: 5
+    CommentList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Please review this order.
+              user:
+                type: string
+                example: admin@example.com
+              timestamp:
+                type: string
+                format: date-time
+                example: '2026-04-18T10:30:00Z'
+    CommentCreate:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Comment text.
+          example: Approved. Proceed with fulfillment.
+    AttachmentList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              attachmentName:
+                type: string
+                example: purchase_order.pdf
+              mimeType:
+                type: string
+                example: application/pdf
+              attachmentId:
+                type: string
+                example: '900123'
+    InstanceMetrics:
+      type: object
+      properties:
+        totalInstances:
+          type: integer
+          example: 500
+        openInstances:
+          type: integer
+          example: 45
+        completedInstances:
+          type: integer
+          example: 440
+        faultedInstances:
+          type: integer
+          example: 15
+    DecisionModel:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Decision model name.
+          example: LoanApprovalDecision
+        description:
+          type: string
+          description: Model description.
+          example: Decision model for loan approval evaluation.
+        spaceId:
+          type: string
+          description: Space identifier.
+          example: default
+    DecisionModelList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/DecisionModel'
+    SpaceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              spaceId:
+                type: string
+                example: default
+              name:
+                type: string
+                example: Default Space
+    WorkspaceSpace:
+      type: object
+      properties:
+        spaceId:
+          type: string
+          description: Space identifier.
+          example: default
+        name:
+          type: string
+          description: Space name.
+          example: Default Space
+        description:
+          type: string
+          description: Space description.
+          example: Default workspace for projects.
+    SpaceCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Space name.
+          example: Production Space
+        description:
+          type: string
+          description: Space description.
+          example: Space for production process projects.
+    WorkspaceSpaceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkspaceSpace'
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: User identifier.
+          example: admin@example.com
+        firstName:
+          type: string
+          description: First name.
+          example: John
+        lastName:
+          type: string
+          description: Last name.
+          example: Smith
+        email:
+          type: string
+          format: email
+          description: Email address.
+          example: admin@example.com
+    IdentityList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    AnalyticsQueryCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Query name.
+          example: Monthly Process Volume
+        dataSource:
+          type: string
+          description: Data source name.
+          example: ProcessInstances
+        columns:
+          type: array
+          items:
+            type: string
+          example:
+            - processName
+            - state
+            - createdDate
+    AnalyticsQueryResult:
+      type: object
+      properties:
+        columns:
+          type: array
+          items:
+            type: string
+        rows:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+    AnalyticsQueryList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              businessQueryId:
+                type: string
+                example: '100123'
+              name:
+                type: string
+                example: Monthly Process Volume
+    DynamicProcessDefinitionList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: DP_ORDER_PROCESSING
+              name:
+                type: string
+                example: Order Processing
+    DynamicProcessInstance:
+      type: object
+      properties:
+        id:
+          type: string
+          example: DPI_001
+        definitionId:
+          type: string
+          example: DP_ORDER_PROCESSING
+        state:
+          type: string
+          example: OPEN
+        createdDate:
+          type: string
+          format: date-time
+          example: '2026-04-18T10:00:00Z'
+    DynamicProcessInstanceCreate:
+      type: object
+      properties:
+        definitionId:
+          type: string
+          example: DP_ORDER_PROCESSING
+        title:
+          type: string
+          example: Order Processing Case #001
+    DynamicProcessInstanceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicProcessInstance'
+    QuickStartAppList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              quickStartAppId:
+                type: string
+                example: QS_TRAVEL_REQUEST
+              name:
+                type: string
+                example: Travel Request

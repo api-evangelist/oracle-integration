@@ -1,0 +1,14 @@
+{
+  "id": "ERP_ORDER_SYNC|01.00.0000",
+  "code": "ERP_ORDER_SYNC",
+  "version": "01.00.0000",
+  "name": "ERP Order Synchronization",
+  "description": "Integration flow for synchronizing orders between Oracle ERP and Salesforce.",
+  "status": "ACTIVATED",
+  "pattern": "Orchestration",
+  "style": "FREEFORM",
+  "lockedFlag": false,
+  "lastUpdatedBy": "admin@example.com",
+  "lastUpdated": "2026-04-15T10:30:00Z",
+  "packageName": "ERP_INTEGRATIONS"
+}

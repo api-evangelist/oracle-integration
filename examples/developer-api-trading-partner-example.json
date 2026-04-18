@@ -1,0 +1,8 @@
+{
+  "id": "TP_ACME",
+  "name": "Acme Corporation",
+  "description": "Primary supplier for raw materials and components.",
+  "status": "ACTIVE",
+  "contactName": "Jane Smith",
+  "contactEmail": "jane.smith@acme.com"
+}

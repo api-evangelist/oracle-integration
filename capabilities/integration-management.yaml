@@ -1,0 +1,284 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: Oracle Integration Management
+  description: >-
+    Unified workflow for managing Oracle Integration lifecycle including
+    integrations, connections, packages, monitoring, B2B trading partners,
+    process automation, tasks, and decision models. Used by integration
+    developers and platform administrators.
+  tags:
+    - Oracle Integration
+    - Integration Management
+    - Process Automation
+    - B2B
+    - Monitoring
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      ORACLE_INTEGRATION_USERNAME: ORACLE_INTEGRATION_USERNAME
+      ORACLE_INTEGRATION_PASSWORD: ORACLE_INTEGRATION_PASSWORD
+
+capability:
+  consumes:
+    - import: oracle-developer-api
+      location: ./shared/developer-api.yaml
+    - import: oracle-process-api
+      location: ./shared/process-automation-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: oracle-integration-api
+      description: Unified REST API for Oracle Integration management.
+      resources:
+        - path: /v1/connections
+          name: connections
+          description: Integration connections.
+          operations:
+            - method: GET
+              name: list-connections
+              description: List all connections.
+              call: oracle-developer-api.list-connections
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/integrations
+          name: integrations
+          description: Integration flows.
+          operations:
+            - method: GET
+              name: list-integrations
+              description: List all integrations.
+              call: oracle-developer-api.list-integrations
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/monitoring/instances
+          name: monitoring-instances
+          description: Integration monitoring instances.
+          operations:
+            - method: GET
+              name: list-instances
+              description: List monitoring instances.
+              call: oracle-developer-api.list-instances
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/monitoring/errors
+          name: monitoring-errors
+          description: Errored integration instances.
+          operations:
+            - method: GET
+              name: list-errors
+              description: List errored instances.
+              call: oracle-developer-api.list-errors
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/packages
+          name: packages
+          description: Integration packages.
+          operations:
+            - method: GET
+              name: list-packages
+              description: List all packages.
+              call: oracle-developer-api.list-packages
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/trading-partners
+          name: trading-partners
+          description: B2B trading partners.
+          operations:
+            - method: GET
+              name: list-trading-partners
+              description: List all trading partners.
+              call: oracle-developer-api.list-trading-partners
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/processes
+          name: processes
+          description: Process instances.
+          operations:
+            - method: GET
+              name: list-process-instances
+              description: List process instances.
+              call: oracle-process-api.list-process-instances
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/tasks
+          name: tasks
+          description: User tasks.
+          operations:
+            - method: GET
+              name: list-tasks
+              description: List user tasks.
+              call: oracle-process-api.list-tasks
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: oracle-integration-mcp
+      transport: http
+      description: MCP server for AI-assisted Oracle Integration management.
+      tools:
+        - name: list-connections
+          description: List all Oracle Integration connections.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: oracle-developer-api.list-connections
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-connection
+          description: Get details of a specific connection.
+          hints:
+            readOnly: true
+          call: oracle-developer-api.get-connection
+          with:
+            id: tools.id
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: test-connection
+          description: Test a connection for connectivity.
+          hints:
+            readOnly: true
+          call: oracle-developer-api.test-connection
+          with:
+            id: tools.id
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-integrations
+          description: List all Oracle Integration flows.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: oracle-developer-api.list-integrations
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-integration
+          description: Get details of a specific integration.
+          hints:
+            readOnly: true
+          call: oracle-developer-api.get-integration
+          with:
+            id: tools.id
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-monitoring-instances
+          description: List integration monitoring instances.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: oracle-developer-api.list-instances
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-monitoring-errors
+          description: List errored integration instances.
+          hints:
+            readOnly: true
+          call: oracle-developer-api.list-errors
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-packages
+          description: List all integration packages.
+          hints:
+            readOnly: true
+          call: oracle-developer-api.list-packages
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-trading-partners
+          description: List all B2B trading partners.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: oracle-developer-api.list-trading-partners
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-process-definitions
+          description: List all process definitions.
+          hints:
+            readOnly: true
+          call: oracle-process-api.list-process-definitions
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-process-instances
+          description: List process instances.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: oracle-process-api.list-process-instances
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-process-instance
+          description: Get process instance details.
+          hints:
+            readOnly: true
+          call: oracle-process-api.get-process-instance
+          with:
+            processId: tools.processId
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-tasks
+          description: List user tasks.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: oracle-process-api.list-tasks
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-task
+          description: Get task details.
+          hints:
+            readOnly: true
+          call: oracle-process-api.get-task
+          with:
+            id: tools.id
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-dmn-spaces
+          description: List DMN decision model spaces.
+          hints:
+            readOnly: true
+          call: oracle-process-api.list-dmn-spaces
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-spaces
+          description: List workspace spaces.
+          hints:
+            readOnly: true
+          call: oracle-process-api.list-spaces
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-analytics-queries
+          description: List process analytics queries.
+          hints:
+            readOnly: true
+          call: oracle-process-api.list-analytics-queries
+          outputParameters:
+            - type: object
+              mapping: "$."

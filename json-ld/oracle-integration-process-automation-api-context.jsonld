@@ -1,0 +1,28 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "oracle": "https://docs.oracle.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ProcessInstance": "oracle:ProcessInstance",
+    "Task": "oracle:Task",
+    "DecisionModel": "oracle:DecisionModel",
+    "processId": {"@id": "dcterms:identifier", "@type": "xsd:string"},
+    "processName": {"@id": "schema:name", "@type": "xsd:string"},
+    "processDefId": {"@id": "oracle:processDefId", "@type": "xsd:string"},
+    "state": {"@id": "oracle:state", "@type": "xsd:string"},
+    "priority": {"@id": "oracle:priority", "@type": "xsd:integer"},
+    "title": {"@id": "schema:name", "@type": "xsd:string"},
+    "createdBy": {"@id": "oracle:createdBy", "@type": "xsd:string"},
+    "createdDate": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+    "id": {"@id": "dcterms:identifier", "@type": "xsd:string"},
+    "assignee": {"@id": "oracle:assignee", "@type": "xsd:string"},
+    "dueDate": {"@id": "oracle:dueDate", "@type": "xsd:dateTime"},
+    "processName_task": {"@id": "oracle:processName", "@type": "xsd:string"},
+    "outcome": {"@id": "oracle:outcome", "@type": "xsd:string"},
+    "name": {"@id": "schema:name", "@type": "xsd:string"},
+    "description": {"@id": "schema:description", "@type": "xsd:string"},
+    "spaceId": {"@id": "oracle:spaceId", "@type": "xsd:string"}
+  }
+}

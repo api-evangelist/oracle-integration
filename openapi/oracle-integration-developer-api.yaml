@@ -1,0 +1,2744 @@
+openapi: 3.0.3
+info:
+  title: Oracle Integration Developer API
+  description: >-
+    Developer API for Oracle Integration 3 providing day-to-day management of
+    integrations, connections, packages, libraries, lookups, certificates,
+    scheduled integrations, monitoring, B2B trading partner operations, and
+    rapid adapter building.
+  version: '1.0.0'
+  contact:
+    name: Oracle Integration Support
+    email: oracle-integration-support@oracle.com
+    url: https://www.oracle.com/support/
+  license:
+    name: Oracle Terms of Service
+    url: https://www.oracle.com/legal/terms.html
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+  - url: https://{instance}.integration.ocp.oraclecloud.com
+    description: Oracle Integration Cloud Instance
+    variables:
+      instance:
+        default: myinstance
+        description: Oracle Integration instance name
+security:
+  - oauth2: []
+  - basicAuth: []
+tags:
+  - name: Connections
+    description: Manage connections that define integration endpoints.
+  - name: Integrations
+    description: Create, manage, and deploy integrations.
+  - name: Scheduled Integrations
+    description: Manage scheduled integration execution.
+  - name: Monitoring
+    description: Monitor and manage integration instances.
+  - name: Packages
+    description: Manage packages for grouping integrations.
+  - name: Libraries
+    description: Manage JavaScript libraries for use in integrations.
+  - name: Lookups
+    description: Manage lookup tables for data mapping.
+  - name: Certificates
+    description: Manage SSL certificates for secure connections.
+  - name: Environment
+    description: Configure CORS and environment settings.
+  - name: Projects
+    description: Manage integration projects and deployments.
+  - name: Adapters
+    description: Rapid Adapter Builder for custom adapters.
+  - name: B2B Documents
+    description: B2B document customization and schema management.
+  - name: B2B Monitoring
+    description: Monitor B2B business and wire messages.
+  - name: Trading Partners
+    description: Manage B2B trading partners and agreements.
+paths:
+  /ic/api/integration/v1/connections:
+    get:
+      operationId: listConnections
+      summary: Oracle Integration List Connections
+      description: Retrieve a list of all connections configured in the instance.
+      tags:
+        - Connections
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - name: q
+          in: query
+          description: Filter query string.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved connections.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/connections/{id}:
+    get:
+      operationId: getConnection
+      summary: Oracle Integration Get Connection
+      description: Retrieve a specific connection by its identifier.
+      tags:
+        - Connections
+      parameters:
+        - $ref: '#/components/parameters/connectionIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved the connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: updateConnection
+      summary: Oracle Integration Update Connection
+      description: Update an existing connection's properties.
+      tags:
+        - Connections
+      parameters:
+        - $ref: '#/components/parameters/connectionIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectionUpdate'
+      responses:
+        '200':
+          description: Successfully updated the connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteConnection
+      summary: Oracle Integration Delete Connection
+      description: Delete a connection by its identifier.
+      tags:
+        - Connections
+      parameters:
+        - $ref: '#/components/parameters/connectionIdParam'
+      responses:
+        '204':
+          description: Successfully deleted the connection.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/connections/{id}/test:
+    post:
+      operationId: testConnection
+      summary: Oracle Integration Test Connection
+      description: Test a connection to verify connectivity.
+      tags:
+        - Connections
+      parameters:
+        - $ref: '#/components/parameters/connectionIdParam'
+      responses:
+        '200':
+          description: Connection test result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionTestResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/connections/{id}/metadata:
+    post:
+      operationId: refreshConnectionMetadata
+      summary: Oracle Integration Refresh Connection Metadata
+      description: Refresh metadata for a connection.
+      tags:
+        - Connections
+      parameters:
+        - $ref: '#/components/parameters/connectionIdParam'
+      responses:
+        '200':
+          description: Metadata refreshed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/integrations:
+    get:
+      operationId: listIntegrations
+      summary: Oracle Integration List Integrations
+      description: Retrieve a list of all integrations.
+      tags:
+        - Integrations
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - name: q
+          in: query
+          description: Filter query string.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved integrations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/integrations/{id}:
+    get:
+      operationId: getIntegration
+      summary: Oracle Integration Get Integration
+      description: Retrieve a specific integration by its identifier.
+      tags:
+        - Integrations
+      parameters:
+        - $ref: '#/components/parameters/integrationIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved the integration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: updateIntegrationStatus
+      summary: Oracle Integration Activate or Deactivate Integration
+      description: Activate or deactivate an integration.
+      tags:
+        - Integrations
+      parameters:
+        - $ref: '#/components/parameters/integrationIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationStatusUpdate'
+      responses:
+        '200':
+          description: Integration status updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteIntegration
+      summary: Oracle Integration Delete Integration Version
+      description: Delete an integration version.
+      tags:
+        - Integrations
+      parameters:
+        - $ref: '#/components/parameters/integrationIdParam'
+      responses:
+        '204':
+          description: Successfully deleted the integration version.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/integrations/{id}/clone:
+    post:
+      operationId: cloneIntegration
+      summary: Oracle Integration Clone Integration
+      description: Clone an existing integration.
+      tags:
+        - Integrations
+      parameters:
+        - $ref: '#/components/parameters/integrationIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloneRequest'
+      responses:
+        '200':
+          description: Integration cloned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/integrations/{id}/archive:
+    get:
+      operationId: exportIntegration
+      summary: Oracle Integration Export Integration
+      description: Export an integration as an archive file.
+      tags:
+        - Integrations
+      parameters:
+        - $ref: '#/components/parameters/integrationIdParam'
+      responses:
+        '200':
+          description: Integration archive file.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/integrations/archive:
+    post:
+      operationId: importIntegration
+      summary: Oracle Integration Import Integration
+      description: Import an integration from an archive file.
+      tags:
+        - Integrations
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Integration imported successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: replaceIntegration
+      summary: Oracle Integration Replace Integration
+      description: Import and replace an existing integration from an archive file.
+      tags:
+        - Integrations
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Integration replaced successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/integrations/{id}/activationStatus:
+    get:
+      operationId: getIntegrationActivationStatus
+      summary: Oracle Integration Get Activation Status
+      description: Retrieve the activation status of an integration.
+      tags:
+        - Integrations
+      parameters:
+        - $ref: '#/components/parameters/integrationIdParam'
+      responses:
+        '200':
+          description: Activation status retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivationStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/integrations/{id}/schedule/start:
+    post:
+      operationId: startIntegrationSchedule
+      summary: Oracle Integration Start Schedule
+      description: Start an integration schedule.
+      tags:
+        - Scheduled Integrations
+      parameters:
+        - $ref: '#/components/parameters/integrationIdParam'
+      responses:
+        '200':
+          description: Schedule started.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/integrations/{id}/schedule/stop:
+    post:
+      operationId: stopIntegrationSchedule
+      summary: Oracle Integration Stop Schedule
+      description: Stop an integration schedule.
+      tags:
+        - Scheduled Integrations
+      parameters:
+        - $ref: '#/components/parameters/integrationIdParam'
+      responses:
+        '200':
+          description: Schedule stopped.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/integrations/{id}/schedule/pause:
+    post:
+      operationId: pauseIntegrationSchedule
+      summary: Oracle Integration Pause Schedule
+      description: Pause an integration schedule.
+      tags:
+        - Scheduled Integrations
+      parameters:
+        - $ref: '#/components/parameters/integrationIdParam'
+      responses:
+        '200':
+          description: Schedule paused.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/integrations/{id}/schedule/resume:
+    post:
+      operationId: resumeIntegrationSchedule
+      summary: Oracle Integration Resume Schedule
+      description: Resume a paused integration schedule.
+      tags:
+        - Scheduled Integrations
+      parameters:
+        - $ref: '#/components/parameters/integrationIdParam'
+      responses:
+        '200':
+          description: Schedule resumed.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/integrations/{id}/schedule/jobs:
+    post:
+      operationId: runScheduledIntegrationNow
+      summary: Oracle Integration Run Scheduled Integration Now
+      description: Trigger an immediate run of a scheduled integration.
+      tags:
+        - Scheduled Integrations
+      parameters:
+        - $ref: '#/components/parameters/integrationIdParam'
+      responses:
+        '200':
+          description: Scheduled run triggered.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledJob'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/instances:
+    get:
+      operationId: listMonitoringInstances
+      summary: Oracle Integration List Monitoring Instances
+      description: Retrieve a list of integration instances for monitoring.
+      tags:
+        - Monitoring
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - name: q
+          in: query
+          description: Filter query string.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved monitoring instances.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitoringInstanceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/instances/{id}:
+    get:
+      operationId: getMonitoringInstance
+      summary: Oracle Integration Get Monitoring Instance
+      description: Retrieve details of a specific integration instance.
+      tags:
+        - Monitoring
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Instance identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Instance details retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitoringInstance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/instances/{id}/activityStream:
+    get:
+      operationId: getInstanceActivityStream
+      summary: Oracle Integration Get Instance Activity Stream
+      description: Retrieve the activity stream for an integration instance.
+      tags:
+        - Monitoring
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Instance identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Activity stream retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityStream'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/instances/{id}/abort:
+    post:
+      operationId: abortMonitoringInstance
+      summary: Oracle Integration Abort Instance
+      description: Abort a running integration instance.
+      tags:
+        - Monitoring
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Instance identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Instance aborted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/errors:
+    get:
+      operationId: listErroredInstances
+      summary: Oracle Integration List Errored Instances
+      description: Retrieve a list of errored integration instances.
+      tags:
+        - Monitoring
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Successfully retrieved errored instances.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroredInstanceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/errors/{id}/resubmit:
+    post:
+      operationId: resubmitErroredInstance
+      summary: Oracle Integration Resubmit Errored Instance
+      description: Resubmit an errored integration instance for reprocessing.
+      tags:
+        - Monitoring
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Error instance identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Instance resubmitted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/integrations:
+    get:
+      operationId: listMonitoringIntegrations
+      summary: Oracle Integration List Monitoring Integrations
+      description: Retrieve monitoring data for all integrations.
+      tags:
+        - Monitoring
+      responses:
+        '200':
+          description: Monitoring data retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitoringIntegrationList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/logs/{id}:
+    get:
+      operationId: downloadLogFile
+      summary: Oracle Integration Download Log File
+      description: Download a log file for an integration.
+      tags:
+        - Monitoring
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Log file identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Log file content.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/auditRecords:
+    get:
+      operationId: listAuditRecords
+      summary: Oracle Integration List Audit Records
+      description: Retrieve audit records for integration activities.
+      tags:
+        - Monitoring
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Audit records retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditRecordList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/agentgroups:
+    get:
+      operationId: listAgentGroups
+      summary: Oracle Integration List Agent Groups
+      description: Retrieve the status of all agent groups.
+      tags:
+        - Monitoring
+      responses:
+        '200':
+          description: Agent groups retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentGroupList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/packages:
+    get:
+      operationId: listPackages
+      summary: Oracle Integration List Packages
+      description: Retrieve a list of all packages.
+      tags:
+        - Packages
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Successfully retrieved packages.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/packages/{packagename}:
+    get:
+      operationId: getPackage
+      summary: Oracle Integration Get Package
+      description: Retrieve a specific package by name.
+      tags:
+        - Packages
+      parameters:
+        - name: packagename
+          in: path
+          required: true
+          description: Package name.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Package details retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Package'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deletePackage
+      summary: Oracle Integration Delete Package
+      description: Delete a package.
+      tags:
+        - Packages
+      parameters:
+        - name: packagename
+          in: path
+          required: true
+          description: Package name.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Package deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/libraries:
+    get:
+      operationId: listLibraries
+      summary: Oracle Integration List Libraries
+      description: Retrieve a list of all JavaScript libraries.
+      tags:
+        - Libraries
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Successfully retrieved libraries.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LibraryList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/libraries/{id}:
+    get:
+      operationId: getLibrary
+      summary: Oracle Integration Get Library
+      description: Retrieve a specific library by identifier.
+      tags:
+        - Libraries
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Library identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Library details retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Library'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteLibrary
+      summary: Oracle Integration Delete Library Version
+      description: Delete a library version.
+      tags:
+        - Libraries
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Library identifier.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Library version deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/lookups:
+    get:
+      operationId: listLookups
+      summary: Oracle Integration List Lookups
+      description: Retrieve a list of all lookup tables.
+      tags:
+        - Lookups
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Successfully retrieved lookups.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LookupList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createLookup
+      summary: Oracle Integration Create Lookup
+      description: Create a new lookup table.
+      tags:
+        - Lookups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LookupCreate'
+      responses:
+        '201':
+          description: Lookup created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lookup'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/lookups/{name}:
+    get:
+      operationId: getLookup
+      summary: Oracle Integration Get Lookup
+      description: Retrieve a specific lookup by name.
+      tags:
+        - Lookups
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: Lookup name.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lookup details retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lookup'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateLookup
+      summary: Oracle Integration Update Lookup
+      description: Update an existing lookup table.
+      tags:
+        - Lookups
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: Lookup name.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LookupCreate'
+      responses:
+        '200':
+          description: Lookup updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lookup'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteLookup
+      summary: Oracle Integration Delete Lookup
+      description: Delete a lookup table.
+      tags:
+        - Lookups
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: Lookup name.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Lookup deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/environment/corsdomains:
+    get:
+      operationId: listCorsDomains
+      summary: Oracle Integration List CORS Domains
+      description: Retrieve the list of allowed CORS domains.
+      tags:
+        - Environment
+      responses:
+        '200':
+          description: CORS domains retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CorsDomainList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createCorsDomains
+      summary: Oracle Integration Create CORS Domains
+      description: Add domains to the CORS whitelist.
+      tags:
+        - Environment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CorsDomainList'
+      responses:
+        '200':
+          description: CORS domains created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CorsDomainList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/certificates:
+    get:
+      operationId: listCertificates
+      summary: Oracle Integration List Certificates
+      description: Retrieve a list of all certificates.
+      tags:
+        - Certificates
+      responses:
+        '200':
+          description: Certificates retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: uploadCertificate
+      summary: Oracle Integration Upload Certificate
+      description: Upload a new certificate.
+      tags:
+        - Certificates
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Certificate file.
+                alias:
+                  type: string
+                  description: Alias for the certificate.
+                type:
+                  type: string
+                  description: Certificate type.
+                  enum:
+                    - trust
+                    - identity
+      responses:
+        '201':
+          description: Certificate uploaded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Certificate'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/projects:
+    get:
+      operationId: listProjects
+      summary: Oracle Integration List Projects
+      description: Retrieve a list of all integration projects.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Projects retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createProject
+      summary: Oracle Integration Create Project
+      description: Create a new integration project.
+      tags:
+        - Projects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCreate'
+      responses:
+        '201':
+          description: Project created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/projects/{id}:
+    get:
+      operationId: getProject
+      summary: Oracle Integration Get Project
+      description: Retrieve a specific project by identifier.
+      tags:
+        - Projects
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Project identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project details retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteProject
+      summary: Oracle Integration Delete Project
+      description: Delete a project.
+      tags:
+        - Projects
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Project identifier.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Project deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/usage:
+    get:
+      operationId: getUsage
+      summary: Oracle Integration Get Usage
+      description: Retrieve integration usage metrics.
+      tags:
+        - Monitoring
+      responses:
+        '200':
+          description: Usage metrics retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageMetrics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/adapters/v1/adapterBundles:
+    get:
+      operationId: listAdapterBundles
+      summary: Oracle Integration List Adapter Bundles
+      description: Retrieve a list of all custom adapter bundles.
+      tags:
+        - Adapters
+      responses:
+        '200':
+          description: Adapter bundles retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdapterBundleList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: registerAdapterBundle
+      summary: Oracle Integration Register Adapter Bundle
+      description: Register a new custom adapter bundle.
+      tags:
+        - Adapters
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Adapter bundle archive file.
+      responses:
+        '201':
+          description: Adapter bundle registered.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdapterBundle'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/adapters/v1/adapterBundles/{id}:
+    get:
+      operationId: getAdapterBundle
+      summary: Oracle Integration Get Adapter Bundle
+      description: Retrieve a specific adapter bundle by identifier.
+      tags:
+        - Adapters
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Adapter bundle identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Adapter bundle details retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdapterBundle'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateAdapterBundle
+      summary: Oracle Integration Update Adapter Bundle
+      description: Update an existing adapter bundle.
+      tags:
+        - Adapters
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Adapter bundle identifier.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Adapter bundle updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdapterBundle'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteAdapterBundle
+      summary: Oracle Integration Delete Adapter Bundle
+      description: Delete a custom adapter bundle.
+      tags:
+        - Adapters
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Adapter bundle identifier.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Adapter bundle deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/b2b/v1/b2bdocuments:
+    get:
+      operationId: listB2bDocuments
+      summary: Oracle Integration List B2B Documents
+      description: Retrieve a list of all B2B documents.
+      tags:
+        - B2B Documents
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: B2B documents retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/B2BDocumentList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createB2bDocument
+      summary: Oracle Integration Create B2B Document
+      description: Create a new B2B document.
+      tags:
+        - B2B Documents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/B2BDocumentCreate'
+      responses:
+        '201':
+          description: B2B document created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/B2BDocument'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/b2b/v1/b2bdocuments/{documentId}:
+    get:
+      operationId: getB2bDocument
+      summary: Oracle Integration Get B2B Document
+      description: Retrieve a specific B2B document.
+      tags:
+        - B2B Documents
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          description: B2B document identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: B2B document details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/B2BDocument'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateB2bDocument
+      summary: Oracle Integration Update B2B Document
+      description: Update an existing B2B document.
+      tags:
+        - B2B Documents
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          description: B2B document identifier.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/B2BDocumentCreate'
+      responses:
+        '200':
+          description: B2B document updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/B2BDocument'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteB2bDocument
+      summary: Oracle Integration Delete B2B Document
+      description: Delete a B2B document.
+      tags:
+        - B2B Documents
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          description: B2B document identifier.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: B2B document deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/b2b/v1/schemas:
+    get:
+      operationId: listB2bSchemas
+      summary: Oracle Integration List B2B Schemas
+      description: Retrieve a list of all B2B schemas.
+      tags:
+        - B2B Documents
+      responses:
+        '200':
+          description: B2B schemas retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/B2BSchemaList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/b2b/v1/standards:
+    get:
+      operationId: listB2bStandards
+      summary: Oracle Integration List B2B Document Standards
+      description: Retrieve all B2B document standards.
+      tags:
+        - B2B Documents
+      responses:
+        '200':
+          description: B2B standards retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/B2BStandardList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/b2b/v1/monitoring/businessmessages:
+    get:
+      operationId: listBusinessMessages
+      summary: Oracle Integration List Business Messages
+      description: Retrieve a list of B2B business messages.
+      tags:
+        - B2B Monitoring
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Business messages retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessMessageList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/b2b/v1/monitoring/wiremessages:
+    get:
+      operationId: listWireMessages
+      summary: Oracle Integration List Wire Messages
+      description: Retrieve a list of B2B wire messages.
+      tags:
+        - B2B Monitoring
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Wire messages retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WireMessageList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/b2b/v1/tpm/partners:
+    get:
+      operationId: listTradingPartners
+      summary: Oracle Integration List Trading Partners
+      description: Retrieve a list of all trading partners.
+      tags:
+        - Trading Partners
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Trading partners retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingPartnerList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createTradingPartner
+      summary: Oracle Integration Create Trading Partner
+      description: Create a new trading partner.
+      tags:
+        - Trading Partners
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TradingPartnerCreate'
+      responses:
+        '201':
+          description: Trading partner created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingPartner'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/b2b/v1/tpm/partners/{tpId}:
+    get:
+      operationId: getTradingPartner
+      summary: Oracle Integration Get Trading Partner
+      description: Retrieve a specific trading partner.
+      tags:
+        - Trading Partners
+      parameters:
+        - name: tpId
+          in: path
+          required: true
+          description: Trading partner identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Trading partner details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingPartner'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateTradingPartner
+      summary: Oracle Integration Update Trading Partner
+      description: Update an existing trading partner.
+      tags:
+        - Trading Partners
+      parameters:
+        - name: tpId
+          in: path
+          required: true
+          description: Trading partner identifier.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TradingPartnerCreate'
+      responses:
+        '200':
+          description: Trading partner updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingPartner'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteTradingPartner
+      summary: Oracle Integration Delete Trading Partner
+      description: Delete a trading partner.
+      tags:
+        - Trading Partners
+      parameters:
+        - name: tpId
+          in: path
+          required: true
+          description: Trading partner identifier.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Trading partner deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/b2b/v1/tpm/host:
+    get:
+      operationId: getHostProfile
+      summary: Oracle Integration Get Host Profile
+      description: Retrieve the B2B host profile.
+      tags:
+        - Trading Partners
+      responses:
+        '200':
+          description: Host profile retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostProfile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createOrUpdateHostProfile
+      summary: Oracle Integration Create or Update Host Profile
+      description: Create or update the B2B host profile.
+      tags:
+        - Trading Partners
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HostProfile'
+      responses:
+        '200':
+          description: Host profile updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostProfile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Oracle Identity Cloud Service (IDCS).
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
+          tokenUrl: https://{idcs-url}/oauth2/v1/token
+          scopes:
+            urn:opc:resource:consumer::all: Full access to Oracle Integration APIs
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with Oracle Integration credentials.
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 20
+        example: 20
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip before returning results.
+      schema:
+        type: integer
+        default: 0
+        example: 0
+    connectionIdParam:
+      name: id
+      in: path
+      required: true
+      description: Connection identifier.
+      schema:
+        type: string
+        example: SALESFORCE_CONNECTION
+    integrationIdParam:
+      name: id
+      in: path
+      required: true
+      description: Integration identifier in the format CODE|VERSION.
+      schema:
+        type: string
+        example: HELLO_WORLD|01.00.0000
+  responses:
+    BadRequest:
+      description: Bad request - invalid input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Error type URI.
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+        title:
+          type: string
+          description: Short error title.
+          example: Bad Request
+        detail:
+          type: string
+          description: Detailed error message.
+          example: Invalid connection identifier format.
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
+    Connection:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Connection identifier.
+          example: SALESFORCE_CONNECTION
+        name:
+          type: string
+          description: Connection display name.
+          example: Salesforce Connection
+        description:
+          type: string
+          description: Connection description.
+          example: Connection to Salesforce CRM instance.
+        status:
+          type: string
+          description: Connection status.
+          enum:
+            - CONFIGURED
+            - DRAFT
+            - ERROR
+          example: CONFIGURED
+        adapterType:
+          type: string
+          description: Type of adapter used by the connection.
+          example: salesforce
+        percentageComplete:
+          type: integer
+          description: Percentage of connection configuration completion.
+          example: 100
+        lockedFlag:
+          type: boolean
+          description: Whether the connection is locked.
+          example: false
+        testStatus:
+          type: string
+          description: Last test status.
+          example: SUCCESS
+        lastUpdatedBy:
+          type: string
+          description: User who last updated the connection.
+          example: admin@example.com
+        lastUpdated:
+          type: string
+          format: date-time
+          description: Last update timestamp.
+          example: '2026-04-15T10:30:00Z'
+    ConnectionUpdate:
+      type: object
+      properties:
+        connectionProperties:
+          type: array
+          description: Connection properties to update.
+          items:
+            type: object
+            properties:
+              propertyName:
+                type: string
+                description: Property name.
+                example: securityPolicy
+              propertyValue:
+                type: string
+                description: Property value.
+                example: USERNAME_PASSWORD_TOKEN
+        securityProperties:
+          type: array
+          description: Security properties to update.
+          items:
+            type: object
+            properties:
+              propertyName:
+                type: string
+                description: Security property name.
+                example: username
+              propertyValue:
+                type: string
+                description: Security property value.
+                example: admin@salesforce.com
+    ConnectionTestResult:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Test result status.
+          enum:
+            - SUCCESS
+            - FAILURE
+          example: SUCCESS
+        message:
+          type: string
+          description: Test result message.
+          example: Connection test was successful.
+    ConnectionList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Connection'
+        totalResults:
+          type: integer
+          description: Total number of connections.
+          example: 15
+        hasMore:
+          type: boolean
+          description: Whether more results are available.
+          example: false
+    Integration:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Integration identifier.
+          example: HELLO_WORLD|01.00.0000
+        code:
+          type: string
+          description: Integration code.
+          example: HELLO_WORLD
+        version:
+          type: string
+          description: Integration version.
+          example: '01.00.0000'
+        name:
+          type: string
+          description: Integration display name.
+          example: Hello World Integration
+        description:
+          type: string
+          description: Integration description.
+          example: A simple hello world integration flow.
+        status:
+          type: string
+          description: Integration status.
+          enum:
+            - CONFIGURED
+            - ACTIVATED
+            - DRAFT
+          example: ACTIVATED
+        pattern:
+          type: string
+          description: Integration pattern type.
+          example: Orchestration
+        style:
+          type: string
+          description: Integration style.
+          example: FREEFORM
+        lockedFlag:
+          type: boolean
+          description: Whether the integration is locked.
+          example: false
+        lastUpdatedBy:
+          type: string
+          description: User who last updated.
+          example: admin@example.com
+        lastUpdated:
+          type: string
+          format: date-time
+          description: Last update timestamp.
+          example: '2026-04-15T10:30:00Z'
+        packageName:
+          type: string
+          description: Package name the integration belongs to.
+          example: MY_PACKAGE
+    IntegrationStatusUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Desired integration status.
+          enum:
+            - ACTIVATED
+            - CONFIGURED
+          example: ACTIVATED
+    CloneRequest:
+      type: object
+      properties:
+        code:
+          type: string
+          description: New code for the cloned resource.
+          example: HELLO_WORLD_CLONE
+        name:
+          type: string
+          description: New name for the cloned resource.
+          example: Hello World Clone
+    IntegrationList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Integration'
+        totalResults:
+          type: integer
+          description: Total number of integrations.
+          example: 42
+        hasMore:
+          type: boolean
+          description: Whether more results are available.
+          example: true
+    ActivationStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Current activation status.
+          example: ACTIVATED
+        version:
+          type: string
+          description: Integration version.
+          example: '01.00.0000'
+    ScheduledJob:
+      type: object
+      properties:
+        jobId:
+          type: string
+          description: Scheduled job identifier.
+          example: '500123'
+        status:
+          type: string
+          description: Job status.
+          example: RUNNING
+        startTime:
+          type: string
+          format: date-time
+          description: Job start time.
+          example: '2026-04-18T14:30:00Z'
+    MonitoringInstance:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Instance identifier.
+          example: '500456'
+        integrationId:
+          type: string
+          description: Parent integration identifier.
+          example: HELLO_WORLD|01.00.0000
+        status:
+          type: string
+          description: Instance status.
+          enum:
+            - COMPLETED
+            - FAILED
+            - ABORTED
+            - IN_PROGRESS
+          example: COMPLETED
+        startTime:
+          type: string
+          format: date-time
+          description: Instance start time.
+          example: '2026-04-18T10:00:00Z'
+        endTime:
+          type: string
+          format: date-time
+          description: Instance end time.
+          example: '2026-04-18T10:00:05Z'
+        businessIdentifier:
+          type: string
+          description: Business identifier for the instance.
+          example: ORD-2026-001
+    MonitoringInstanceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonitoringInstance'
+        totalResults:
+          type: integer
+          example: 1250
+        hasMore:
+          type: boolean
+          example: true
+    ErroredInstanceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonitoringInstance'
+        totalResults:
+          type: integer
+          example: 5
+        hasMore:
+          type: boolean
+          example: false
+    ActivityStream:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              activityName:
+                type: string
+                description: Activity name.
+                example: MapData
+              activityType:
+                type: string
+                description: Activity type.
+                example: MAP
+              status:
+                type: string
+                description: Activity status.
+                example: COMPLETED
+              timestamp:
+                type: string
+                format: date-time
+                description: Activity timestamp.
+                example: '2026-04-18T10:00:01Z'
+    MonitoringIntegrationList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: HELLO_WORLD|01.00.0000
+              successCount:
+                type: integer
+                example: 1200
+              failedCount:
+                type: integer
+                example: 5
+              status:
+                type: string
+                example: ACTIVATED
+    AuditRecordList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: '800123'
+              action:
+                type: string
+                example: ACTIVATE
+              target:
+                type: string
+                example: HELLO_WORLD|01.00.0000
+              user:
+                type: string
+                example: admin@example.com
+              timestamp:
+                type: string
+                format: date-time
+                example: '2026-04-15T10:30:00Z'
+    AgentGroupList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: AG_001
+              name:
+                type: string
+                example: On-Premises Agent Group
+              status:
+                type: string
+                example: RUNNING
+              agentCount:
+                type: integer
+                example: 2
+    Package:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Package code.
+          example: MY_PACKAGE
+        name:
+          type: string
+          description: Package display name.
+          example: My Integration Package
+        description:
+          type: string
+          description: Package description.
+          example: Package containing ERP integration flows.
+        lastUpdatedBy:
+          type: string
+          description: User who last updated.
+          example: admin@example.com
+        lastUpdated:
+          type: string
+          format: date-time
+          example: '2026-04-15T10:30:00Z'
+    PackageList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Package'
+        totalResults:
+          type: integer
+          example: 8
+        hasMore:
+          type: boolean
+          example: false
+    Library:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Library identifier.
+          example: MY_LIBRARY|01.00.0000
+        name:
+          type: string
+          description: Library name.
+          example: Utility Functions
+        description:
+          type: string
+          description: Library description.
+          example: Common JavaScript utility functions.
+        version:
+          type: string
+          description: Library version.
+          example: '01.00.0000'
+    LibraryList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Library'
+        totalResults:
+          type: integer
+          example: 3
+        hasMore:
+          type: boolean
+          example: false
+    Lookup:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Lookup name.
+          example: COUNTRY_CODES
+        description:
+          type: string
+          description: Lookup description.
+          example: Country code mapping for address normalization.
+        columns:
+          type: array
+          description: Lookup column names.
+          items:
+            type: string
+          example: ['Common', 'Oracle', 'Salesforce']
+        rows:
+          type: array
+          description: Lookup data rows.
+          items:
+            type: object
+            additionalProperties:
+              type: string
+    LookupCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Lookup name.
+          example: COUNTRY_CODES
+        description:
+          type: string
+          description: Lookup description.
+          example: Country code mapping table.
+        columns:
+          type: array
+          items:
+            type: string
+          example: ['Common', 'Oracle', 'Salesforce']
+    LookupList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Lookup'
+        totalResults:
+          type: integer
+          example: 5
+        hasMore:
+          type: boolean
+          example: false
+    Certificate:
+      type: object
+      properties:
+        alias:
+          type: string
+          description: Certificate alias.
+          example: salesforce-cert
+        type:
+          type: string
+          description: Certificate type.
+          enum:
+            - trust
+            - identity
+          example: trust
+        subject:
+          type: string
+          description: Certificate subject.
+          example: CN=*.salesforce.com
+        expiry:
+          type: string
+          format: date-time
+          description: Certificate expiry date.
+          example: '2027-12-31T23:59:59Z'
+    CertificateList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Certificate'
+    CorsDomainList:
+      type: object
+      properties:
+        allowedOrigins:
+          type: array
+          description: List of allowed CORS origins.
+          items:
+            type: string
+          example:
+            - https://myapp.example.com
+            - https://portal.example.com
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Project identifier.
+          example: MY_PROJECT
+        name:
+          type: string
+          description: Project name.
+          example: ERP Integration Project
+        description:
+          type: string
+          description: Project description.
+          example: Project containing ERP integration flows and connections.
+        lastUpdatedBy:
+          type: string
+          example: admin@example.com
+        lastUpdated:
+          type: string
+          format: date-time
+          example: '2026-04-15T10:30:00Z'
+    ProjectCreate:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Project identifier.
+          example: MY_PROJECT
+        name:
+          type: string
+          description: Project name.
+          example: ERP Integration Project
+        description:
+          type: string
+          description: Project description.
+          example: Project for ERP integration flows.
+    ProjectList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+        totalResults:
+          type: integer
+          example: 12
+        hasMore:
+          type: boolean
+          example: false
+    UsageMetrics:
+      type: object
+      properties:
+        messageCount:
+          type: integer
+          description: Total message count.
+          example: 15000
+        period:
+          type: string
+          description: Reporting period.
+          example: '2026-04'
+    AdapterBundle:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Adapter bundle identifier.
+          example: MY_CUSTOM_ADAPTER
+        name:
+          type: string
+          description: Adapter bundle name.
+          example: Custom REST Adapter
+        description:
+          type: string
+          description: Adapter bundle description.
+          example: Custom adapter for proprietary REST API.
+        version:
+          type: string
+          description: Adapter version.
+          example: '1.0.0'
+        status:
+          type: string
+          description: Adapter registration status.
+          example: REGISTERED
+    AdapterBundleList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdapterBundle'
+    B2BDocument:
+      type: object
+      properties:
+        id:
+          type: string
+          description: B2B document identifier.
+          example: '500789'
+        name:
+          type: string
+          description: Document name.
+          example: Purchase Order 850
+        standard:
+          type: string
+          description: B2B document standard.
+          example: X12
+        version:
+          type: string
+          description: Document version.
+          example: '005010'
+        transactionType:
+          type: string
+          description: Transaction type code.
+          example: '850'
+        direction:
+          type: string
+          description: Document direction.
+          enum:
+            - INBOUND
+            - OUTBOUND
+          example: INBOUND
+    B2BDocumentCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Document name.
+          example: Invoice 810
+        standard:
+          type: string
+          description: B2B standard.
+          example: X12
+        version:
+          type: string
+          description: Standard version.
+          example: '005010'
+        transactionType:
+          type: string
+          description: Transaction type.
+          example: '810'
+    B2BDocumentList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/B2BDocument'
+        totalResults:
+          type: integer
+          example: 12
+        hasMore:
+          type: boolean
+          example: false
+    B2BSchemaList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: '600123'
+              name:
+                type: string
+                example: X12_005010_850
+              standard:
+                type: string
+                example: X12
+    B2BStandardList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: X12
+              name:
+                type: string
+                example: ANSI ASC X12
+              versions:
+                type: array
+                items:
+                  type: string
+                example: ['004010', '005010']
+    BusinessMessageList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: '700123'
+              direction:
+                type: string
+                example: INBOUND
+              status:
+                type: string
+                example: COMPLETED
+              tradingPartner:
+                type: string
+                example: Acme Corp
+              documentType:
+                type: string
+                example: '850'
+              timestamp:
+                type: string
+                format: date-time
+                example: '2026-04-18T10:00:00Z'
+    WireMessageList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: '700456'
+              protocol:
+                type: string
+                example: AS2
+              direction:
+                type: string
+                example: INBOUND
+              status:
+                type: string
+                example: SUCCESS
+              timestamp:
+                type: string
+                format: date-time
+                example: '2026-04-18T10:00:00Z'
+    TradingPartner:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Trading partner identifier.
+          example: TP_ACME
+        name:
+          type: string
+          description: Trading partner name.
+          example: Acme Corporation
+        description:
+          type: string
+          description: Trading partner description.
+          example: Primary supplier for raw materials.
+        status:
+          type: string
+          description: Partner status.
+          enum:
+            - ACTIVE
+            - INACTIVE
+          example: ACTIVE
+        contactName:
+          type: string
+          description: Contact person name.
+          example: Jane Smith
+        contactEmail:
+          type: string
+          format: email
+          description: Contact email address.
+          example: jane.smith@acme.com
+    TradingPartnerCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Trading partner name.
+          example: Acme Corporation
+        description:
+          type: string
+          description: Trading partner description.
+          example: Primary supplier for raw materials.
+    TradingPartnerList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TradingPartner'
+        totalResults:
+          type: integer
+          example: 25
+        hasMore:
+          type: boolean
+          example: false
+    HostProfile:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Host profile name.
+          example: MyCompany B2B Host
+        identifiers:
+          type: array
+          description: Host identifiers.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: DUNS
+              value:
+                type: string
+                example: '123456789'

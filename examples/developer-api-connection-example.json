@@ -1,0 +1,12 @@
+{
+  "id": "SALESFORCE_CONNECTION",
+  "name": "Salesforce Production Connection",
+  "description": "Connection to Salesforce CRM production instance.",
+  "status": "CONFIGURED",
+  "adapterType": "salesforce",
+  "percentageComplete": 100,
+  "lockedFlag": false,
+  "testStatus": "SUCCESS",
+  "lastUpdatedBy": "admin@example.com",
+  "lastUpdated": "2026-04-15T10:30:00Z"
+}

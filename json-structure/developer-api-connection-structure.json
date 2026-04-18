@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/oracle-integration/refs/heads/main/json-structure/developer-api-connection-structure.json",
+  "name": "Connection",
+  "description": "Connection structure from Oracle Integration Developer API.",
+  "type": "object",
+  "properties": {
+    "id": {"type": "string", "description": "Connection identifier."},
+    "name": {"type": "string", "description": "Connection display name."},
+    "description": {"type": "string", "description": "Connection description."},
+    "status": {"type": "string", "description": "Connection status.", "enum": ["CONFIGURED", "DRAFT", "ERROR"]},
+    "adapterType": {"type": "string", "description": "Type of adapter used by the connection."},
+    "percentageComplete": {"type": "int32", "description": "Percentage of connection configuration completion."},
+    "lockedFlag": {"type": "boolean", "description": "Whether the connection is locked."},
+    "testStatus": {"type": "string", "description": "Last test status."},
+    "lastUpdatedBy": {"type": "string", "description": "User who last updated the connection."},
+    "lastUpdated": {"type": "datetime", "description": "Last update timestamp."}
+  }
+}

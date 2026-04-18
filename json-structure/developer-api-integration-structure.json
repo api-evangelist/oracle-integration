@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/oracle-integration/refs/heads/main/json-structure/developer-api-integration-structure.json",
+  "name": "Integration",
+  "description": "Integration structure from Oracle Integration Developer API.",
+  "type": "object",
+  "properties": {
+    "id": {"type": "string", "description": "Integration identifier."},
+    "code": {"type": "string", "description": "Integration code."},
+    "version": {"type": "string", "description": "Integration version."},
+    "name": {"type": "string", "description": "Integration display name."},
+    "description": {"type": "string", "description": "Integration description."},
+    "status": {"type": "string", "description": "Integration status.", "enum": ["CONFIGURED", "ACTIVATED", "DRAFT"]},
+    "pattern": {"type": "string", "description": "Integration pattern type."},
+    "style": {"type": "string", "description": "Integration style."},
+    "lockedFlag": {"type": "boolean", "description": "Whether the integration is locked."},
+    "lastUpdatedBy": {"type": "string", "description": "User who last updated."},
+    "lastUpdated": {"type": "datetime", "description": "Last update timestamp."},
+    "packageName": {"type": "string", "description": "Package name the integration belongs to."}
+  }
+}

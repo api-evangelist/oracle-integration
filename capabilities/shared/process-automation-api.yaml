@@ -1,0 +1,272 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: Oracle Integration Process Automation API
+  description: >-
+    Process Automation API for managing process definitions, instances, tasks,
+    decision models, spaces, identities, and analytics.
+  tags:
+    - Oracle Integration
+    - Process Automation
+    - BPM
+    - Tasks
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      ORACLE_INTEGRATION_USERNAME: ORACLE_INTEGRATION_USERNAME
+      ORACLE_INTEGRATION_PASSWORD: ORACLE_INTEGRATION_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: oracle-process-api
+      baseUri: https://{instance}.integration.ocp.oraclecloud.com
+      description: Oracle Integration Process Automation REST API
+      authentication:
+        type: basic
+        username: "{{ORACLE_INTEGRATION_USERNAME}}"
+        password: "{{ORACLE_INTEGRATION_PASSWORD}}"
+      resources:
+        - name: process-definitions
+          path: /ic/api/process/v1/process-definitions
+          description: Process definitions management.
+          operations:
+            - name: list-process-definitions
+              method: GET
+              description: List all process definitions.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: process-instances
+          path: /ic/api/process/v1/processes
+          description: Process instance management.
+          operations:
+            - name: list-process-instances
+              method: GET
+              description: List process instances.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-process-instance
+              method: GET
+              description: Get a process instance.
+              inputParameters:
+                - name: processId
+                  in: path
+                  type: string
+                  required: true
+                  description: Process instance identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-process-instance
+              method: POST
+              description: Create a new process instance.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: tasks
+          path: /ic/api/process/v1/tasks
+          description: Task management.
+          operations:
+            - name: list-tasks
+              method: GET
+              description: List user tasks.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-task
+              method: GET
+              description: Get a specific task.
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: Task identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: perform-task-action
+              method: PUT
+              description: Perform an action on a task.
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: Task identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: decision-models
+          path: /ic/api/process/v1/dmn/spaces
+          description: Decision model management.
+          operations:
+            - name: list-dmn-spaces
+              method: GET
+              description: List DMN spaces.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: list-decision-models
+              method: GET
+              description: List decision models in a space.
+              inputParameters:
+                - name: spaceId
+                  in: path
+                  type: string
+                  required: true
+                  description: Space identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: spaces
+          path: /ic/api/process/v1/spaces
+          description: Workspace space management.
+          operations:
+            - name: list-spaces
+              method: GET
+              description: List workspace spaces.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: analytics
+          path: /ic/api/process/v1/analyticsqueries
+          description: Process analytics.
+          operations:
+            - name: list-analytics-queries
+              method: GET
+              description: List analytics queries.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: oracle-process-rest
+      resources:
+        - path: /v1/processes
+          name: processes
+          description: Process instances.
+          operations:
+            - method: GET
+              name: list-process-instances
+              description: List process instances.
+              call: oracle-process-api.list-process-instances
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/tasks
+          name: tasks
+          description: User tasks.
+          operations:
+            - method: GET
+              name: list-tasks
+              description: List user tasks.
+              call: oracle-process-api.list-tasks
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: oracle-process-mcp
+      transport: http
+      tools:
+        - name: list-process-definitions
+          description: List all process definitions.
+          hints:
+            readOnly: true
+          call: oracle-process-api.list-process-definitions
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-process-instances
+          description: List process instances.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: oracle-process-api.list-process-instances
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-process-instance
+          description: Get process instance details.
+          hints:
+            readOnly: true
+          call: oracle-process-api.get-process-instance
+          with:
+            processId: tools.processId
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-tasks
+          description: List user tasks.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: oracle-process-api.list-tasks
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-task
+          description: Get task details.
+          hints:
+            readOnly: true
+          call: oracle-process-api.get-task
+          with:
+            id: tools.id
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-dmn-spaces
+          description: List DMN spaces.
+          hints:
+            readOnly: true
+          call: oracle-process-api.list-dmn-spaces
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-spaces
+          description: List workspace spaces.
+          hints:
+            readOnly: true
+          call: oracle-process-api.list-spaces
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-analytics-queries
+          description: List analytics queries.
+          hints:
+            readOnly: true
+          call: oracle-process-api.list-analytics-queries
+          outputParameters:
+            - type: object
+              mapping: "$."

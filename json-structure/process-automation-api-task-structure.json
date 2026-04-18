@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/oracle-integration/refs/heads/main/json-structure/process-automation-api-task-structure.json",
+  "name": "Task",
+  "description": "Task structure from Oracle Integration Process Automation API.",
+  "type": "object",
+  "properties": {
+    "id": {"type": "string", "description": "Task identifier."},
+    "title": {"type": "string", "description": "Task title."},
+    "assignee": {"type": "string", "description": "Current assignee."},
+    "state": {"type": "string", "description": "Task state.", "enum": ["ASSIGNED", "COMPLETED", "EXPIRED", "INFO_REQUESTED", "SUSPENDED", "WITHDRAWN"]},
+    "priority": {"type": "int32", "description": "Task priority."},
+    "createdDate": {"type": "datetime", "description": "Task creation timestamp."},
+    "dueDate": {"type": "datetime", "description": "Task due date."},
+    "processId": {"type": "string", "description": "Parent process instance identifier."},
+    "processName": {"type": "string", "description": "Parent process name."},
+    "outcome": {"type": "string", "description": "Task outcome."}
+  }
+}

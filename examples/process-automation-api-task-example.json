@@ -1,0 +1,12 @@
+{
+  "id": "400789",
+  "title": "Review Order #12345",
+  "assignee": "jsmith@example.com",
+  "state": "ASSIGNED",
+  "priority": 3,
+  "createdDate": "2026-04-18T10:00:00Z",
+  "dueDate": "2026-04-20T17:00:00Z",
+  "processId": "300456",
+  "processName": "Order Approval",
+  "outcome": "APPROVE"
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/oracle-integration/refs/heads/main/json-schema/developer-api-trading-partner-schema.json",
+  "title": "TradingPartner",
+  "description": "TradingPartner schema from Oracle Integration Developer API.",
+  "type": "object",
+  "properties": {
+    "id": {"type": "string", "description": "Trading partner identifier."},
+    "name": {"type": "string", "description": "Trading partner name."},
+    "description": {"type": "string", "description": "Trading partner description."},
+    "status": {"type": "string", "description": "Partner status.", "enum": ["ACTIVE", "INACTIVE"]},
+    "contactName": {"type": "string", "description": "Contact person name."},
+    "contactEmail": {"type": "string", "format": "email", "description": "Contact email address."}
+  }
+}

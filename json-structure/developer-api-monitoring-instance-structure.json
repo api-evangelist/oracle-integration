@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/oracle-integration/refs/heads/main/json-structure/developer-api-monitoring-instance-structure.json",
+  "name": "MonitoringInstance",
+  "description": "MonitoringInstance structure from Oracle Integration Developer API.",
+  "type": "object",
+  "properties": {
+    "id": {"type": "string", "description": "Instance identifier."},
+    "integrationId": {"type": "string", "description": "Parent integration identifier."},
+    "status": {"type": "string", "description": "Instance status.", "enum": ["COMPLETED", "FAILED", "ABORTED", "IN_PROGRESS"]},
+    "startTime": {"type": "datetime", "description": "Instance start time."},
+    "endTime": {"type": "datetime", "description": "Instance end time."},
+    "businessIdentifier": {"type": "string", "description": "Business identifier for the instance."}
+  }
+}

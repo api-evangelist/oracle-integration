@@ -1,0 +1,432 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: Oracle Integration Developer API
+  description: >-
+    Developer API for Oracle Integration 3 providing management of integrations,
+    connections, packages, libraries, lookups, certificates, monitoring, B2B
+    trading partners, and custom adapters.
+  tags:
+    - Oracle Integration
+    - Integration Management
+    - B2B
+    - Monitoring
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      ORACLE_INTEGRATION_USERNAME: ORACLE_INTEGRATION_USERNAME
+      ORACLE_INTEGRATION_PASSWORD: ORACLE_INTEGRATION_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: oracle-developer-api
+      baseUri: https://{instance}.integration.ocp.oraclecloud.com
+      description: Oracle Integration Developer REST API
+      authentication:
+        type: basic
+        username: "{{ORACLE_INTEGRATION_USERNAME}}"
+        password: "{{ORACLE_INTEGRATION_PASSWORD}}"
+      resources:
+        - name: connections
+          path: /ic/api/integration/v1/connections
+          description: Manage integration connections.
+          operations:
+            - name: list-connections
+              method: GET
+              description: List all connections.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-connection
+              method: GET
+              description: Get a specific connection.
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: Connection identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-connection
+              method: POST
+              description: Update a connection.
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: Connection identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-connection
+              method: DELETE
+              description: Delete a connection.
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: Connection identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: test-connection
+              method: POST
+              description: Test a connection.
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: Connection identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: integrations
+          path: /ic/api/integration/v1/integrations
+          description: Manage integrations.
+          operations:
+            - name: list-integrations
+              method: GET
+              description: List all integrations.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-integration
+              method: GET
+              description: Get a specific integration.
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: Integration identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: activate-integration
+              method: POST
+              description: Activate or deactivate an integration.
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: Integration identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: clone-integration
+              method: POST
+              description: Clone an integration.
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: Integration identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-integration
+              method: DELETE
+              description: Delete an integration version.
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: Integration identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: monitoring
+          path: /ic/api/integration/v1/monitoring
+          description: Monitor integration instances.
+          operations:
+            - name: list-instances
+              method: GET
+              description: List integration instances.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-instance
+              method: GET
+              description: Get a specific integration instance.
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: Instance identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: abort-instance
+              method: POST
+              description: Abort a running integration instance.
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: Instance identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: list-errors
+              method: GET
+              description: List errored integration instances.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: resubmit-error
+              method: POST
+              description: Resubmit an errored instance.
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: Error instance identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: packages
+          path: /ic/api/integration/v1/packages
+          description: Manage integration packages.
+          operations:
+            - name: list-packages
+              method: GET
+              description: List all packages.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-package
+              method: GET
+              description: Get a specific package.
+              inputParameters:
+                - name: packagename
+                  in: path
+                  type: string
+                  required: true
+                  description: Package name.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: trading-partners
+          path: /ic/api/b2b/v1/tpm/partners
+          description: Manage B2B trading partners.
+          operations:
+            - name: list-trading-partners
+              method: GET
+              description: List all trading partners.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-trading-partner
+              method: GET
+              description: Get a specific trading partner.
+              inputParameters:
+                - name: tpId
+                  in: path
+                  type: string
+                  required: true
+                  description: Trading partner identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-trading-partner
+              method: POST
+              description: Create a new trading partner.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-trading-partner
+              method: DELETE
+              description: Delete a trading partner.
+              inputParameters:
+                - name: tpId
+                  in: path
+                  type: string
+                  required: true
+                  description: Trading partner identifier.
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: oracle-developer-rest
+      resources:
+        - path: /v1/connections
+          name: connections
+          description: Manage connections.
+          operations:
+            - method: GET
+              name: list-connections
+              description: List all connections.
+              call: oracle-developer-api.list-connections
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/integrations
+          name: integrations
+          description: Manage integrations.
+          operations:
+            - method: GET
+              name: list-integrations
+              description: List all integrations.
+              call: oracle-developer-api.list-integrations
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/monitoring/instances
+          name: monitoring-instances
+          description: Monitor instances.
+          operations:
+            - method: GET
+              name: list-instances
+              description: List monitoring instances.
+              call: oracle-developer-api.list-instances
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: oracle-developer-mcp
+      transport: http
+      tools:
+        - name: list-connections
+          description: List all Oracle Integration connections.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: oracle-developer-api.list-connections
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-connection
+          description: Get details of a specific connection.
+          hints:
+            readOnly: true
+          call: oracle-developer-api.get-connection
+          with:
+            id: tools.id
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: test-connection
+          description: Test a connection.
+          hints:
+            readOnly: true
+          call: oracle-developer-api.test-connection
+          with:
+            id: tools.id
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-integrations
+          description: List all Oracle Integration integrations.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: oracle-developer-api.list-integrations
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-integration
+          description: Get details of a specific integration.
+          hints:
+            readOnly: true
+          call: oracle-developer-api.get-integration
+          with:
+            id: tools.id
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-instances
+          description: List integration monitoring instances.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: oracle-developer-api.list-instances
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-errors
+          description: List errored integration instances.
+          hints:
+            readOnly: true
+          call: oracle-developer-api.list-errors
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-packages
+          description: List all integration packages.
+          hints:
+            readOnly: true
+          call: oracle-developer-api.list-packages
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-trading-partners
+          description: List all B2B trading partners.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: oracle-developer-api.list-trading-partners
+          outputParameters:
+            - type: object
+              mapping: "$."
