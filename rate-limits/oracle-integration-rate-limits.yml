@@ -4,104 +4,183 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Oracle Integration
 providerId: oracle-integration
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - API Management
-  - Automation
-  - B2B Integration
   - Cloud Integration
-  - Enterprise Integration
-  - Integration
   - iPaaS
-  - Process Automation
+  - Oracle Cloud
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Oracle Integration API surface. Captures
-  per-tier quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values
-  to be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: >-
+  Oracle Integration enforces per-instance service limits rather than a
+  per-second / per-minute rate-limit table. Throughput scales with the
+  provisioned edition and message-pack count; structural caps apply to active
+  integrations, payload sizes per adapter, scheduled-instance concurrency,
+  loop iterations, file-server storage, and outbound notifications. Lifecycle
+  operations against the underlying OCI control plane inherit the standard
+  OCI service-limits envelope. The numbers below come from the Oracle
+  Integration Service Limits documentation.
+sources:
+  - https://docs.oracle.com/en/cloud/paas/application-integration/
+  - https://docs.oracle.com/en/cloud/paas/integration-cloud/oracle-integration-oci/service-limits.html
+  - https://docs.oracle.com/en-us/iaas/Content/General/Concepts/servicelimits.htm
 responseCodes:
+  unauthorized: 401
+  forbidden: 403
+  notFound: 404
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Oracle Integration Developer API
-      - Oracle Integration Process Automation API
-      - Oracle Integration File Server API
-      - Oracle Integration Administrative API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
+  - name: Integration Service Instances per Region
+    scope: tenancy/region
+    metric: instances
+    limit: 200
+    notes: Maximum number of Oracle Integration service instances per OCI region.
+  - name: Custom Endpoints per Instance
+    scope: instance
+    metric: endpoints
+    limit: 3
+    notes: Up to three alternative custom endpoints per Oracle Integration instance.
+  - name: Active Integrations per Instance
+    scope: instance
+    metric: integrations
+    limit: 700
+    notes: Maximum number of activated integrations per Oracle Integration instance.
+  - name: Synchronous Integration Timeout
+    scope: integration
+    metric: seconds
+    limit: 300
+    notes: Hard timeout for synchronous integration invocations.
+  - name: Long-Running Scheduled Integration Limit
+    scope: integration
+    metric: hours
+    limit: 6
+    notes: Maximum runtime for a single scheduled integration execution.
+  - name: Concurrent Scheduled Instances
+    scope: integration
+    metric: concurrent_instances
+    limit: 2
+    notes: One scheduled / out-of-band instance plus one ad-hoc instance per scheduled integration.
+  - name: For-Each Loop Iterations
+    scope: integration
+    metric: iterations
+    limit: 5000
+    notes: Maximum iterations per for-each loop within an integration.
+  - name: While Loop Iterations
+    scope: integration
+    metric: iterations
+    limit: 5000
+    notes: Maximum iterations per while loop within an integration.
+  - name: Activity Executions per Instance
+    scope: integration
+    metric: activity_executions
     limit: 1000
-    timeFrame: month
-    applies:
-      - Oracle Integration Developer API
-      - Oracle Integration Process Automation API
-      - Oracle Integration File Server API
-      - Oracle Integration Administrative API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Oracle Integration Developer API
-      - Oracle Integration Process Automation API
-      - Oracle Integration File Server API
-      - Oracle Integration Administrative API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Oracle Integration Developer API
-      - Oracle Integration Process Automation API
-      - Oracle Integration File Server API
-      - Oracle Integration Administrative API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Oracle Integration Developer API
-      - Oracle Integration Process Automation API
-      - Oracle Integration File Server API
-      - Oracle Integration Administrative API
+    notes: Maximum activity executions per integration instance.
+  - name: Structured Payload (Cloud Endpoints)
+    scope: request
+    metric: payload_size_bytes
+    limit: 52428800
+    notes: 50 MB structured payload limit for cloud-endpoint adapters.
+  - name: Binary / Attachment Payload (Cloud Endpoints)
+    scope: request
+    metric: payload_size_bytes
+    limit: 1073741824
+    notes: 1 GB binary, attachment, or MTOM payload limit for cloud-endpoint adapters.
+  - name: Connectivity Agent Payload (SOAP / REST)
+    scope: request
+    metric: payload_size_bytes
+    limit: 52428800
+    notes: 50 MB payload limit for SOAP and REST adapters routed through the connectivity agent.
+  - name: Connectivity Agent Payload (Database / JMS / MQ / Kafka)
+    scope: request
+    metric: payload_size_bytes
+    limit: 10485760
+    notes: 10 MB payload limit for Database, JMS, MQ, and Kafka adapters via the connectivity agent.
+  - name: AS2 Adapter Payload
+    scope: request
+    metric: payload_size_bytes
+    limit: 10485760
+    notes: 10 MB AS2 adapter payload limit.
+  - name: Salesforce Adapter Batch
+    scope: request
+    metric: records
+    limit: 10000
+    notes: 8 MB / 10,000-record batch limit for the Salesforce adapter.
+  - name: Stage File - Read Entire File
+    scope: integration
+    metric: payload_size_bytes
+    limit: 10485760
+    notes: 10 MB cap when using Stage File "read entire file" mode.
+  - name: Stage File - Encrypt / Decrypt
+    scope: integration
+    metric: payload_size_bytes
+    limit: 1073741824
+    notes: 1 GB cap when using Stage File encrypt or decrypt operations.
+  - name: Activity Stream Size
+    scope: instance
+    metric: bytes
+    limit: 104857600
+    notes: 100 MB activity stream cap; payloads are truncated at 512 KB within the stream.
+  - name: File Server Storage
+    scope: instance
+    metric: GB
+    limit: 500
+    notes: 500 GB total file-server storage per Oracle Integration instance.
+  - name: File Server Concurrent Connections
+    scope: instance
+    metric: concurrent_connections
+    limit: 50
+    notes: 50 concurrent SFTP / file-server connections per Oracle Integration instance.
+  - name: Daily Outbound Emails
+    scope: instance
+    metric: emails_per_day
+    limit: 10000
+    timeFrame: day
+    notes: 10,000 outbound notification emails per day per instance.
+  - name: JavaScript Action Timeout
+    scope: integration
+    metric: seconds
+    limit: 15
+    notes: 15 second per-invocation timeout for JavaScript actions.
+  - name: JavaScript Function Parameters
+    scope: integration
+    metric: parameters
+    limit: 20
+    notes: Up to 20 parameters per JavaScript function.
+  - name: OCI Control-Plane Operations
+    scope: tenancy
+    metric: requests_per_second
+    limit: see OCI service-limits documentation
+    notes: >-
+      Lifecycle operations (create, update, scale, delete instance) inherit
+      the standard OCI control-plane throttling envelope.
 policies:
+  - name: Hard Service Limits
+    description: >-
+      The numeric limits above are enforced by Oracle Integration and cannot
+      be increased on a per-tenant basis. Solutions exceeding a limit must
+      be redesigned (split integrations, larger edition, additional
+      message packs, or migrate to bulk patterns).
+  - name: Capacity Scaling
+    description: >-
+      Throughput is scaled by adding message packs to the instance or
+      moving to a higher edition (Standard, Enterprise, Healthcare); raise
+      a service request to expand the per-region instance count beyond 200.
   - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+    description: >-
+      Clients should implement exponential backoff with jitter on 429 / 5xx
+      responses; honor any Retry-After header when present.
+  - name: Bulk Patterns
+    description: >-
+      For high-volume integrations prefer scheduled / batch integrations
+      with chunking and the File Server staging pattern over synchronous
+      REST invocations.
+  - name: Connectivity Agent Sizing
+    description: >-
+      Where on-premises adapters are used, ensure the connectivity agent
+      host has the required 8 GB minimum (4 GB heap) to avoid client-side
+      throttling.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

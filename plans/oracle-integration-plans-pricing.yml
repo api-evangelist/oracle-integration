@@ -4,174 +4,153 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Oracle Integration
 providerId: oracle-integration
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - API Management
-  - Automation
   - B2B Integration
   - Cloud Integration
-  - Enterprise Integration
-  - Integration
   - iPaaS
+  - Oracle Cloud
   - Process Automation
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+description: >-
+  Oracle Integration (OIC, current generation Oracle Integration 3) is sold as
+  an OCI service billed against per-hour service editions: Standard, Enterprise,
+  and (where licensed) Healthcare. Each edition is provisioned with a number of
+  message packs that scale concurrent message throughput; additional message
+  packs can be added per hour. There is no free or freemium public tier; a
+  trial is offered through Oracle Cloud Free Tier credits but is not a
+  committed plan. Engage Oracle Sales for the per-hour edition and message-pack
+  rates published on the Oracle Cloud Price List.
+sources:
+  - https://www.oracle.com/integration/integration-cloud/
+  - https://docs.oracle.com/en/cloud/paas/application-integration/
+  - https://www.oracle.com/cloud/price-list/
+notes: >-
+  Oracle blocks programmatic fetches of www.oracle.com pricing pages (HTTP 403).
+  Plan structure preserved as a per-edition usage-based plan plus an enterprise
+  agreement; replace per-hour message-pack price with the verified Oracle Cloud
+  Price List value when available.
 plans:
-  - id: oracle-integration-free
-    name: Free
-    type: freemium
-    description: Free entry tier for the Oracle Integration API surface. Intended for evaluation, prototyping,
-      and low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+  - id: oracle-integration-standard
+    name: Oracle Integration - Standard Edition
+    type: usage-based
+    description: >-
+      Standard edition of Oracle Integration on OCI, billed per hour against
+      the provisioned message-pack count. Suitable for application
+      integrations across Oracle SaaS and common third-party SaaS connectors.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/fileserver/v1
-          - https://integration.{region}.oci.oraclecloud.com
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/fileserver/v1
-          - https://integration.{region}.oci.oraclecloud.com
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Oracle Integration Developer API
-      - name: Oracle Integration Process Automation API
-      - name: Oracle Integration File Server API
-      - name: Oracle Integration Administrative API
-  - id: oracle-integration-pro
-    name: Professional
-    type: paid
-    description: Production tier for Oracle Integration. Provides higher quotas, priority support, and
-      access to the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/fileserver/v1
-          - https://integration.{region}.oci.oraclecloud.com
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/fileserver/v1
-          - https://integration.{region}.oci.oraclecloud.com
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
+      - label: Standard Edition Message Pack
+        name: standard_message_pack
         type: metered
-        metric: requests
+        metric: message-pack-hour
         limit: -1
-        timeFrame: month
+        timeFrame: usage
         geo: global
-        domains:
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/fileserver/v1
-          - https://integration.{region}.oci.oraclecloud.com
-        unit: 1000
-        price: TBD
+        unit: 1
+        price: see https://www.oracle.com/cloud/price-list/
+        userMultiplied: false
+      - label: Active Integrations
+        name: active_integrations
+        type: quota
+        metric: integrations
+        limit: 700
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.00'
         userMultiplied: false
     elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
       - name: Oracle Integration Developer API
       - name: Oracle Integration Process Automation API
       - name: Oracle Integration File Server API
       - name: Oracle Integration Administrative API
-  - id: oracle-integration-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom-negotiated tier for Oracle Integration. Includes dedicated capacity, contractual
-      SLAs, security review, data residency options, and named technical account management.
+  - id: oracle-integration-enterprise-edition
+    name: Oracle Integration - Enterprise Edition
+    type: usage-based
+    description: >-
+      Enterprise edition of Oracle Integration on OCI, billed per hour against
+      the provisioned message-pack count. Adds B2B for Oracle Integration,
+      File Server, additional process-automation capacity, and the broader
+      adapter library.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: Enterprise Edition Message Pack
+        name: enterprise_message_pack
+        type: metered
+        metric: message-pack-hour
         limit: -1
-        timeFrame: month
-        geo: configurable
-        domains:
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/fileserver/v1
-          - https://integration.{region}.oci.oraclecloud.com
+        timeFrame: usage
+        geo: global
         unit: 1
-        price: custom
+        price: see https://www.oracle.com/cloud/price-list/
         userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
+      - label: File Server Storage
+        name: file_server_storage
+        type: quota
+        metric: GB
+        limit: 500
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Active Integrations
+        name: active_integrations
+        type: quota
+        metric: integrations
+        limit: 700
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Oracle Integration Developer API
+      - name: Oracle Integration Process Automation API
+      - name: Oracle Integration File Server API
+      - name: Oracle Integration Administrative API
+  - id: oracle-integration-healthcare
+    name: Oracle Integration - Healthcare Edition
+    type: usage-based
+    description: >-
+      Healthcare edition of Oracle Integration with HL7 / FHIR-oriented
+      adapters and validation, billed per hour against the provisioned
+      message-pack count. Available where regional licensing permits.
+    entries:
+      - label: Healthcare Edition Message Pack
+        name: healthcare_message_pack
+        type: metered
+        metric: message-pack-hour
+        limit: -1
+        timeFrame: usage
         geo: configurable
-        domains:
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1
-          - https://{instance}.integration.ocp.oraclecloud.com/ic/api/fileserver/v1
-          - https://integration.{region}.oci.oraclecloud.com
+        unit: 1
+        price: see https://www.oracle.com/cloud/price-list/
+        userMultiplied: false
+    elements:
+      - name: Oracle Integration Developer API
+      - name: Oracle Integration Process Automation API
+      - name: Oracle Integration File Server API
+      - name: Oracle Integration Administrative API
+  - id: oracle-integration-enterprise-agreement
+    name: Enterprise Agreement
+    type: enterprise
+    description: >-
+      Negotiated enterprise agreement covering Oracle Integration capacity
+      across multiple OCI regions, with contractual SLAs, premier support,
+      and named technical account management.
+    entries:
+      - label: Negotiated Message-Pack Hours
+        name: negotiated_message_pack_hours
+        type: subscription
+        metric: message-pack-hour
+        limit: -1
+        timeFrame: year
+        geo: configurable
         unit: 1
         price: custom
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
       - name: Oracle Integration Developer API
       - name: Oracle Integration Process Automation API
       - name: Oracle Integration File Server API

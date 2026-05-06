@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,159 +9,124 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Oracle Integration
 providerId: oracle-integration
-publisherName: Oracle Integration
-serviceCategory: API
+publisherName: Oracle America, Inc.
+serviceCategory: Integration / iPaaS
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - API Management
-  - Automation
-  - B2B Integration
-  - Cloud Integration
-  - Enterprise Integration
-  - Integration
   - iPaaS
-  - Process Automation
+  - Cloud Integration
+  - Oracle Cloud
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Oracle Integration API surface. Provides a FOCUS-aligned
-  mapping for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: >-
+  FOCUS-aligned FinOps view for Oracle Integration: per-hour billing of the
+  service edition (Standard / Enterprise / Healthcare) multiplied by the
+  provisioned message-pack count, plus separate OCI charges for outbound
+  data transfer and any auxiliary OCI resources (object storage, identity
+  domains). FinOps observation focuses on edition + message-pack utilization,
+  active integrations, and File Server storage against the contractual
+  edition.
+sources:
+  - https://www.oracle.com/integration/integration-cloud/
+  - https://docs.oracle.com/en/cloud/paas/application-integration/
+  - https://www.oracle.com/cloud/price-list/
+notes: >-
+  Per-hour message-pack price is not publicly fetchable. Track edition,
+  message-pack hours, and active-integration count via OCI Cost Analysis and
+  the Oracle Integration monitoring dashboards.
 billingModel:
-  pricingCategory: Usage-Based
+  pricingCategory: Pay-As-You-Go (Per-Edition Hourly)
   billingFrequency: Monthly
   billingCurrency: USD
   chargeCategories:
     - Usage
     - Purchase
     - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
+    - Credit
 focusColumns:
   ServiceName: Oracle Integration
-  ServiceCategory: Developer Tools / API
-  ProviderName: Oracle Integration
-  PublisherName: Oracle Integration
-  InvoiceIssuerName: Oracle Integration
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceCategory: Integration / iPaaS
+  ProviderName: Oracle
+  PublisherName: Oracle America, Inc.
+  InvoiceIssuerName: Oracle America, Inc.
   BillingCurrency: USD
+  PricingCategory: Pay-As-You-Go
   ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: oic_message_pack_hours
+    description: Message-pack hours consumed by Oracle Integration instances
+    unit: message-pack-hour
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
+      - edition
       - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
+      - instance
+      - tag
+  - name: oic_active_integrations
+    description: Active integrations against the per-instance cap of 700
+    unit: integrations
+    aggregation: max
+    dimensions:
+      - instance
+      - environment
+  - name: oic_file_server_storage_gb
+    description: File Server storage consumed against the 500 GB per-instance cap
+    unit: GB
+    aggregation: max
+    dimensions:
+      - instance
+  - name: oic_outbound_email
+    description: Daily outbound notification emails against the 10,000 per-instance cap
+    unit: emails
+    aggregation: sum
+    dimensions:
+      - instance
+      - day
+  - name: oci_egress_gb
+    description: Outbound data transfer attributable to Oracle Integration
     unit: GB
     aggregation: sum
     dimensions:
-      - api
       - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
+principles:
+  - name: Visibility
+    description: >-
+      Use OCI Cost Analysis with cost-tracking tags applied to each Oracle
+      Integration instance, and the Oracle Integration monitoring dashboards
+      for active integrations, message volume, and File Server consumption.
+  - name: Allocation
+    description: >-
+      Apply cost-tracking tags (e.g. team, business_capability, environment)
+      to each instance so iPaaS spend can be allocated back to the consuming
+      product line.
+  - name: Optimization
+    description: >-
+      Right-size message-pack count to peak concurrent messages, drop unused
+      activated integrations to stay below the 700-integration cap, and
+      consolidate low-volume tenants onto shared instances. Move bursty
+      bulk workloads onto scheduled integrations to flatten message-pack
+      demand.
+  - name: Accountability
+    description: >-
+      Assign an integration center-of-excellence owner per instance; review
+      message-pack utilization and edition fit at quarterly business
+      reviews and at each renewal.
 apis:
   - name: Oracle Integration Developer API
-    baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
-    tags:
-      - B2B
-      - Connections
-      - Integration Management
-      - Monitoring
-      - Orchestration
-      - Packages
-      - REST API
-      - Scheduled Integrations
     serviceName: Oracle Integration Developer API
-    serviceCategory: API
+    serviceCategory: Integration / iPaaS
   - name: Oracle Integration Process Automation API
-    baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1
-    tags:
-      - BPM
-      - Decision Models
-      - Process Automation
-      - Tasks
-      - Workflows
     serviceName: Oracle Integration Process Automation API
-    serviceCategory: API
+    serviceCategory: Integration / iPaaS
   - name: Oracle Integration File Server API
-    baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/fileserver/v1
-    tags:
-      - File Management
-      - File Server
-      - SFTP
     serviceName: Oracle Integration File Server API
-    serviceCategory: API
+    serviceCategory: Integration / iPaaS
   - name: Oracle Integration Administrative API
-    baseURL: https://integration.{region}.oci.oraclecloud.com
-    tags:
-      - Administration
-      - Lifecycle Management
-      - Provisioning
     serviceName: Oracle Integration Administrative API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+    serviceCategory: Integration / iPaaS
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
