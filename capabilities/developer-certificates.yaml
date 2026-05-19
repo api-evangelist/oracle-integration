@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Integration Developer API — Certificates
+  description: 'Oracle Integration Developer API — Certificates. 2 operations. Lead operation: Oracle Integration List Certificates.
+    Self-contained Naftiko capability covering one Oracle Integration business surface.'
+  tags:
+  - Oracle Integration
+  - Certificates
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_INTEGRATION_API_KEY: ORACLE_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: developer-certificates
+    baseUri: https://{instance}.integration.ocp.oraclecloud.com
+    description: Oracle Integration Developer API — Certificates business capability. Self-contained, no shared references.
+    resources:
+    - name: ic-api-integration-v1-certificates
+      path: /ic/api/integration/v1/certificates
+      operations:
+      - name: listcertificates
+        method: GET
+        description: Oracle Integration List Certificates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: uploadcertificate
+        method: POST
+        description: Oracle Integration Upload Certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ORACLE_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: developer-certificates-rest
+    port: 8080
+    description: REST adapter for Oracle Integration Developer API — Certificates. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/ic/api/integration/v1/certificates
+      name: ic-api-integration-v1-certificates
+      description: REST surface for ic-api-integration-v1-certificates.
+      operations:
+      - method: GET
+        name: listcertificates
+        description: Oracle Integration List Certificates
+        call: developer-certificates.listcertificates
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: uploadcertificate
+        description: Oracle Integration Upload Certificate
+        call: developer-certificates.uploadcertificate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: developer-certificates-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Integration Developer API — Certificates. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: oracle-integration-list-certificates
+      description: Oracle Integration List Certificates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-certificates.listcertificates
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-upload-certificate
+      description: Oracle Integration Upload Certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-certificates.uploadcertificate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

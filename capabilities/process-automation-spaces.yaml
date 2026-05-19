@@ -1,0 +1,162 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Integration Process Automation API — Spaces
+  description: 'Oracle Integration Process Automation API — Spaces. 4 operations. Lead operation: Oracle Integration List
+    Spaces. Self-contained Naftiko capability covering one Oracle Integration business surface.'
+  tags:
+  - Oracle Integration
+  - Spaces
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_INTEGRATION_API_KEY: ORACLE_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: process-automation-spaces
+    baseUri: https://{instance}.integration.ocp.oraclecloud.com
+    description: Oracle Integration Process Automation API — Spaces business capability. Self-contained, no shared references.
+    resources:
+    - name: ic-api-process-v1-spaces
+      path: /ic/api/process/v1/spaces
+      operations:
+      - name: listspaces
+        method: GET
+        description: Oracle Integration List Spaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createspace
+        method: POST
+        description: Oracle Integration Create Space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ic-api-process-v1-spaces-spaceId
+      path: /ic/api/process/v1/spaces/{spaceId}
+      operations:
+      - name: getspace
+        method: GET
+        description: Oracle Integration Get Space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletespace
+        method: DELETE
+        description: Oracle Integration Delete Space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ORACLE_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: process-automation-spaces-rest
+    port: 8080
+    description: REST adapter for Oracle Integration Process Automation API — Spaces. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/ic/api/process/v1/spaces
+      name: ic-api-process-v1-spaces
+      description: REST surface for ic-api-process-v1-spaces.
+      operations:
+      - method: GET
+        name: listspaces
+        description: Oracle Integration List Spaces
+        call: process-automation-spaces.listspaces
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createspace
+        description: Oracle Integration Create Space
+        call: process-automation-spaces.createspace
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/process/v1/spaces/{spaceid}
+      name: ic-api-process-v1-spaces-spaceid
+      description: REST surface for ic-api-process-v1-spaces-spaceId.
+      operations:
+      - method: GET
+        name: getspace
+        description: Oracle Integration Get Space
+        call: process-automation-spaces.getspace
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletespace
+        description: Oracle Integration Delete Space
+        call: process-automation-spaces.deletespace
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: process-automation-spaces-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Integration Process Automation API — Spaces. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: oracle-integration-list-spaces
+      description: Oracle Integration List Spaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-spaces.listspaces
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-create-space
+      description: Oracle Integration Create Space
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: process-automation-spaces.createspace
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-get-space
+      description: Oracle Integration Get Space
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-spaces.getspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-delete-space
+      description: Oracle Integration Delete Space
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: process-automation-spaces.deletespace
+      outputParameters:
+      - type: object
+        mapping: $.

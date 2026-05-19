@@ -1,0 +1,113 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Integration Process Automation API — Process Definitions
+  description: 'Oracle Integration Process Automation API — Process Definitions. 2 operations. Lead operation: Oracle Integration
+    List Process Definitions. Self-contained Naftiko capability covering one Oracle Integration business surface.'
+  tags:
+  - Oracle Integration
+  - Process Definitions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_INTEGRATION_API_KEY: ORACLE_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: process-automation-process-definitions
+    baseUri: https://{instance}.integration.ocp.oraclecloud.com
+    description: Oracle Integration Process Automation API — Process Definitions business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: ic-api-process-v1-process-definitions
+      path: /ic/api/process/v1/process-definitions
+      operations:
+      - name: listprocessdefinitions
+        method: GET
+        description: Oracle Integration List Process Definitions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ic-api-process-v1-process-definitions-processDefId-process-metadata
+      path: /ic/api/process/v1/process-definitions/{processDefId}/process-metadata
+      operations:
+      - name: getprocessmetadata
+        method: GET
+        description: Oracle Integration Get Process Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: processDefId
+          in: path
+          type: string
+          description: Process definition identifier.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ORACLE_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: process-automation-process-definitions-rest
+    port: 8080
+    description: REST adapter for Oracle Integration Process Automation API — Process Definitions. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/ic/api/process/v1/process-definitions
+      name: ic-api-process-v1-process-definitions
+      description: REST surface for ic-api-process-v1-process-definitions.
+      operations:
+      - method: GET
+        name: listprocessdefinitions
+        description: Oracle Integration List Process Definitions
+        call: process-automation-process-definitions.listprocessdefinitions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/process/v1/process-definitions/{processdefid}/process-metadata
+      name: ic-api-process-v1-process-definitions-processdefid-process-metadata
+      description: REST surface for ic-api-process-v1-process-definitions-processDefId-process-metadata.
+      operations:
+      - method: GET
+        name: getprocessmetadata
+        description: Oracle Integration Get Process Metadata
+        call: process-automation-process-definitions.getprocessmetadata
+        with:
+          processDefId: rest.processDefId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: process-automation-process-definitions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Integration Process Automation API — Process Definitions. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: oracle-integration-list-process-definitions
+      description: Oracle Integration List Process Definitions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-process-definitions.listprocessdefinitions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-get-process-metadata
+      description: Oracle Integration Get Process Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-process-definitions.getprocessmetadata
+      with:
+        processDefId: tools.processDefId
+      outputParameters:
+      - type: object
+        mapping: $.

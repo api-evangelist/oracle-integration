@@ -1,0 +1,288 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Integration Developer API — B2B Documents
+  description: 'Oracle Integration Developer API — B2B Documents. 7 operations. Lead operation: Oracle Integration List B2B
+    Documents. Self-contained Naftiko capability covering one Oracle Integration business surface.'
+  tags:
+  - Oracle Integration
+  - B2B Documents
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_INTEGRATION_API_KEY: ORACLE_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: developer-b2b-documents
+    baseUri: https://{instance}.integration.ocp.oraclecloud.com
+    description: Oracle Integration Developer API — B2B Documents business capability. Self-contained, no shared references.
+    resources:
+    - name: ic-api-b2b-v1-b2bdocuments
+      path: /ic/api/b2b/v1/b2bdocuments
+      operations:
+      - name: listb2bdocuments
+        method: GET
+        description: Oracle Integration List B2B Documents
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createb2bdocument
+        method: POST
+        description: Oracle Integration Create B2B Document
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ic-api-b2b-v1-b2bdocuments-documentId
+      path: /ic/api/b2b/v1/b2bdocuments/{documentId}
+      operations:
+      - name: getb2bdocument
+        method: GET
+        description: Oracle Integration Get B2B Document
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: documentId
+          in: path
+          type: string
+          description: B2B document identifier.
+          required: true
+      - name: updateb2bdocument
+        method: PUT
+        description: Oracle Integration Update B2B Document
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: documentId
+          in: path
+          type: string
+          description: B2B document identifier.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteb2bdocument
+        method: DELETE
+        description: Oracle Integration Delete B2B Document
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: documentId
+          in: path
+          type: string
+          description: B2B document identifier.
+          required: true
+    - name: ic-api-b2b-v1-schemas
+      path: /ic/api/b2b/v1/schemas
+      operations:
+      - name: listb2bschemas
+        method: GET
+        description: Oracle Integration List B2B Schemas
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ic-api-b2b-v1-standards
+      path: /ic/api/b2b/v1/standards
+      operations:
+      - name: listb2bstandards
+        method: GET
+        description: Oracle Integration List B2B Document Standards
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ORACLE_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: developer-b2b-documents-rest
+    port: 8080
+    description: REST adapter for Oracle Integration Developer API — B2B Documents. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/ic/api/b2b/v1/b2bdocuments
+      name: ic-api-b2b-v1-b2bdocuments
+      description: REST surface for ic-api-b2b-v1-b2bdocuments.
+      operations:
+      - method: GET
+        name: listb2bdocuments
+        description: Oracle Integration List B2B Documents
+        call: developer-b2b-documents.listb2bdocuments
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createb2bdocument
+        description: Oracle Integration Create B2B Document
+        call: developer-b2b-documents.createb2bdocument
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/b2b/v1/b2bdocuments/{documentid}
+      name: ic-api-b2b-v1-b2bdocuments-documentid
+      description: REST surface for ic-api-b2b-v1-b2bdocuments-documentId.
+      operations:
+      - method: GET
+        name: getb2bdocument
+        description: Oracle Integration Get B2B Document
+        call: developer-b2b-documents.getb2bdocument
+        with:
+          documentId: rest.documentId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateb2bdocument
+        description: Oracle Integration Update B2B Document
+        call: developer-b2b-documents.updateb2bdocument
+        with:
+          documentId: rest.documentId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteb2bdocument
+        description: Oracle Integration Delete B2B Document
+        call: developer-b2b-documents.deleteb2bdocument
+        with:
+          documentId: rest.documentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/b2b/v1/schemas
+      name: ic-api-b2b-v1-schemas
+      description: REST surface for ic-api-b2b-v1-schemas.
+      operations:
+      - method: GET
+        name: listb2bschemas
+        description: Oracle Integration List B2B Schemas
+        call: developer-b2b-documents.listb2bschemas
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/b2b/v1/standards
+      name: ic-api-b2b-v1-standards
+      description: REST surface for ic-api-b2b-v1-standards.
+      operations:
+      - method: GET
+        name: listb2bstandards
+        description: Oracle Integration List B2B Document Standards
+        call: developer-b2b-documents.listb2bstandards
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: developer-b2b-documents-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Integration Developer API — B2B Documents. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: oracle-integration-list-b2b-documents
+      description: Oracle Integration List B2B Documents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-b2b-documents.listb2bdocuments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-create-b2b-document
+      description: Oracle Integration Create B2B Document
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-b2b-documents.createb2bdocument
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-get-b2b-document
+      description: Oracle Integration Get B2B Document
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-b2b-documents.getb2bdocument
+      with:
+        documentId: tools.documentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-update-b2b-document
+      description: Oracle Integration Update B2B Document
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: developer-b2b-documents.updateb2bdocument
+      with:
+        documentId: tools.documentId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-delete-b2b-document
+      description: Oracle Integration Delete B2B Document
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: developer-b2b-documents.deleteb2bdocument
+      with:
+        documentId: tools.documentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-list-b2b-schemas
+      description: Oracle Integration List B2B Schemas
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-b2b-documents.listb2bschemas
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-list-b2b-document
+      description: Oracle Integration List B2B Document Standards
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-b2b-documents.listb2bstandards
+      outputParameters:
+      - type: object
+        mapping: $.

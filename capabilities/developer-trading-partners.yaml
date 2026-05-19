@@ -1,0 +1,291 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Integration Developer API — Trading Partners
+  description: 'Oracle Integration Developer API — Trading Partners. 7 operations. Lead operation: Oracle Integration Get
+    Host Profile. Self-contained Naftiko capability covering one Oracle Integration business surface.'
+  tags:
+  - Oracle Integration
+  - Trading Partners
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_INTEGRATION_API_KEY: ORACLE_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: developer-trading-partners
+    baseUri: https://{instance}.integration.ocp.oraclecloud.com
+    description: Oracle Integration Developer API — Trading Partners business capability. Self-contained, no shared references.
+    resources:
+    - name: ic-api-b2b-v1-tpm-host
+      path: /ic/api/b2b/v1/tpm/host
+      operations:
+      - name: gethostprofile
+        method: GET
+        description: Oracle Integration Get Host Profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createorupdatehostprofile
+        method: POST
+        description: Oracle Integration Create or Update Host Profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ic-api-b2b-v1-tpm-partners
+      path: /ic/api/b2b/v1/tpm/partners
+      operations:
+      - name: listtradingpartners
+        method: GET
+        description: Oracle Integration List Trading Partners
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createtradingpartner
+        method: POST
+        description: Oracle Integration Create Trading Partner
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ic-api-b2b-v1-tpm-partners-tpId
+      path: /ic/api/b2b/v1/tpm/partners/{tpId}
+      operations:
+      - name: gettradingpartner
+        method: GET
+        description: Oracle Integration Get Trading Partner
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tpId
+          in: path
+          type: string
+          description: Trading partner identifier.
+          required: true
+      - name: updatetradingpartner
+        method: PUT
+        description: Oracle Integration Update Trading Partner
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tpId
+          in: path
+          type: string
+          description: Trading partner identifier.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletetradingpartner
+        method: DELETE
+        description: Oracle Integration Delete Trading Partner
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tpId
+          in: path
+          type: string
+          description: Trading partner identifier.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ORACLE_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: developer-trading-partners-rest
+    port: 8080
+    description: REST adapter for Oracle Integration Developer API — Trading Partners. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/ic/api/b2b/v1/tpm/host
+      name: ic-api-b2b-v1-tpm-host
+      description: REST surface for ic-api-b2b-v1-tpm-host.
+      operations:
+      - method: GET
+        name: gethostprofile
+        description: Oracle Integration Get Host Profile
+        call: developer-trading-partners.gethostprofile
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createorupdatehostprofile
+        description: Oracle Integration Create or Update Host Profile
+        call: developer-trading-partners.createorupdatehostprofile
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/b2b/v1/tpm/partners
+      name: ic-api-b2b-v1-tpm-partners
+      description: REST surface for ic-api-b2b-v1-tpm-partners.
+      operations:
+      - method: GET
+        name: listtradingpartners
+        description: Oracle Integration List Trading Partners
+        call: developer-trading-partners.listtradingpartners
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createtradingpartner
+        description: Oracle Integration Create Trading Partner
+        call: developer-trading-partners.createtradingpartner
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/b2b/v1/tpm/partners/{tpid}
+      name: ic-api-b2b-v1-tpm-partners-tpid
+      description: REST surface for ic-api-b2b-v1-tpm-partners-tpId.
+      operations:
+      - method: GET
+        name: gettradingpartner
+        description: Oracle Integration Get Trading Partner
+        call: developer-trading-partners.gettradingpartner
+        with:
+          tpId: rest.tpId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatetradingpartner
+        description: Oracle Integration Update Trading Partner
+        call: developer-trading-partners.updatetradingpartner
+        with:
+          tpId: rest.tpId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletetradingpartner
+        description: Oracle Integration Delete Trading Partner
+        call: developer-trading-partners.deletetradingpartner
+        with:
+          tpId: rest.tpId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: developer-trading-partners-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Integration Developer API — Trading Partners. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: oracle-integration-get-host-profile
+      description: Oracle Integration Get Host Profile
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-trading-partners.gethostprofile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-create-update-host
+      description: Oracle Integration Create or Update Host Profile
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-trading-partners.createorupdatehostprofile
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-list-trading-partners
+      description: Oracle Integration List Trading Partners
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-trading-partners.listtradingpartners
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-create-trading-partner
+      description: Oracle Integration Create Trading Partner
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-trading-partners.createtradingpartner
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-get-trading-partner
+      description: Oracle Integration Get Trading Partner
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-trading-partners.gettradingpartner
+      with:
+        tpId: tools.tpId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-update-trading-partner
+      description: Oracle Integration Update Trading Partner
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: developer-trading-partners.updatetradingpartner
+      with:
+        tpId: tools.tpId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-delete-trading-partner
+      description: Oracle Integration Delete Trading Partner
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: developer-trading-partners.deletetradingpartner
+      with:
+        tpId: tools.tpId
+      outputParameters:
+      - type: object
+        mapping: $.

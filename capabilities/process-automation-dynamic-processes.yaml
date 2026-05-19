@@ -1,0 +1,138 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Integration Process Automation API — Dynamic Processes
+  description: 'Oracle Integration Process Automation API — Dynamic Processes. 3 operations. Lead operation: Oracle Integration
+    List Dynamic Process Definitions. Self-contained Naftiko capability covering one Oracle Integration business surface.'
+  tags:
+  - Oracle Integration
+  - Dynamic Processes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_INTEGRATION_API_KEY: ORACLE_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: process-automation-dynamic-processes
+    baseUri: https://{instance}.integration.ocp.oraclecloud.com
+    description: Oracle Integration Process Automation API — Dynamic Processes business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: ic-api-process-v1-dp-definitions
+      path: /ic/api/process/v1/dp-definitions
+      operations:
+      - name: listdynamicprocessdefinitions
+        method: GET
+        description: Oracle Integration List Dynamic Process Definitions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ic-api-process-v1-dp-instances
+      path: /ic/api/process/v1/dp-instances
+      operations:
+      - name: listdynamicprocessinstances
+        method: GET
+        description: Oracle Integration List Dynamic Process Instances
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createdynamicprocessinstance
+        method: POST
+        description: Oracle Integration Create Dynamic Process Instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ORACLE_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: process-automation-dynamic-processes-rest
+    port: 8080
+    description: REST adapter for Oracle Integration Process Automation API — Dynamic Processes. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/ic/api/process/v1/dp-definitions
+      name: ic-api-process-v1-dp-definitions
+      description: REST surface for ic-api-process-v1-dp-definitions.
+      operations:
+      - method: GET
+        name: listdynamicprocessdefinitions
+        description: Oracle Integration List Dynamic Process Definitions
+        call: process-automation-dynamic-processes.listdynamicprocessdefinitions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/process/v1/dp-instances
+      name: ic-api-process-v1-dp-instances
+      description: REST surface for ic-api-process-v1-dp-instances.
+      operations:
+      - method: GET
+        name: listdynamicprocessinstances
+        description: Oracle Integration List Dynamic Process Instances
+        call: process-automation-dynamic-processes.listdynamicprocessinstances
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createdynamicprocessinstance
+        description: Oracle Integration Create Dynamic Process Instance
+        call: process-automation-dynamic-processes.createdynamicprocessinstance
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: process-automation-dynamic-processes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Integration Process Automation API — Dynamic Processes. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: oracle-integration-list-dynamic-process
+      description: Oracle Integration List Dynamic Process Definitions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-dynamic-processes.listdynamicprocessdefinitions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-list-dynamic-process-2
+      description: Oracle Integration List Dynamic Process Instances
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-dynamic-processes.listdynamicprocessinstances
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-create-dynamic-process
+      description: Oracle Integration Create Dynamic Process Instance
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: process-automation-dynamic-processes.createdynamicprocessinstance
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,313 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Integration Process Automation API — Process Instances
+  description: 'Oracle Integration Process Automation API — Process Instances. 8 operations. Lead operation: Oracle Integration
+    List Process Instances. Self-contained Naftiko capability covering one Oracle Integration business surface.'
+  tags:
+  - Oracle Integration
+  - Process Instances
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_INTEGRATION_API_KEY: ORACLE_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: process-automation-process-instances
+    baseUri: https://{instance}.integration.ocp.oraclecloud.com
+    description: Oracle Integration Process Automation API — Process Instances business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: ic-api-process-v1-processes
+      path: /ic/api/process/v1/processes
+      operations:
+      - name: listprocessinstances
+        method: GET
+        description: Oracle Integration List Process Instances
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: q
+          in: query
+          type: string
+          description: Filter query string.
+      - name: createprocessinstance
+        method: POST
+        description: Oracle Integration Create Process Instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ic-api-process-v1-processes-instance-metrics
+      path: /ic/api/process/v1/processes/instance-metrics
+      operations:
+      - name: getinstancemetrics
+        method: GET
+        description: Oracle Integration Get Instance Metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ic-api-process-v1-processes-processId
+      path: /ic/api/process/v1/processes/{processId}
+      operations:
+      - name: getprocessinstance
+        method: GET
+        description: Oracle Integration Get Process Instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateprocessstate
+        method: PUT
+        description: Oracle Integration Update Process State
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ic-api-process-v1-processes-processId-attachments
+      path: /ic/api/process/v1/processes/{processId}/attachments
+      operations:
+      - name: listprocessattachments
+        method: GET
+        description: Oracle Integration List Process Attachments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ic-api-process-v1-processes-processId-comments
+      path: /ic/api/process/v1/processes/{processId}/comments
+      operations:
+      - name: listprocesscomments
+        method: GET
+        description: Oracle Integration List Process Comments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: addprocesscomment
+        method: POST
+        description: Oracle Integration Add Process Comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ORACLE_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: process-automation-process-instances-rest
+    port: 8080
+    description: REST adapter for Oracle Integration Process Automation API — Process Instances. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/ic/api/process/v1/processes
+      name: ic-api-process-v1-processes
+      description: REST surface for ic-api-process-v1-processes.
+      operations:
+      - method: GET
+        name: listprocessinstances
+        description: Oracle Integration List Process Instances
+        call: process-automation-process-instances.listprocessinstances
+        with:
+          q: rest.q
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createprocessinstance
+        description: Oracle Integration Create Process Instance
+        call: process-automation-process-instances.createprocessinstance
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/process/v1/processes/instance-metrics
+      name: ic-api-process-v1-processes-instance-metrics
+      description: REST surface for ic-api-process-v1-processes-instance-metrics.
+      operations:
+      - method: GET
+        name: getinstancemetrics
+        description: Oracle Integration Get Instance Metrics
+        call: process-automation-process-instances.getinstancemetrics
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/process/v1/processes/{processid}
+      name: ic-api-process-v1-processes-processid
+      description: REST surface for ic-api-process-v1-processes-processId.
+      operations:
+      - method: GET
+        name: getprocessinstance
+        description: Oracle Integration Get Process Instance
+        call: process-automation-process-instances.getprocessinstance
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateprocessstate
+        description: Oracle Integration Update Process State
+        call: process-automation-process-instances.updateprocessstate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/process/v1/processes/{processid}/attachments
+      name: ic-api-process-v1-processes-processid-attachments
+      description: REST surface for ic-api-process-v1-processes-processId-attachments.
+      operations:
+      - method: GET
+        name: listprocessattachments
+        description: Oracle Integration List Process Attachments
+        call: process-automation-process-instances.listprocessattachments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/process/v1/processes/{processid}/comments
+      name: ic-api-process-v1-processes-processid-comments
+      description: REST surface for ic-api-process-v1-processes-processId-comments.
+      operations:
+      - method: GET
+        name: listprocesscomments
+        description: Oracle Integration List Process Comments
+        call: process-automation-process-instances.listprocesscomments
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: addprocesscomment
+        description: Oracle Integration Add Process Comment
+        call: process-automation-process-instances.addprocesscomment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: process-automation-process-instances-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Integration Process Automation API — Process Instances. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: oracle-integration-list-process-instances
+      description: Oracle Integration List Process Instances
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-process-instances.listprocessinstances
+      with:
+        q: tools.q
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-create-process-instance
+      description: Oracle Integration Create Process Instance
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: process-automation-process-instances.createprocessinstance
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-get-instance-metrics
+      description: Oracle Integration Get Instance Metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-process-instances.getinstancemetrics
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-get-process-instance
+      description: Oracle Integration Get Process Instance
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-process-instances.getprocessinstance
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-update-process-state
+      description: Oracle Integration Update Process State
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: process-automation-process-instances.updateprocessstate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-list-process-attachments
+      description: Oracle Integration List Process Attachments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-process-instances.listprocessattachments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-list-process-comments
+      description: Oracle Integration List Process Comments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-process-instances.listprocesscomments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-add-process-comment
+      description: Oracle Integration Add Process Comment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: process-automation-process-instances.addprocesscomment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

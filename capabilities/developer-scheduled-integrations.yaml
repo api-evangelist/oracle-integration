@@ -1,0 +1,199 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Integration Developer API — Scheduled Integrations
+  description: 'Oracle Integration Developer API — Scheduled Integrations. 5 operations. Lead operation: Oracle Integration
+    Run Scheduled Integration Now. Self-contained Naftiko capability covering one Oracle Integration business surface.'
+  tags:
+  - Oracle Integration
+  - Scheduled Integrations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_INTEGRATION_API_KEY: ORACLE_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: developer-scheduled-integrations
+    baseUri: https://{instance}.integration.ocp.oraclecloud.com
+    description: Oracle Integration Developer API — Scheduled Integrations business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: ic-api-integration-v1-integrations-id-schedule-jobs
+      path: /ic/api/integration/v1/integrations/{id}/schedule/jobs
+      operations:
+      - name: runscheduledintegrationnow
+        method: POST
+        description: Oracle Integration Run Scheduled Integration Now
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ic-api-integration-v1-integrations-id-schedule-pause
+      path: /ic/api/integration/v1/integrations/{id}/schedule/pause
+      operations:
+      - name: pauseintegrationschedule
+        method: POST
+        description: Oracle Integration Pause Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ic-api-integration-v1-integrations-id-schedule-resume
+      path: /ic/api/integration/v1/integrations/{id}/schedule/resume
+      operations:
+      - name: resumeintegrationschedule
+        method: POST
+        description: Oracle Integration Resume Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ic-api-integration-v1-integrations-id-schedule-start
+      path: /ic/api/integration/v1/integrations/{id}/schedule/start
+      operations:
+      - name: startintegrationschedule
+        method: POST
+        description: Oracle Integration Start Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ic-api-integration-v1-integrations-id-schedule-stop
+      path: /ic/api/integration/v1/integrations/{id}/schedule/stop
+      operations:
+      - name: stopintegrationschedule
+        method: POST
+        description: Oracle Integration Stop Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ORACLE_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: developer-scheduled-integrations-rest
+    port: 8080
+    description: REST adapter for Oracle Integration Developer API — Scheduled Integrations. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/ic/api/integration/v1/integrations/{id}/schedule/jobs
+      name: ic-api-integration-v1-integrations-id-schedule-jobs
+      description: REST surface for ic-api-integration-v1-integrations-id-schedule-jobs.
+      operations:
+      - method: POST
+        name: runscheduledintegrationnow
+        description: Oracle Integration Run Scheduled Integration Now
+        call: developer-scheduled-integrations.runscheduledintegrationnow
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/integration/v1/integrations/{id}/schedule/pause
+      name: ic-api-integration-v1-integrations-id-schedule-pause
+      description: REST surface for ic-api-integration-v1-integrations-id-schedule-pause.
+      operations:
+      - method: POST
+        name: pauseintegrationschedule
+        description: Oracle Integration Pause Schedule
+        call: developer-scheduled-integrations.pauseintegrationschedule
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/integration/v1/integrations/{id}/schedule/resume
+      name: ic-api-integration-v1-integrations-id-schedule-resume
+      description: REST surface for ic-api-integration-v1-integrations-id-schedule-resume.
+      operations:
+      - method: POST
+        name: resumeintegrationschedule
+        description: Oracle Integration Resume Schedule
+        call: developer-scheduled-integrations.resumeintegrationschedule
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/integration/v1/integrations/{id}/schedule/start
+      name: ic-api-integration-v1-integrations-id-schedule-start
+      description: REST surface for ic-api-integration-v1-integrations-id-schedule-start.
+      operations:
+      - method: POST
+        name: startintegrationschedule
+        description: Oracle Integration Start Schedule
+        call: developer-scheduled-integrations.startintegrationschedule
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/integration/v1/integrations/{id}/schedule/stop
+      name: ic-api-integration-v1-integrations-id-schedule-stop
+      description: REST surface for ic-api-integration-v1-integrations-id-schedule-stop.
+      operations:
+      - method: POST
+        name: stopintegrationschedule
+        description: Oracle Integration Stop Schedule
+        call: developer-scheduled-integrations.stopintegrationschedule
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: developer-scheduled-integrations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Integration Developer API — Scheduled Integrations. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: oracle-integration-run-scheduled-integration
+      description: Oracle Integration Run Scheduled Integration Now
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-scheduled-integrations.runscheduledintegrationnow
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-pause-schedule
+      description: Oracle Integration Pause Schedule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-scheduled-integrations.pauseintegrationschedule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-resume-schedule
+      description: Oracle Integration Resume Schedule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-scheduled-integrations.resumeintegrationschedule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-start-schedule
+      description: Oracle Integration Start Schedule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-scheduled-integrations.startintegrationschedule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-stop-schedule
+      description: Oracle Integration Stop Schedule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-scheduled-integrations.stopintegrationschedule
+      outputParameters:
+      - type: object
+        mapping: $.

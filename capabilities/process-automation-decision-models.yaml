@@ -1,0 +1,185 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Integration Process Automation API — Decision Models
+  description: 'Oracle Integration Process Automation API — Decision Models. 5 operations. Lead operation: Oracle Integration
+    List DMN Spaces. Self-contained Naftiko capability covering one Oracle Integration business surface.'
+  tags:
+  - Oracle Integration
+  - Decision Models
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_INTEGRATION_API_KEY: ORACLE_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: process-automation-decision-models
+    baseUri: https://{instance}.integration.ocp.oraclecloud.com
+    description: Oracle Integration Process Automation API — Decision Models business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: ic-api-process-v1-dmn-spaces
+      path: /ic/api/process/v1/dmn/spaces
+      operations:
+      - name: listdmnspaces
+        method: GET
+        description: Oracle Integration List DMN Spaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ic-api-process-v1-dmn-spaces-spaceId-decision-models
+      path: /ic/api/process/v1/dmn/spaces/{spaceId}/decision-models
+      operations:
+      - name: listdecisionmodels
+        method: GET
+        description: Oracle Integration List Decision Models
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ic-api-process-v1-dmn-spaces-spaceId-decision-models-decisionModelName
+      path: /ic/api/process/v1/dmn/spaces/{spaceId}/decision-models/{decisionModelName}
+      operations:
+      - name: getdecisionmodel
+        method: GET
+        description: Oracle Integration Get Decision Model
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createdecisionmodel
+        method: PUT
+        description: Oracle Integration Create Decision Model
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletedecisionmodel
+        method: DELETE
+        description: Oracle Integration Delete Decision Model
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ORACLE_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: process-automation-decision-models-rest
+    port: 8080
+    description: REST adapter for Oracle Integration Process Automation API — Decision Models. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/ic/api/process/v1/dmn/spaces
+      name: ic-api-process-v1-dmn-spaces
+      description: REST surface for ic-api-process-v1-dmn-spaces.
+      operations:
+      - method: GET
+        name: listdmnspaces
+        description: Oracle Integration List DMN Spaces
+        call: process-automation-decision-models.listdmnspaces
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/process/v1/dmn/spaces/{spaceid}/decision-models
+      name: ic-api-process-v1-dmn-spaces-spaceid-decision-models
+      description: REST surface for ic-api-process-v1-dmn-spaces-spaceId-decision-models.
+      operations:
+      - method: GET
+        name: listdecisionmodels
+        description: Oracle Integration List Decision Models
+        call: process-automation-decision-models.listdecisionmodels
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/process/v1/dmn/spaces/{spaceid}/decision-models/{decisionmodelname}
+      name: ic-api-process-v1-dmn-spaces-spaceid-decision-models-decisionmodelname
+      description: REST surface for ic-api-process-v1-dmn-spaces-spaceId-decision-models-decisionModelName.
+      operations:
+      - method: GET
+        name: getdecisionmodel
+        description: Oracle Integration Get Decision Model
+        call: process-automation-decision-models.getdecisionmodel
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: createdecisionmodel
+        description: Oracle Integration Create Decision Model
+        call: process-automation-decision-models.createdecisionmodel
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletedecisionmodel
+        description: Oracle Integration Delete Decision Model
+        call: process-automation-decision-models.deletedecisionmodel
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: process-automation-decision-models-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Integration Process Automation API — Decision Models. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: oracle-integration-list-dmn-spaces
+      description: Oracle Integration List DMN Spaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-decision-models.listdmnspaces
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-list-decision-models
+      description: Oracle Integration List Decision Models
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-decision-models.listdecisionmodels
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-get-decision-model
+      description: Oracle Integration Get Decision Model
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-decision-models.getdecisionmodel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-create-decision-model
+      description: Oracle Integration Create Decision Model
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: process-automation-decision-models.createdecisionmodel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-delete-decision-model
+      description: Oracle Integration Delete Decision Model
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: process-automation-decision-models.deletedecisionmodel
+      outputParameters:
+      - type: object
+        mapping: $.

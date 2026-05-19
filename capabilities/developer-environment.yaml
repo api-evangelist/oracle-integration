@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Integration Developer API — Environment
+  description: 'Oracle Integration Developer API — Environment. 2 operations. Lead operation: Oracle Integration List CORS
+    Domains. Self-contained Naftiko capability covering one Oracle Integration business surface.'
+  tags:
+  - Oracle Integration
+  - Environment
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_INTEGRATION_API_KEY: ORACLE_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: developer-environment
+    baseUri: https://{instance}.integration.ocp.oraclecloud.com
+    description: Oracle Integration Developer API — Environment business capability. Self-contained, no shared references.
+    resources:
+    - name: ic-api-integration-v1-environment-corsdomains
+      path: /ic/api/integration/v1/environment/corsdomains
+      operations:
+      - name: listcorsdomains
+        method: GET
+        description: Oracle Integration List CORS Domains
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createcorsdomains
+        method: POST
+        description: Oracle Integration Create CORS Domains
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ORACLE_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: developer-environment-rest
+    port: 8080
+    description: REST adapter for Oracle Integration Developer API — Environment. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/ic/api/integration/v1/environment/corsdomains
+      name: ic-api-integration-v1-environment-corsdomains
+      description: REST surface for ic-api-integration-v1-environment-corsdomains.
+      operations:
+      - method: GET
+        name: listcorsdomains
+        description: Oracle Integration List CORS Domains
+        call: developer-environment.listcorsdomains
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcorsdomains
+        description: Oracle Integration Create CORS Domains
+        call: developer-environment.createcorsdomains
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: developer-environment-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Integration Developer API — Environment. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: oracle-integration-list-cors-domains
+      description: Oracle Integration List CORS Domains
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-environment.listcorsdomains
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-create-cors-domains
+      description: Oracle Integration Create CORS Domains
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-environment.createcorsdomains
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

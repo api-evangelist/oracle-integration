@@ -1,0 +1,233 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Integration Process Automation API — Tasks
+  description: 'Oracle Integration Process Automation API — Tasks. 6 operations. Lead operation: Oracle Integration List Tasks.
+    Self-contained Naftiko capability covering one Oracle Integration business surface.'
+  tags:
+  - Oracle Integration
+  - Tasks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_INTEGRATION_API_KEY: ORACLE_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: process-automation-tasks
+    baseUri: https://{instance}.integration.ocp.oraclecloud.com
+    description: Oracle Integration Process Automation API — Tasks business capability. Self-contained, no shared references.
+    resources:
+    - name: ic-api-process-v1-tasks
+      path: /ic/api/process/v1/tasks
+      operations:
+      - name: listtasks
+        method: GET
+        description: Oracle Integration List Tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ic-api-process-v1-tasks-task-metrics
+      path: /ic/api/process/v1/tasks/task-metrics
+      operations:
+      - name: gettaskmetrics
+        method: GET
+        description: Oracle Integration Get Task Metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ic-api-process-v1-tasks-id
+      path: /ic/api/process/v1/tasks/{id}
+      operations:
+      - name: gettask
+        method: GET
+        description: Oracle Integration Get Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: performtaskaction
+        method: PUT
+        description: Oracle Integration Perform Task Action
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ic-api-process-v1-tasks-id-history
+      path: /ic/api/process/v1/tasks/{id}/history
+      operations:
+      - name: gettaskhistory
+        method: GET
+        description: Oracle Integration Get Task History
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ic-api-process-v1-tasks-id-payload
+      path: /ic/api/process/v1/tasks/{id}/payload
+      operations:
+      - name: gettaskpayload
+        method: GET
+        description: Oracle Integration Get Task Payload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ORACLE_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: process-automation-tasks-rest
+    port: 8080
+    description: REST adapter for Oracle Integration Process Automation API — Tasks. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/ic/api/process/v1/tasks
+      name: ic-api-process-v1-tasks
+      description: REST surface for ic-api-process-v1-tasks.
+      operations:
+      - method: GET
+        name: listtasks
+        description: Oracle Integration List Tasks
+        call: process-automation-tasks.listtasks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/process/v1/tasks/task-metrics
+      name: ic-api-process-v1-tasks-task-metrics
+      description: REST surface for ic-api-process-v1-tasks-task-metrics.
+      operations:
+      - method: GET
+        name: gettaskmetrics
+        description: Oracle Integration Get Task Metrics
+        call: process-automation-tasks.gettaskmetrics
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/process/v1/tasks/{id}
+      name: ic-api-process-v1-tasks-id
+      description: REST surface for ic-api-process-v1-tasks-id.
+      operations:
+      - method: GET
+        name: gettask
+        description: Oracle Integration Get Task
+        call: process-automation-tasks.gettask
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: performtaskaction
+        description: Oracle Integration Perform Task Action
+        call: process-automation-tasks.performtaskaction
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/process/v1/tasks/{id}/history
+      name: ic-api-process-v1-tasks-id-history
+      description: REST surface for ic-api-process-v1-tasks-id-history.
+      operations:
+      - method: GET
+        name: gettaskhistory
+        description: Oracle Integration Get Task History
+        call: process-automation-tasks.gettaskhistory
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ic/api/process/v1/tasks/{id}/payload
+      name: ic-api-process-v1-tasks-id-payload
+      description: REST surface for ic-api-process-v1-tasks-id-payload.
+      operations:
+      - method: GET
+        name: gettaskpayload
+        description: Oracle Integration Get Task Payload
+        call: process-automation-tasks.gettaskpayload
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: process-automation-tasks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Integration Process Automation API — Tasks. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: oracle-integration-list-tasks
+      description: Oracle Integration List Tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-tasks.listtasks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-get-task-metrics
+      description: Oracle Integration Get Task Metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-tasks.gettaskmetrics
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-get-task
+      description: Oracle Integration Get Task
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-tasks.gettask
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-perform-task-action
+      description: Oracle Integration Perform Task Action
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: process-automation-tasks.performtaskaction
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-get-task-history
+      description: Oracle Integration Get Task History
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-tasks.gettaskhistory
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-integration-get-task-payload
+      description: Oracle Integration Get Task Payload
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: process-automation-tasks.gettaskpayload
+      outputParameters:
+      - type: object
+        mapping: $.
