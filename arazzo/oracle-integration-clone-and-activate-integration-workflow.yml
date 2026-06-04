@@ -1,0 +1,107 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Integration Clone and Activate an Integration
+  summary: Clone an existing integration to a new code, then activate the clone.
+  description: >-
+    A safe promotion pattern that creates an independent copy of a proven
+    integration and brings it online. The workflow retrieves the source
+    integration, clones it into a new code and name, requests activation of the
+    newly cloned integration, and polls until the clone reports it is fully
+    ACTIVATED. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: developerApi
+  url: ../openapi/oracle-integration-developer-api.yaml
+  type: openapi
+workflows:
+- workflowId: clone-and-activate-integration
+  summary: Clone a source integration and activate the resulting copy.
+  description: >-
+    Reads the source integration, clones it to a new code and name, activates
+    the clone, and polls activation status until it completes.
+  inputs:
+    type: object
+    required:
+    - sourceIntegrationId
+    - cloneCode
+    - cloneName
+    properties:
+      sourceIntegrationId:
+        type: string
+        description: Identifier of the source integration to clone (e.g. HELLO_WORLD|01.00.0000).
+      cloneCode:
+        type: string
+        description: New code for the cloned integration (e.g. HELLO_WORLD_CLONE).
+      cloneName:
+        type: string
+        description: New display name for the cloned integration.
+  steps:
+  - stepId: getSource
+    description: >-
+      Retrieve the source integration to confirm it exists before cloning it.
+    operationId: getIntegration
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.sourceIntegrationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sourceName: $response.body#/name
+      sourceVersion: $response.body#/version
+  - stepId: clone
+    description: >-
+      Clone the source integration into a new code and name. Returns the cloned
+      integration representation.
+    operationId: cloneIntegration
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.sourceIntegrationId
+    requestBody:
+      contentType: application/json
+      payload:
+        code: $inputs.cloneCode
+        name: $inputs.cloneName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clonedId: $response.body#/id
+      clonedStatus: $response.body#/status
+  - stepId: activateClone
+    description: >-
+      Activate the cloned integration by posting an ACTIVATED status to its
+      identifier.
+    operationId: updateIntegrationStatus
+    parameters:
+    - name: id
+      in: path
+      value: $steps.clone.outputs.clonedId
+    requestBody:
+      contentType: application/json
+      payload:
+        status: ACTIVATED
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updatedStatus: $response.body#/status
+  - stepId: confirmActivation
+    description: >-
+      Poll the activation status of the cloned integration until it reports it
+      is fully ACTIVATED.
+    operationId: getIntegrationActivationStatus
+    parameters:
+    - name: id
+      in: path
+      value: $steps.clone.outputs.clonedId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "ACTIVATED"
+      type: jsonpath
+    outputs:
+      finalStatus: $response.body#/status
+  outputs:
+    clonedId: $steps.clone.outputs.clonedId
+    finalStatus: $steps.confirmActivation.outputs.finalStatus

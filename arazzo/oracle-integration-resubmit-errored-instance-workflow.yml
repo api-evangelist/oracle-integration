@@ -1,0 +1,100 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Integration Triage and Resubmit an Errored Instance
+  summary: Find errored integration instances, inspect the activity stream of one, and resubmit it for reprocessing.
+  description: >-
+    A monitoring remediation flow for failed runs. The workflow lists errored
+    integration instances, retrieves the detail of the first failure, reads its
+    activity stream to understand where the flow broke, and then resubmits the
+    errored instance so it is reprocessed. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: developerApi
+  url: ../openapi/oracle-integration-developer-api.yaml
+  type: openapi
+workflows:
+- workflowId: resubmit-errored-instance
+  summary: Inspect the first errored instance and resubmit it for reprocessing.
+  description: >-
+    Lists errored instances, inspects the first one's detail and activity stream,
+    and resubmits it when at least one errored instance exists.
+  inputs:
+    type: object
+    properties:
+      limit:
+        type: integer
+        description: Maximum number of errored instances to retrieve.
+        default: 10
+  steps:
+  - stepId: listErrored
+    description: >-
+      Retrieve the list of errored integration instances awaiting remediation.
+    operationId: listErroredInstances
+    parameters:
+    - name: limit
+      in: query
+      value: $inputs.limit
+    - name: offset
+      in: query
+      value: 0
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstErrorId: $response.body#/items/0/id
+      totalResults: $response.body#/totalResults
+    onSuccess:
+    - name: hasErrors
+      type: goto
+      stepId: getInstance
+      criteria:
+      - context: $response.body
+        condition: $.items.length > 0
+        type: jsonpath
+    - name: noErrors
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.items.length == 0
+        type: jsonpath
+  - stepId: getInstance
+    description: >-
+      Retrieve detail for the first errored instance to confirm its failed
+      status before resubmitting.
+    operationId: getMonitoringInstance
+    parameters:
+    - name: id
+      in: path
+      value: $steps.listErrored.outputs.firstErrorId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      instanceStatus: $response.body#/status
+      integrationId: $response.body#/integrationId
+  - stepId: getActivityStream
+    description: >-
+      Read the activity stream of the errored instance to capture where in the
+      flow the failure occurred.
+    operationId: getInstanceActivityStream
+    parameters:
+    - name: id
+      in: path
+      value: $steps.listErrored.outputs.firstErrorId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      activities: $response.body#/items
+  - stepId: resubmit
+    description: >-
+      Resubmit the errored instance so it is reprocessed by the integration.
+    operationId: resubmitErroredInstance
+    parameters:
+    - name: id
+      in: path
+      value: $steps.listErrored.outputs.firstErrorId
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    resubmittedInstanceId: $steps.listErrored.outputs.firstErrorId
+    integrationId: $steps.getInstance.outputs.integrationId

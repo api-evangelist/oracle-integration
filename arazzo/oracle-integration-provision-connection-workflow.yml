@@ -1,0 +1,128 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Integration Configure and Test a Connection
+  summary: Update a connection's properties, test connectivity, and refresh its metadata on success.
+  description: >-
+    The standard connection bring-up flow. The workflow reads the current
+    connection, applies updated connection and security properties, runs a
+    connectivity test, and then branches: when the test succeeds it refreshes the
+    connection metadata so adapter operations reflect the live endpoint, and when
+    the test fails it ends without refreshing. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: developerApi
+  url: ../openapi/oracle-integration-developer-api.yaml
+  type: openapi
+workflows:
+- workflowId: provision-connection
+  summary: Update connection properties, test connectivity, and refresh metadata when the test passes.
+  description: >-
+    Reads the connection, applies connection and security property updates, tests
+    the connection, and refreshes metadata only when the test reports SUCCESS.
+  inputs:
+    type: object
+    required:
+    - connectionId
+    - username
+    - password
+    properties:
+      connectionId:
+        type: string
+        description: The connection identifier (e.g. SALESFORCE_CONNECTION).
+      securityPolicy:
+        type: string
+        description: The security policy connection property value.
+        default: USERNAME_PASSWORD_TOKEN
+      username:
+        type: string
+        description: The username security property value.
+      password:
+        type: string
+        description: The password security property value.
+  steps:
+  - stepId: getConnection
+    description: >-
+      Retrieve the connection to confirm it exists and capture its adapter type
+      before applying updates.
+    operationId: getConnection
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.connectionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      connectionName: $response.body#/name
+      adapterType: $response.body#/adapterType
+  - stepId: updateConnection
+    description: >-
+      Apply the security policy connection property and the username and password
+      security properties to the connection.
+    operationId: updateConnection
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.connectionId
+    requestBody:
+      contentType: application/json
+      payload:
+        connectionProperties:
+        - propertyName: securityPolicy
+          propertyValue: $inputs.securityPolicy
+        securityProperties:
+        - propertyName: username
+          propertyValue: $inputs.username
+        - propertyName: password
+          propertyValue: $inputs.password
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updatedStatus: $response.body#/status
+  - stepId: testConnection
+    description: >-
+      Test the connection to verify connectivity using the newly applied
+      properties.
+    operationId: testConnection
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.connectionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      testStatus: $response.body#/status
+      testMessage: $response.body#/message
+    onSuccess:
+    - name: testPassed
+      type: goto
+      stepId: refreshMetadata
+      criteria:
+      - context: $response.body
+        condition: $.status == "SUCCESS"
+        type: jsonpath
+    - name: testFailed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "FAILURE"
+        type: jsonpath
+  - stepId: refreshMetadata
+    description: >-
+      Refresh the connection metadata so adapter operations reflect the live
+      endpoint now that the connection tested successfully.
+    operationId: refreshConnectionMetadata
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.connectionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      refreshedStatus: $response.body#/status
+      percentageComplete: $response.body#/percentageComplete
+  outputs:
+    connectionName: $steps.getConnection.outputs.connectionName
+    testStatus: $steps.testConnection.outputs.testStatus
+    refreshedStatus: $steps.refreshMetadata.outputs.refreshedStatus

@@ -1,0 +1,95 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Integration Deactivate an Integration
+  summary: Confirm an integration is active and deactivate it back to a configured state.
+  description: >-
+    The inverse of activation, used to safely take an integration offline for
+    maintenance or replacement. The workflow retrieves the integration to confirm
+    it is currently ACTIVATED, posts a CONFIGURED status to deactivate it, and
+    then polls the activation status endpoint until the integration reports it is
+    no longer active. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: developerApi
+  url: ../openapi/oracle-integration-developer-api.yaml
+  type: openapi
+workflows:
+- workflowId: deactivate-integration
+  summary: Deactivate an active integration and wait for it to leave the active state.
+  description: >-
+    Verifies the integration is ACTIVATED, posts a CONFIGURED status update to
+    deactivate it, and polls the activation status until it is no longer active.
+  inputs:
+    type: object
+    required:
+    - integrationId
+    properties:
+      integrationId:
+        type: string
+        description: The integration identifier including version (e.g. HELLO_WORLD|01.00.0000).
+  steps:
+  - stepId: getIntegration
+    description: >-
+      Retrieve the integration to confirm it is currently ACTIVATED before
+      requesting deactivation.
+    operationId: getIntegration
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.integrationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentStatus: $response.body#/status
+      integrationName: $response.body#/name
+    onSuccess:
+    - name: notActive
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status != "ACTIVATED"
+        type: jsonpath
+    - name: proceedToDeactivate
+      type: goto
+      stepId: deactivate
+      criteria:
+      - context: $response.body
+        condition: $.status == "ACTIVATED"
+        type: jsonpath
+  - stepId: deactivate
+    description: >-
+      Request deactivation by posting a CONFIGURED status to the integration.
+      Returns the updated integration representation.
+    operationId: updateIntegrationStatus
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.integrationId
+    requestBody:
+      contentType: application/json
+      payload:
+        status: CONFIGURED
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updatedStatus: $response.body#/status
+  - stepId: confirmDeactivation
+    description: >-
+      Poll the activation status endpoint until the integration reports it is no
+      longer ACTIVATED.
+    operationId: getIntegrationActivationStatus
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.integrationId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status != "ACTIVATED"
+      type: jsonpath
+    outputs:
+      finalStatus: $response.body#/status
+  outputs:
+    integrationName: $steps.getIntegration.outputs.integrationName
+    finalStatus: $steps.confirmDeactivation.outputs.finalStatus

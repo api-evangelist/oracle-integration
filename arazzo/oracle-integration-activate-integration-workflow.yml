@@ -1,0 +1,120 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Integration Activate an Integration
+  summary: Locate an integration, confirm it is ready, activate it, and poll until the activation completes.
+  description: >-
+    The core lifecycle action in Oracle Integration Cloud. The workflow searches
+    the catalog for the target integration, retrieves its current detail to
+    confirm it is in a CONFIGURED state, requests activation by posting an
+    ACTIVATED status, and then polls the activation status endpoint until the
+    integration reports it is fully ACTIVATED. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: developerApi
+  url: ../openapi/oracle-integration-developer-api.yaml
+  type: openapi
+workflows:
+- workflowId: activate-integration
+  summary: Activate a configured integration and wait for it to become active.
+  description: >-
+    Finds the integration, verifies it is configured, posts an ACTIVATED status
+    update, and polls the activation status endpoint until activation completes.
+  inputs:
+    type: object
+    required:
+    - integrationId
+    properties:
+      integrationId:
+        type: string
+        description: The integration identifier including version (e.g. HELLO_WORLD|01.00.0000).
+      query:
+        type: string
+        description: Optional filter query string used when listing integrations.
+  steps:
+  - stepId: findIntegration
+    description: >-
+      List integrations using an optional filter so the caller can confirm the
+      target integration exists in the catalog before acting on it.
+    operationId: listIntegrations
+    parameters:
+    - name: q
+      in: query
+      value: $inputs.query
+    - name: limit
+      in: query
+      value: 50
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      totalResults: $response.body#/totalResults
+  - stepId: getIntegration
+    description: >-
+      Retrieve the target integration to confirm its current status before
+      requesting activation.
+    operationId: getIntegration
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.integrationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentStatus: $response.body#/status
+      integrationName: $response.body#/name
+    onSuccess:
+    - name: alreadyActive
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "ACTIVATED"
+        type: jsonpath
+    - name: proceedToActivate
+      type: goto
+      stepId: activate
+      criteria:
+      - context: $response.body
+        condition: $.status != "ACTIVATED"
+        type: jsonpath
+  - stepId: activate
+    description: >-
+      Request activation by posting an ACTIVATED status to the integration.
+      Returns the updated integration representation.
+    operationId: updateIntegrationStatus
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.integrationId
+    requestBody:
+      contentType: application/json
+      payload:
+        status: ACTIVATED
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updatedStatus: $response.body#/status
+  - stepId: confirmActivation
+    description: >-
+      Poll the activation status endpoint until the integration reports that it
+      is fully ACTIVATED.
+    operationId: getIntegrationActivationStatus
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.integrationId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "ACTIVATED"
+      type: jsonpath
+    outputs:
+      finalStatus: $response.body#/status
+      activeVersion: $response.body#/version
+    onSuccess:
+    - name: activated
+      type: end
+  outputs:
+    integrationName: $steps.getIntegration.outputs.integrationName
+    finalStatus: $steps.confirmActivation.outputs.finalStatus
+    activeVersion: $steps.confirmActivation.outputs.activeVersion

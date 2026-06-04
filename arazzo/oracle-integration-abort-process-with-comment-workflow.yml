@@ -1,0 +1,95 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Integration Abort a Process with an Audit Comment
+  summary: Record an explanatory comment on a process instance, then abort it when it is still open.
+  description: >-
+    A governed cancellation flow for structured processes. The workflow retrieves
+    the process instance, adds an audit comment explaining why it is being
+    stopped, and then branches: when the process is still OPEN it updates the
+    state to ABORTED, and when it has already finished it ends without acting.
+    Every step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: processApi
+  url: ../openapi/oracle-integration-process-automation-api.yaml
+  type: openapi
+workflows:
+- workflowId: abort-process-with-comment
+  summary: Comment on a process instance and abort it when it is still open.
+  description: >-
+    Reads the process instance, records an audit comment, and updates the state
+    to ABORTED only when the process is still OPEN.
+  inputs:
+    type: object
+    required:
+    - processId
+    - comment
+    properties:
+      processId:
+        type: string
+        description: The process instance identifier to abort.
+      comment:
+        type: string
+        description: Audit comment explaining why the process is being aborted.
+  steps:
+  - stepId: getProcess
+    description: >-
+      Retrieve the process instance to capture its current state and title before
+      acting.
+    operationId: getProcessInstance
+    parameters:
+    - name: processId
+      in: path
+      value: $inputs.processId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+      title: $response.body#/title
+  - stepId: addComment
+    description: >-
+      Add an audit comment to the process instance documenting the reason for the
+      abort.
+    operationId: addProcessComment
+    parameters:
+    - name: processId
+      in: path
+      value: $inputs.processId
+    requestBody:
+      contentType: application/json
+      payload:
+        message: $inputs.comment
+    successCriteria:
+    - condition: $statusCode == 201
+    onSuccess:
+    - name: stillOpen
+      type: goto
+      stepId: abortProcess
+      criteria:
+      - context: $steps.getProcess.outputs.state
+        condition: $steps.getProcess.outputs.state == "OPEN"
+    - name: alreadyClosed
+      type: end
+      criteria:
+      - context: $steps.getProcess.outputs.state
+        condition: $steps.getProcess.outputs.state != "OPEN"
+  - stepId: abortProcess
+    description: >-
+      Update the process state to ABORTED now that the abort has been documented.
+    operationId: updateProcessState
+    parameters:
+    - name: processId
+      in: path
+      value: $inputs.processId
+    requestBody:
+      contentType: application/json
+      payload:
+        state: ABORTED
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      finalState: $response.body#/state
+  outputs:
+    title: $steps.getProcess.outputs.title
+    finalState: $steps.abortProcess.outputs.finalState

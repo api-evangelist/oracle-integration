@@ -175,6 +175,45 @@ apis:
   - FN: Oracle Integration Support
     email: oracle-integration-support@oracle.com
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/oracle-integration-abort-process-with-comment-workflow.yml
+    name: Oracle Integration Abort a Process with an Audit Comment
+    summary: Record an explanatory comment on a process instance, then abort it when it is still open.
+  - url: arazzo/oracle-integration-abort-running-instance-workflow.yml
+    name: Oracle Integration Abort a Running Instance
+    summary: Find a monitored instance, confirm it is in progress, and abort it.
+  - url: arazzo/oracle-integration-activate-integration-workflow.yml
+    name: Oracle Integration Activate an Integration
+    summary: Locate an integration, confirm it is ready, activate it, and poll until the activation completes.
+  - url: arazzo/oracle-integration-clone-and-activate-integration-workflow.yml
+    name: Oracle Integration Clone and Activate an Integration
+    summary: Clone an existing integration to a new code, then activate the clone.
+  - url: arazzo/oracle-integration-deactivate-integration-workflow.yml
+    name: Oracle Integration Deactivate an Integration
+    summary: Confirm an integration is active and deactivate it back to a configured state.
+  - url: arazzo/oracle-integration-provision-connection-workflow.yml
+    name: Oracle Integration Configure and Test a Connection
+    summary: Update a connection's properties, test connectivity, and refresh its metadata on success.
+  - url: arazzo/oracle-integration-provision-decision-model-workflow.yml
+    name: Oracle Integration Provision a Decision Model
+    summary: Create a workspace space, create an empty decision model inside its DMN space, and read the model back.
+  - url: arazzo/oracle-integration-resubmit-errored-instance-workflow.yml
+    name: Oracle Integration Triage and Resubmit an Errored Instance
+    summary: Find errored integration instances, inspect the activity stream of one, and resubmit it for reprocessing.
+  - url: arazzo/oracle-integration-review-and-action-task-workflow.yml
+    name: Oracle Integration Review and Action a User Task
+    summary: Pull a user task, read its payload, and approve or reject it based on the assignee's review.
+  - url: arazzo/oracle-integration-run-scheduled-integration-workflow.yml
+    name: Oracle Integration Start Schedule and Run Now
+    summary: Confirm a scheduled integration is active, start its schedule, and trigger an immediate run.
+  - url: arazzo/oracle-integration-start-process-and-handle-task-workflow.yml
+    name: Oracle Integration Start a Process and Handle Its Task
+    summary: Start a structured process instance, locate the user task it generates, and act on that task.
+  - url: arazzo/oracle-integration-upsert-lookup-workflow.yml
+    name: Oracle Integration Upsert a Lookup Table
+    summary: Detect whether a lookup exists, then update it if present or create it if missing, and read the result back.
 - type: Portal
   url: https://cloud.oracle.com/integration
 - type: GettingStarted

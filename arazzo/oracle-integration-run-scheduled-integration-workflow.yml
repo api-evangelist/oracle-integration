@@ -1,0 +1,90 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Integration Start Schedule and Run Now
+  summary: Confirm a scheduled integration is active, start its schedule, and trigger an immediate run.
+  description: >-
+    Operates the scheduling lifecycle of a scheduled-orchestration integration.
+    The workflow confirms the integration is ACTIVATED, starts its recurring
+    schedule, and then submits an on-demand job so the integration runs
+    immediately rather than waiting for the next scheduled window, capturing the
+    resulting job identifier. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: developerApi
+  url: ../openapi/oracle-integration-developer-api.yaml
+  type: openapi
+workflows:
+- workflowId: run-scheduled-integration
+  summary: Start a schedule on an active integration and submit an immediate run.
+  description: >-
+    Verifies the integration is ACTIVATED, starts its schedule, and triggers an
+    immediate scheduled run, returning the job identifier.
+  inputs:
+    type: object
+    required:
+    - integrationId
+    properties:
+      integrationId:
+        type: string
+        description: The scheduled integration identifier including version (e.g. ORDER_SYNC|01.00.0000).
+  steps:
+  - stepId: getIntegration
+    description: >-
+      Retrieve the integration to confirm it is ACTIVATED before operating its
+      schedule.
+    operationId: getIntegration
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.integrationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      integrationName: $response.body#/name
+      currentStatus: $response.body#/status
+    onSuccess:
+    - name: notActive
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status != "ACTIVATED"
+        type: jsonpath
+    - name: proceedToStart
+      type: goto
+      stepId: startSchedule
+      criteria:
+      - context: $response.body
+        condition: $.status == "ACTIVATED"
+        type: jsonpath
+  - stepId: startSchedule
+    description: >-
+      Start the integration's recurring schedule so it begins running on its
+      configured cadence.
+    operationId: startIntegrationSchedule
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.integrationId
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: runNow
+    description: >-
+      Submit an on-demand job so the scheduled integration runs immediately,
+      returning the resulting job identifier and status.
+    operationId: runScheduledIntegrationNow
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.integrationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobId: $response.body#/jobId
+      jobStatus: $response.body#/status
+      startTime: $response.body#/startTime
+  outputs:
+    integrationName: $steps.getIntegration.outputs.integrationName
+    jobId: $steps.runNow.outputs.jobId
+    jobStatus: $steps.runNow.outputs.jobStatus

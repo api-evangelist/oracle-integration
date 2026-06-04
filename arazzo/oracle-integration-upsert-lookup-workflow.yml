@@ -1,0 +1,126 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Integration Upsert a Lookup Table
+  summary: Detect whether a lookup exists, then update it if present or create it if missing, and read the result back.
+  description: >-
+    A common configuration-management pattern for the lookup tables that drive
+    data mappings. The workflow lists existing lookups to detect a name match,
+    then branches: when the lookup already exists it is updated with the supplied
+    columns, and when it does not exist it is created. The final step reads the
+    lookup back to confirm the persisted definition. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: developerApi
+  url: ../openapi/oracle-integration-developer-api.yaml
+  type: openapi
+workflows:
+- workflowId: upsert-lookup
+  summary: Create or update a lookup table by name and read back the result.
+  description: >-
+    Lists lookups to detect an existing entry, updates it when present or creates
+    it when missing, then retrieves the lookup to confirm the persisted columns.
+  inputs:
+    type: object
+    required:
+    - lookupName
+    - columns
+    properties:
+      lookupName:
+        type: string
+        description: The lookup table name (e.g. COUNTRY_CODES).
+      description:
+        type: string
+        description: Human-readable description of the lookup table.
+        default: Managed lookup table.
+      columns:
+        type: array
+        description: The list of column names for the lookup table.
+        items:
+          type: string
+  steps:
+  - stepId: findLookup
+    description: >-
+      List existing lookups so the workflow can detect whether the target lookup
+      name already exists.
+    operationId: listLookups
+    parameters:
+    - name: limit
+      in: query
+      value: 100
+    - name: offset
+      in: query
+      value: 0
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      totalResults: $response.body#/totalResults
+    onSuccess:
+    - name: lookupExists
+      type: goto
+      stepId: updateLookup
+      criteria:
+      - context: $response.body
+        condition: $.items[?(@.name == $inputs.lookupName)]
+        type: jsonpath
+    - name: lookupMissing
+      type: goto
+      stepId: createLookup
+      criteria:
+      - context: $response.body
+        condition: $.items[?(@.name == $inputs.lookupName)].length == 0
+        type: jsonpath
+  - stepId: updateLookup
+    description: >-
+      Update the existing lookup table with the supplied description and columns.
+    operationId: updateLookup
+    parameters:
+    - name: name
+      in: path
+      value: $inputs.lookupName
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.lookupName
+        description: $inputs.description
+        columns: $inputs.columns
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      persistedName: $response.body#/name
+    onSuccess:
+    - name: updated
+      type: goto
+      stepId: readLookup
+  - stepId: createLookup
+    description: >-
+      Create a new lookup table with the supplied name, description, and columns
+      when no existing lookup matched.
+    operationId: createLookup
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.lookupName
+        description: $inputs.description
+        columns: $inputs.columns
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      persistedName: $response.body#/name
+  - stepId: readLookup
+    description: >-
+      Read the lookup back by name to confirm the persisted definition.
+    operationId: getLookup
+    parameters:
+    - name: name
+      in: path
+      value: $inputs.lookupName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      lookupName: $response.body#/name
+      columns: $response.body#/columns
+  outputs:
+    lookupName: $steps.readLookup.outputs.lookupName
+    columns: $steps.readLookup.outputs.columns

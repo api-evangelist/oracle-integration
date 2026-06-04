@@ -1,0 +1,112 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Integration Provision a Decision Model
+  summary: Create a workspace space, create an empty decision model inside its DMN space, and read the model back.
+  description: >-
+    A scaffolding flow for Decision Model and Notation (DMN) authoring. The
+    workflow creates a new workspace space, lists existing decision models in the
+    matching DMN space to avoid clobbering an existing model, creates an empty
+    decision model in that space, and reads the model back to confirm it was
+    provisioned. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: processApi
+  url: ../openapi/oracle-integration-process-automation-api.yaml
+  type: openapi
+workflows:
+- workflowId: provision-decision-model
+  summary: Create a space and an empty decision model within it, then read the model back.
+  description: >-
+    Creates a workspace space, checks the DMN space for the decision model name,
+    creates the empty model, and retrieves it to confirm provisioning.
+  inputs:
+    type: object
+    required:
+    - spaceName
+    - decisionModelName
+    properties:
+      spaceName:
+        type: string
+        description: Display name for the new workspace space.
+      spaceDescription:
+        type: string
+        description: Description for the new workspace space.
+        default: Space for decision modeling projects.
+      decisionModelName:
+        type: string
+        description: Name of the decision model to create (e.g. LoanApprovalDecision).
+  steps:
+  - stepId: createSpace
+    description: >-
+      Create a new workspace space that will host the decision model.
+    operationId: createSpace
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.spaceName
+        description: $inputs.spaceDescription
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      spaceId: $response.body#/spaceId
+  - stepId: listModels
+    description: >-
+      List existing decision models in the new space's DMN area so an existing
+      model with the same name is not overwritten.
+    operationId: listDecisionModels
+    parameters:
+    - name: spaceId
+      in: path
+      value: $steps.createSpace.outputs.spaceId
+    successCriteria:
+    - condition: $statusCode == 200
+    onSuccess:
+    - name: modelMissing
+      type: goto
+      stepId: createModel
+      criteria:
+      - context: $response.body
+        condition: $.items[?(@.name == $inputs.decisionModelName)].length == 0
+        type: jsonpath
+    - name: modelExists
+      type: goto
+      stepId: readModel
+      criteria:
+      - context: $response.body
+        condition: $.items[?(@.name == $inputs.decisionModelName)]
+        type: jsonpath
+  - stepId: createModel
+    description: >-
+      Create an empty decision model in the DMN space under the supplied name.
+    operationId: createDecisionModel
+    parameters:
+    - name: spaceId
+      in: path
+      value: $steps.createSpace.outputs.spaceId
+    - name: decisionModelName
+      in: path
+      value: $inputs.decisionModelName
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      modelName: $response.body#/name
+  - stepId: readModel
+    description: >-
+      Read the decision model back to confirm it was provisioned in the space.
+    operationId: getDecisionModel
+    parameters:
+    - name: spaceId
+      in: path
+      value: $steps.createSpace.outputs.spaceId
+    - name: decisionModelName
+      in: path
+      value: $inputs.decisionModelName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      modelName: $response.body#/name
+      modelSpaceId: $response.body#/spaceId
+  outputs:
+    spaceId: $steps.createSpace.outputs.spaceId
+    modelName: $steps.readModel.outputs.modelName

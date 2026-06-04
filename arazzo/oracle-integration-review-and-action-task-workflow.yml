@@ -1,0 +1,106 @@
+arazzo: 1.0.1
+info:
+  title: Oracle Integration Review and Action a User Task
+  summary: Pull a user task, read its payload, and approve or reject it based on the assignee's review.
+  description: >-
+    A reviewer-facing task handling flow. The workflow retrieves a specific task,
+    reads its payload data so the reviewer has the full context, and then
+    branches on the task state: when the task is ASSIGNED it performs the supplied
+    action with a comment, and when it is already in a terminal state it ends
+    without acting. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: processApi
+  url: ../openapi/oracle-integration-process-automation-api.yaml
+  type: openapi
+workflows:
+- workflowId: review-and-action-task
+  summary: Read a task and its payload, then action it when it is still assigned.
+  description: >-
+    Retrieves a task, reads its payload, and performs the supplied action only
+    when the task state is ASSIGNED.
+  inputs:
+    type: object
+    required:
+    - taskId
+    properties:
+      taskId:
+        type: string
+        description: The task identifier to review and action.
+      action:
+        type: string
+        description: The action to perform (e.g. APPROVE, REJECT, REASSIGN).
+        default: APPROVE
+      actionComment:
+        type: string
+        description: Comment recorded with the action.
+        default: Reviewed and actioned.
+      assignee:
+        type: string
+        description: New assignee used when the action is REASSIGN.
+        default: manager@example.com
+  steps:
+  - stepId: getTask
+    description: >-
+      Retrieve the task to capture its title, current state, and parent process.
+    operationId: getTask
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.taskId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      taskState: $response.body#/state
+      taskTitle: $response.body#/title
+      processId: $response.body#/processId
+  - stepId: getPayload
+    description: >-
+      Read the task payload so the reviewer has the full data context before
+      deciding on an action.
+    operationId: getTaskPayload
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.taskId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      payload: $response.body
+    onSuccess:
+    - name: assigned
+      type: goto
+      stepId: performAction
+      criteria:
+      - context: $steps.getTask.outputs.taskState
+        condition: $steps.getTask.outputs.taskState == "ASSIGNED"
+    - name: notActionable
+      type: end
+      criteria:
+      - context: $steps.getTask.outputs.taskState
+        condition: $steps.getTask.outputs.taskState != "ASSIGNED"
+  - stepId: performAction
+    description: >-
+      Perform the supplied action on the assigned task, including a reassignment
+      target for the REASSIGN action.
+    operationId: performTaskAction
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.taskId
+    requestBody:
+      contentType: application/json
+      payload:
+        action: $inputs.action
+        comment: $inputs.actionComment
+        assignee: $inputs.assignee
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      finalState: $response.body#/state
+      outcome: $response.body#/outcome
+  outputs:
+    taskTitle: $steps.getTask.outputs.taskTitle
+    processId: $steps.getTask.outputs.processId
+    finalState: $steps.performAction.outputs.finalState
