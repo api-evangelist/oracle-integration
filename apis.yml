@@ -175,6 +175,8 @@ apis:
   - FN: Oracle Integration Support
     email: oracle-integration-support@oracle.com
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/oracle-integration/overview
 - type: ArazzoWorkflows
   url: arazzo/
   workflows:
