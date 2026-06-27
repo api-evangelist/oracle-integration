@@ -61,33 +61,33 @@ apis:
     title: Trading Partner Schema
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/developer-adapters.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/developer-b2b-documents.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/developer-b2b-monitoring.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/developer-certificates.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/developer-connections.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/developer-environment.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/developer-integrations.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/developer-libraries.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/developer-lookups.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/developer-monitoring.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/developer-packages.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/developer-projects.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/developer-scheduled-integrations.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/developer-trading-partners.yaml
   contact:
   - FN: Oracle Integration Support
@@ -119,23 +119,23 @@ apis:
     title: Task Schema
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/process-automation-analytics.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/process-automation-decision-models.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/process-automation-deployed-projects.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/process-automation-dynamic-processes.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/process-automation-identities.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/process-automation-process-definitions.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/process-automation-process-instances.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/process-automation-spaces.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/process-automation-tasks.yaml
   contact:
   - FN: Oracle Integration Support
@@ -177,179 +177,176 @@ apis:
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/oracle-integration/overview
-- type: ArazzoWorkflows
-  url: arazzo/
-  workflows:
-  - url: arazzo/oracle-integration-abort-process-with-comment-workflow.yml
+  - type: Arazzo
+    url: arazzo/oracle-integration-abort-process-with-comment-workflow.yml
     name: Oracle Integration Abort a Process with an Audit Comment
-    summary: Record an explanatory comment on a process instance, then abort it when it is still open.
-  - url: arazzo/oracle-integration-abort-running-instance-workflow.yml
+  - type: Arazzo
+    url: arazzo/oracle-integration-abort-running-instance-workflow.yml
     name: Oracle Integration Abort a Running Instance
-    summary: Find a monitored instance, confirm it is in progress, and abort it.
-  - url: arazzo/oracle-integration-activate-integration-workflow.yml
+  - type: Arazzo
+    url: arazzo/oracle-integration-activate-integration-workflow.yml
     name: Oracle Integration Activate an Integration
-    summary: Locate an integration, confirm it is ready, activate it, and poll until the activation completes.
-  - url: arazzo/oracle-integration-clone-and-activate-integration-workflow.yml
+  - type: Arazzo
+    url: arazzo/oracle-integration-clone-and-activate-integration-workflow.yml
     name: Oracle Integration Clone and Activate an Integration
-    summary: Clone an existing integration to a new code, then activate the clone.
-  - url: arazzo/oracle-integration-deactivate-integration-workflow.yml
+  - type: Arazzo
+    url: arazzo/oracle-integration-deactivate-integration-workflow.yml
     name: Oracle Integration Deactivate an Integration
-    summary: Confirm an integration is active and deactivate it back to a configured state.
-  - url: arazzo/oracle-integration-provision-connection-workflow.yml
+  - type: Arazzo
+    url: arazzo/oracle-integration-provision-connection-workflow.yml
     name: Oracle Integration Configure and Test a Connection
-    summary: Update a connection's properties, test connectivity, and refresh its metadata on success.
-  - url: arazzo/oracle-integration-provision-decision-model-workflow.yml
+  - type: Arazzo
+    url: arazzo/oracle-integration-provision-decision-model-workflow.yml
     name: Oracle Integration Provision a Decision Model
-    summary: Create a workspace space, create an empty decision model inside its DMN space, and read the model back.
-  - url: arazzo/oracle-integration-resubmit-errored-instance-workflow.yml
+  - type: Arazzo
+    url: arazzo/oracle-integration-resubmit-errored-instance-workflow.yml
     name: Oracle Integration Triage and Resubmit an Errored Instance
-    summary: Find errored integration instances, inspect the activity stream of one, and resubmit it for reprocessing.
-  - url: arazzo/oracle-integration-review-and-action-task-workflow.yml
+  - type: Arazzo
+    url: arazzo/oracle-integration-review-and-action-task-workflow.yml
     name: Oracle Integration Review and Action a User Task
-    summary: Pull a user task, read its payload, and approve or reject it based on the assignee's review.
-  - url: arazzo/oracle-integration-run-scheduled-integration-workflow.yml
+  - type: Arazzo
+    url: arazzo/oracle-integration-run-scheduled-integration-workflow.yml
     name: Oracle Integration Start Schedule and Run Now
-    summary: Confirm a scheduled integration is active, start its schedule, and trigger an immediate run.
-  - url: arazzo/oracle-integration-start-process-and-handle-task-workflow.yml
+  - type: Arazzo
+    url: arazzo/oracle-integration-start-process-and-handle-task-workflow.yml
     name: Oracle Integration Start a Process and Handle Its Task
-    summary: Start a structured process instance, locate the user task it generates, and act on that task.
-  - url: arazzo/oracle-integration-upsert-lookup-workflow.yml
+  - type: Arazzo
+    url: arazzo/oracle-integration-upsert-lookup-workflow.yml
     name: Oracle Integration Upsert a Lookup Table
-    summary: Detect whether a lookup exists, then update it if present or create it if missing, and read the result back.
-- type: Portal
-  url: https://cloud.oracle.com/integration
-- type: GettingStarted
-  url: https://docs.oracle.com/en/cloud/paas/application-integration/oracle-integration-oci/explore-oracle-integration-apis.html
-- type: Tutorials
-  url: https://docs.oracle.com/en/cloud/paas/integration-cloud/tutorials.html
-- type: Documentation
-  url: https://docs.oracle.com/en/cloud/paas/application-integration/index.html
-- type: Blog
-  url: https://blogs.oracle.com/integration/
-- type: ChangeLog
-  url: https://docs.oracle.com/en/cloud/paas/integration-cloud/whats-new/
-- type: Support
-  url: https://www.oracle.com/support/
-- type: TermsOfService
-  url: https://www.oracle.com/legal/terms.html
-- type: PrivacyPolicy
-  url: https://www.oracle.com/legal/privacy/
-- type: StatusPage
-  url: https://ocistatus.oraclecloud.com/
-- type: Pricing
-  url: https://www.oracle.com/integration/pricing/
-- type: Console
-  url: https://cloud.oracle.com/integration
-- type: SDK
-  url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
-  title: OCI SDKs
-- type: CLI
-  url: https://github.com/oracle/oci-cli
-  title: OCI CLI
-- type: GitHubOrganization
-  url: https://github.com/oracle
-- type: GitHubRepository
-  url: https://github.com/oracle/oci-cli
-  title: OCI CLI Repository
-- type: GitHubRepository
-  url: https://github.com/oracle/oci-python-sdk
-  title: Python SDK Repository
-- type: GitHubRepository
-  url: https://github.com/oracle/oci-go-sdk
-  title: Go SDK Repository
-- type: Training
-  url: https://education.oracle.com/
-- type: Marketplace
-  url: https://cloudmarketplace.oracle.com/marketplace/en_US/homeLinkPage
-- type: SpectralRules
-  url: rules/oracle-integration-spectral-rules.yml
-- type: Vocabulary
-  url: vocabulary/oracle-integration-vocabulary.yaml
-- type: Features
-  data:
-  - name: Prebuilt Integrations
-    description: Library of prebuilt integration recipes and adapters for rapid deployment of common integration patterns.
-  - name: Application Adapters
-    description: Native connectivity to Oracle SaaS, on-premises applications, and third-party services including Salesforce,
-      SAP, Workday, and ServiceNow.
-  - name: Visual Integration Designer
-    description: Low-code drag-and-drop integration designer for building integration flows without extensive coding.
-  - name: B2B Document Exchange
-    description: EDI and B2B document processing with support for trading partner management, document standards, and agreement
-      lifecycle.
-  - name: Process Automation
-    description: Business process management with structured and unstructured workflows, case management, and task management.
-  - name: Decision Modeling
-    description: DMN-based decision model management for business rules execution and deployment.
-  - name: Scheduled Integrations
-    description: Time-based scheduling of integration flows with pause, resume, start, and stop controls.
-  - name: Integration Monitoring
-    description: Real-time monitoring of integration instances, error tracking, activity streams, and audit records.
-  - name: File Server
-    description: SFTP-compliant embedded file server for file-based integration scenarios.
-  - name: Rapid Adapter Builder
-    description: Custom adapter development framework for building reusable connectivity to proprietary or niche systems.
-  - name: AI Agents
-    description: AI agent capabilities within integration projects for intelligent automation patterns and prompt templates.
-  - name: Machine Learning Recommendations
-    description: ML-based guidance and recommendations for building and optimizing integrations.
-  - name: Integration Analytics
-    description: Built-in analytics and process analytics with custom query builders and data visualization.
-  - name: FHIR Support
-    description: Native Fast Healthcare Interoperability Resources support for healthcare integration workflows.
-- type: UseCases
-  data:
-  - name: SaaS Application Integration
-    description: Connect Oracle SaaS applications like ERP Cloud, HCM Cloud, and CX Cloud with third-party SaaS platforms.
-  - name: ERP Integration
-    description: Integrate Oracle ERP Cloud or on-premises EBS with procurement, supply chain, and financial systems.
-  - name: HCM Integration
-    description: Synchronize human capital management data across Oracle HCM Cloud, Workday, and other HR systems.
-  - name: B2B Trading Partner Onboarding
-    description: Automate EDI-based trading partner setup, agreement management, and document exchange.
-  - name: Process Automation
-    description: Automate business processes with approval workflows, case management, and task orchestration.
-  - name: Healthcare Data Exchange
-    description: Build FHIR-compliant healthcare integration workflows for patient data exchange and interoperability.
-  - name: Hybrid Cloud Integration
-    description: Connect on-premises applications to Oracle Cloud and third-party cloud services via connectivity agents.
-  - name: File-Based Integration
-    description: Automate file transfers and processing with the embedded SFTP-compliant file server.
-  - name: CI/CD For Integrations
-    description: Manage integration lifecycle with export, import, and deployment APIs for DevOps automation.
-  - name: Real-Time Event Processing
-    description: Process events and messages in real time using event-driven integration patterns and stream analytics.
-- type: Integrations
-  data:
-  - name: Oracle ERP Cloud
-    description: Native adapter for Oracle Enterprise Resource Planning Cloud including financials, procurement, and supply
-      chain.
-  - name: Oracle HCM Cloud
-    description: Native adapter for Oracle Human Capital Management Cloud for HR, payroll, and talent management.
-  - name: Oracle CX Cloud
-    description: Native adapter for Oracle Customer Experience Cloud including sales, service, and marketing.
-  - name: Oracle NetSuite
-    description: Native adapter for Oracle NetSuite ERP and CRM cloud services.
-  - name: Salesforce
-    description: Prebuilt adapter for Salesforce CRM integration with Oracle cloud and on-premises applications.
-  - name: SAP
-    description: Adapter for SAP ERP and S/4HANA integration via IDoc, BAPI, and RFC protocols.
-  - name: Workday
-    description: Prebuilt adapter for Workday HCM and financial management integration.
-  - name: ServiceNow
-    description: Adapter for ServiceNow ITSM and ITOM integration with Oracle applications.
-  - name: Shopify
-    description: Adapter for Shopify e-commerce platform integration with order management and inventory systems.
-  - name: Snowflake
-    description: Adapter for Snowflake data warehouse integration for analytics and data pipelines.
-  - name: Microsoft Azure
-    description: Connectivity to Microsoft Azure services and applications for multi-cloud integration.
-  - name: AWS
-    description: Connectivity to Amazon Web Services for multi-cloud integration scenarios.
-  - name: Slack
-    description: Adapter for Slack messaging integration with workflow notifications and approvals.
-  - name: JIRA
-    description: Adapter for Atlassian JIRA project management and issue tracking integration.
+  - type: Portal
+    url: https://cloud.oracle.com/integration
+  - type: GettingStarted
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/oracle-integration-oci/explore-oracle-integration-apis.html
+  - type: Tutorials
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/tutorials.html
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/index.html
+  - type: Blog
+    url: https://blogs.oracle.com/integration/
+  - type: ChangeLog
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/whats-new/
+  - type: Support
+    url: https://www.oracle.com/support/
+  - type: TermsOfService
+    url: https://www.oracle.com/legal/terms.html
+  - type: PrivacyPolicy
+    url: https://www.oracle.com/legal/privacy/
+  - type: StatusPage
+    url: https://ocistatus.oraclecloud.com/
+  - type: Pricing
+    url: https://www.oracle.com/integration/pricing/
+  - type: Console
+    url: https://cloud.oracle.com/integration
+  - type: SDKs
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+    title: OCI SDKs
+  - type: CLI
+    url: https://github.com/oracle/oci-cli
+    title: OCI CLI
+  - type: GitHubOrganization
+    url: https://github.com/oracle
+  - type: GitHubRepository
+    url: https://github.com/oracle/oci-cli
+    title: OCI CLI Repository
+  - type: GitHubRepository
+    url: https://github.com/oracle/oci-python-sdk
+    title: Python SDK Repository
+  - type: GitHubRepository
+    url: https://github.com/oracle/oci-go-sdk
+    title: Go SDK Repository
+  - type: Training
+    url: https://education.oracle.com/
+  - type: Marketplace
+    url: https://cloudmarketplace.oracle.com/marketplace/en_US/homeLinkPage
+  - type: SpectralRules
+    url: rules/oracle-integration-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/oracle-integration-vocabulary.yaml
+  - type: Features
+    data:
+    - name: Prebuilt Integrations
+      description: Library of prebuilt integration recipes and adapters for rapid deployment of common integration patterns.
+    - name: Application Adapters
+      description: Native connectivity to Oracle SaaS, on-premises applications, and third-party services including Salesforce,
+        SAP, Workday, and ServiceNow.
+    - name: Visual Integration Designer
+      description: Low-code drag-and-drop integration designer for building integration flows without extensive coding.
+    - name: B2B Document Exchange
+      description: EDI and B2B document processing with support for trading partner management, document standards, and agreement
+        lifecycle.
+    - name: Process Automation
+      description: Business process management with structured and unstructured workflows, case management, and task management.
+    - name: Decision Modeling
+      description: DMN-based decision model management for business rules execution and deployment.
+    - name: Scheduled Integrations
+      description: Time-based scheduling of integration flows with pause, resume, start, and stop controls.
+    - name: Integration Monitoring
+      description: Real-time monitoring of integration instances, error tracking, activity streams, and audit records.
+    - name: File Server
+      description: SFTP-compliant embedded file server for file-based integration scenarios.
+    - name: Rapid Adapter Builder
+      description: Custom adapter development framework for building reusable connectivity to proprietary or niche systems.
+    - name: AI Agents
+      description: AI agent capabilities within integration projects for intelligent automation patterns and prompt templates.
+    - name: Machine Learning Recommendations
+      description: ML-based guidance and recommendations for building and optimizing integrations.
+    - name: Integration Analytics
+      description: Built-in analytics and process analytics with custom query builders and data visualization.
+    - name: FHIR Support
+      description: Native Fast Healthcare Interoperability Resources support for healthcare integration workflows.
+  - type: UseCases
+    data:
+    - name: SaaS Application Integration
+      description: Connect Oracle SaaS applications like ERP Cloud, HCM Cloud, and CX Cloud with third-party SaaS platforms.
+    - name: ERP Integration
+      description: Integrate Oracle ERP Cloud or on-premises EBS with procurement, supply chain, and financial systems.
+    - name: HCM Integration
+      description: Synchronize human capital management data across Oracle HCM Cloud, Workday, and other HR systems.
+    - name: B2B Trading Partner Onboarding
+      description: Automate EDI-based trading partner setup, agreement management, and document exchange.
+    - name: Process Automation
+      description: Automate business processes with approval workflows, case management, and task orchestration.
+    - name: Healthcare Data Exchange
+      description: Build FHIR-compliant healthcare integration workflows for patient data exchange and interoperability.
+    - name: Hybrid Cloud Integration
+      description: Connect on-premises applications to Oracle Cloud and third-party cloud services via connectivity agents.
+    - name: File-Based Integration
+      description: Automate file transfers and processing with the embedded SFTP-compliant file server.
+    - name: CI/CD For Integrations
+      description: Manage integration lifecycle with export, import, and deployment APIs for DevOps automation.
+    - name: Real-Time Event Processing
+      description: Process events and messages in real time using event-driven integration patterns and stream analytics.
+  - type: Integrations
+    data:
+    - name: Oracle ERP Cloud
+      description: Native adapter for Oracle Enterprise Resource Planning Cloud including financials, procurement, and supply
+        chain.
+    - name: Oracle HCM Cloud
+      description: Native adapter for Oracle Human Capital Management Cloud for HR, payroll, and talent management.
+    - name: Oracle CX Cloud
+      description: Native adapter for Oracle Customer Experience Cloud including sales, service, and marketing.
+    - name: Oracle NetSuite
+      description: Native adapter for Oracle NetSuite ERP and CRM cloud services.
+    - name: Salesforce
+      description: Prebuilt adapter for Salesforce CRM integration with Oracle cloud and on-premises applications.
+    - name: SAP
+      description: Adapter for SAP ERP and S/4HANA integration via IDoc, BAPI, and RFC protocols.
+    - name: Workday
+      description: Prebuilt adapter for Workday HCM and financial management integration.
+    - name: ServiceNow
+      description: Adapter for ServiceNow ITSM and ITOM integration with Oracle applications.
+    - name: Shopify
+      description: Adapter for Shopify e-commerce platform integration with order management and inventory systems.
+    - name: Snowflake
+      description: Adapter for Snowflake data warehouse integration for analytics and data pipelines.
+    - name: Microsoft Azure
+      description: Connectivity to Microsoft Azure services and applications for multi-cloud integration.
+    - name: AWS
+      description: Connectivity to Amazon Web Services for multi-cloud integration scenarios.
+    - name: Slack
+      description: Adapter for Slack messaging integration with workflow notifications and approvals.
+    - name: JIRA
+      description: Adapter for Atlassian JIRA project management and issue tracking integration.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
