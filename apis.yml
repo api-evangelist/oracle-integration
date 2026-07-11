@@ -175,6 +175,10 @@ apis:
   - FN: Oracle Integration Support
     email: oracle-integration-support@oracle.com
 common:
+  - type: DomainSecurity
+    url: security/oracle-integration-domain-security.yml
+  - type: Authentication
+    url: authentication/oracle-integration-authentication.yml
   - type: OAuthScopes
     url: scopes/oracle-integration-scopes.yml
   - type: PostmanWorkspace

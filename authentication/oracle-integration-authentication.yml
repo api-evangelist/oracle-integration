@@ -1,0 +1,28 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/oracle-integration-developer-api.yaml, openapi/oracle-integration-process-automation-api.yaml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
+    tokenUrl: https://{idcs-url}/oauth2/v1/token
+    scopes: 1
+  description: OAuth 2.0 authentication via Oracle Identity Cloud Service (IDCS).
+  sources:
+  - openapi/oracle-integration-developer-api.yaml
+  - openapi/oracle-integration-process-automation-api.yaml
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: Basic authentication with Oracle Integration credentials.
+  sources:
+  - openapi/oracle-integration-developer-api.yaml
+  - openapi/oracle-integration-process-automation-api.yaml
