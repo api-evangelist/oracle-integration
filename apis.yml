@@ -175,6 +175,8 @@ apis:
   - FN: Oracle Integration Support
     email: oracle-integration-support@oracle.com
 common:
+  - type: AgenticAccess
+    url: agentic-access/oracle-integration-agentic-access.yml
   - type: DomainSecurity
     url: security/oracle-integration-domain-security.yml
   - type: Authentication
