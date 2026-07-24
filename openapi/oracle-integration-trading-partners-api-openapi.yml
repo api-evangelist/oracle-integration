@@ -1,0 +1,348 @@
+openapi: 3.0.3
+info:
+  title: Oracle Integration Developer Adapters Trading Partners API
+  description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
+  version: 1.0.0
+  contact:
+    name: Oracle Integration Support
+    email: oracle-integration-support@oracle.com
+    url: https://www.oracle.com/support/
+  license:
+    name: Oracle Terms of Service
+    url: https://www.oracle.com/legal/terms.html
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{instance}.integration.ocp.oraclecloud.com
+  description: Oracle Integration Cloud Instance
+  variables:
+    instance:
+      default: myinstance
+      description: Oracle Integration instance name
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: Trading Partners
+  description: Manage B2B trading partners and agreements.
+paths:
+  /ic/api/b2b/v1/tpm/partners:
+    get:
+      operationId: listTradingPartners
+      summary: Oracle Integration List Trading Partners
+      description: Retrieve a list of all trading partners.
+      tags:
+      - Trading Partners
+      parameters:
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Trading partners retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingPartnerList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createTradingPartner
+      summary: Oracle Integration Create Trading Partner
+      description: Create a new trading partner.
+      tags:
+      - Trading Partners
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TradingPartnerCreate'
+      responses:
+        '201':
+          description: Trading partner created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingPartner'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/b2b/v1/tpm/partners/{tpId}:
+    get:
+      operationId: getTradingPartner
+      summary: Oracle Integration Get Trading Partner
+      description: Retrieve a specific trading partner.
+      tags:
+      - Trading Partners
+      parameters:
+      - name: tpId
+        in: path
+        required: true
+        description: Trading partner identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Trading partner details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingPartner'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateTradingPartner
+      summary: Oracle Integration Update Trading Partner
+      description: Update an existing trading partner.
+      tags:
+      - Trading Partners
+      parameters:
+      - name: tpId
+        in: path
+        required: true
+        description: Trading partner identifier.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TradingPartnerCreate'
+      responses:
+        '200':
+          description: Trading partner updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingPartner'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteTradingPartner
+      summary: Oracle Integration Delete Trading Partner
+      description: Delete a trading partner.
+      tags:
+      - Trading Partners
+      parameters:
+      - name: tpId
+        in: path
+        required: true
+        description: Trading partner identifier.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Trading partner deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/b2b/v1/tpm/host:
+    get:
+      operationId: getHostProfile
+      summary: Oracle Integration Get Host Profile
+      description: Retrieve the B2B host profile.
+      tags:
+      - Trading Partners
+      responses:
+        '200':
+          description: Host profile retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostProfile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createOrUpdateHostProfile
+      summary: Oracle Integration Create or Update Host Profile
+      description: Create or update the B2B host profile.
+      tags:
+      - Trading Partners
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HostProfile'
+      responses:
+        '200':
+          description: Host profile updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostProfile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    TradingPartnerList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TradingPartner'
+        totalResults:
+          type: integer
+          example: 25
+        hasMore:
+          type: boolean
+          example: false
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Error type URI.
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+        title:
+          type: string
+          description: Short error title.
+          example: Bad Request
+        detail:
+          type: string
+          description: Detailed error message.
+          example: Invalid connection identifier format.
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
+    TradingPartner:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Trading partner identifier.
+          example: TP_ACME
+        name:
+          type: string
+          description: Trading partner name.
+          example: Acme Corporation
+        description:
+          type: string
+          description: Trading partner description.
+          example: Primary supplier for raw materials.
+        status:
+          type: string
+          description: Partner status.
+          enum:
+          - ACTIVE
+          - INACTIVE
+          example: ACTIVE
+        contactName:
+          type: string
+          description: Contact person name.
+          example: Jane Smith
+        contactEmail:
+          type: string
+          format: email
+          description: Contact email address.
+          example: jane.smith@acme.com
+    TradingPartnerCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Trading partner name.
+          example: Acme Corporation
+        description:
+          type: string
+          description: Trading partner description.
+          example: Primary supplier for raw materials.
+    HostProfile:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Host profile name.
+          example: MyCompany B2B Host
+        identifiers:
+          type: array
+          description: Host identifiers.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: DUNS
+              value:
+                type: string
+                example: '123456789'
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request - invalid input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 20
+        example: 20
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip before returning results.
+      schema:
+        type: integer
+        default: 0
+        example: 0
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Oracle Identity Cloud Service (IDCS).
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
+          tokenUrl: https://{idcs-url}/oauth2/v1/token
+          scopes:
+            urn:opc:resource:consumer::all: Full access to Oracle Integration APIs
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with Oracle Integration credentials.

@@ -1,0 +1,131 @@
+openapi: 3.0.3
+info:
+  title: Oracle Integration Developer Adapters Identities API
+  description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
+  version: 1.0.0
+  contact:
+    name: Oracle Integration Support
+    email: oracle-integration-support@oracle.com
+    url: https://www.oracle.com/support/
+  license:
+    name: Oracle Terms of Service
+    url: https://www.oracle.com/legal/terms.html
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{instance}.integration.ocp.oraclecloud.com
+  description: Oracle Integration Cloud Instance
+  variables:
+    instance:
+      default: myinstance
+      description: Oracle Integration instance name
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: Identities
+  description: Manage users, groups, and roles.
+paths:
+  /ic/api/process/v1/identities:
+    get:
+      operationId: listIdentities
+      summary: Oracle Integration List Identities
+      description: Retrieve a list of users, groups, and roles.
+      tags:
+      - Identities
+      responses:
+        '200':
+          description: Identities retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/identities/loggedInUser:
+    get:
+      operationId: getLoggedInUser
+      summary: Oracle Integration Get Logged in User
+      description: Retrieve the currently logged in user.
+      tags:
+      - Identities
+      responses:
+        '200':
+          description: User details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+        title:
+          type: string
+          example: Not Found
+        detail:
+          type: string
+          example: Process instance not found.
+        status:
+          type: integer
+          example: 404
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: User identifier.
+          example: admin@example.com
+        firstName:
+          type: string
+          description: First name.
+          example: John
+        lastName:
+          type: string
+          description: Last name.
+          example: Smith
+        email:
+          type: string
+          format: email
+          description: Email address.
+          example: admin@example.com
+    IdentityList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+  responses:
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Oracle Identity Cloud Service (IDCS).
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
+          tokenUrl: https://{idcs-url}/oauth2/v1/token
+          scopes:
+            urn:opc:resource:consumer::all: Full access to Oracle Integration APIs
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with Oracle Integration credentials.

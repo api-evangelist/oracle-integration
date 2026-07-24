@@ -1,0 +1,514 @@
+openapi: 3.0.3
+info:
+  title: Oracle Integration Developer Adapters Monitoring API
+  description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
+  version: 1.0.0
+  contact:
+    name: Oracle Integration Support
+    email: oracle-integration-support@oracle.com
+    url: https://www.oracle.com/support/
+  license:
+    name: Oracle Terms of Service
+    url: https://www.oracle.com/legal/terms.html
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{instance}.integration.ocp.oraclecloud.com
+  description: Oracle Integration Cloud Instance
+  variables:
+    instance:
+      default: myinstance
+      description: Oracle Integration instance name
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: Monitoring
+  description: Monitor and manage integration instances.
+paths:
+  /ic/api/integration/v1/monitoring/instances:
+    get:
+      operationId: listMonitoringInstances
+      summary: Oracle Integration List Monitoring Instances
+      description: Retrieve a list of integration instances for monitoring.
+      tags:
+      - Monitoring
+      parameters:
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - name: q
+        in: query
+        description: Filter query string.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved monitoring instances.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitoringInstanceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/instances/{id}:
+    get:
+      operationId: getMonitoringInstance
+      summary: Oracle Integration Get Monitoring Instance
+      description: Retrieve details of a specific integration instance.
+      tags:
+      - Monitoring
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Instance identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Instance details retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitoringInstance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/instances/{id}/activityStream:
+    get:
+      operationId: getInstanceActivityStream
+      summary: Oracle Integration Get Instance Activity Stream
+      description: Retrieve the activity stream for an integration instance.
+      tags:
+      - Monitoring
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Instance identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Activity stream retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityStream'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/instances/{id}/abort:
+    post:
+      operationId: abortMonitoringInstance
+      summary: Oracle Integration Abort Instance
+      description: Abort a running integration instance.
+      tags:
+      - Monitoring
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Instance identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Instance aborted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/errors:
+    get:
+      operationId: listErroredInstances
+      summary: Oracle Integration List Errored Instances
+      description: Retrieve a list of errored integration instances.
+      tags:
+      - Monitoring
+      parameters:
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Successfully retrieved errored instances.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErroredInstanceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/errors/{id}/resubmit:
+    post:
+      operationId: resubmitErroredInstance
+      summary: Oracle Integration Resubmit Errored Instance
+      description: Resubmit an errored integration instance for reprocessing.
+      tags:
+      - Monitoring
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Error instance identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Instance resubmitted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/integrations:
+    get:
+      operationId: listMonitoringIntegrations
+      summary: Oracle Integration List Monitoring Integrations
+      description: Retrieve monitoring data for all integrations.
+      tags:
+      - Monitoring
+      responses:
+        '200':
+          description: Monitoring data retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitoringIntegrationList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/logs/{id}:
+    get:
+      operationId: downloadLogFile
+      summary: Oracle Integration Download Log File
+      description: Download a log file for an integration.
+      tags:
+      - Monitoring
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Log file identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Log file content.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/auditRecords:
+    get:
+      operationId: listAuditRecords
+      summary: Oracle Integration List Audit Records
+      description: Retrieve audit records for integration activities.
+      tags:
+      - Monitoring
+      parameters:
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Audit records retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditRecordList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/monitoring/agentgroups:
+    get:
+      operationId: listAgentGroups
+      summary: Oracle Integration List Agent Groups
+      description: Retrieve the status of all agent groups.
+      tags:
+      - Monitoring
+      responses:
+        '200':
+          description: Agent groups retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentGroupList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/usage:
+    get:
+      operationId: getUsage
+      summary: Oracle Integration Get Usage
+      description: Retrieve integration usage metrics.
+      tags:
+      - Monitoring
+      responses:
+        '200':
+          description: Usage metrics retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageMetrics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    MonitoringInstanceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonitoringInstance'
+        totalResults:
+          type: integer
+          example: 1250
+        hasMore:
+          type: boolean
+          example: true
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Error type URI.
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+        title:
+          type: string
+          description: Short error title.
+          example: Bad Request
+        detail:
+          type: string
+          description: Detailed error message.
+          example: Invalid connection identifier format.
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
+    UsageMetrics:
+      type: object
+      properties:
+        messageCount:
+          type: integer
+          description: Total message count.
+          example: 15000
+        period:
+          type: string
+          description: Reporting period.
+          example: 2026-04
+    AuditRecordList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: '800123'
+              action:
+                type: string
+                example: ACTIVATE
+              target:
+                type: string
+                example: HELLO_WORLD|01.00.0000
+              user:
+                type: string
+                example: admin@example.com
+              timestamp:
+                type: string
+                format: date-time
+                example: '2026-04-15T10:30:00Z'
+    ActivityStream:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              activityName:
+                type: string
+                description: Activity name.
+                example: MapData
+              activityType:
+                type: string
+                description: Activity type.
+                example: MAP
+              status:
+                type: string
+                description: Activity status.
+                example: COMPLETED
+              timestamp:
+                type: string
+                format: date-time
+                description: Activity timestamp.
+                example: '2026-04-18T10:00:01Z'
+    MonitoringIntegrationList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: HELLO_WORLD|01.00.0000
+              successCount:
+                type: integer
+                example: 1200
+              failedCount:
+                type: integer
+                example: 5
+              status:
+                type: string
+                example: ACTIVATED
+    ErroredInstanceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonitoringInstance'
+        totalResults:
+          type: integer
+          example: 5
+        hasMore:
+          type: boolean
+          example: false
+    MonitoringInstance:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Instance identifier.
+          example: '500456'
+        integrationId:
+          type: string
+          description: Parent integration identifier.
+          example: HELLO_WORLD|01.00.0000
+        status:
+          type: string
+          description: Instance status.
+          enum:
+          - COMPLETED
+          - FAILED
+          - ABORTED
+          - IN_PROGRESS
+          example: COMPLETED
+        startTime:
+          type: string
+          format: date-time
+          description: Instance start time.
+          example: '2026-04-18T10:00:00Z'
+        endTime:
+          type: string
+          format: date-time
+          description: Instance end time.
+          example: '2026-04-18T10:00:05Z'
+        businessIdentifier:
+          type: string
+          description: Business identifier for the instance.
+          example: ORD-2026-001
+    AgentGroupList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: AG_001
+              name:
+                type: string
+                example: On-Premises Agent Group
+              status:
+                type: string
+                example: RUNNING
+              agentCount:
+                type: integer
+                example: 2
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 20
+        example: 20
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip before returning results.
+      schema:
+        type: integer
+        default: 0
+        example: 0
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Oracle Identity Cloud Service (IDCS).
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
+          tokenUrl: https://{idcs-url}/oauth2/v1/token
+          scopes:
+            urn:opc:resource:consumer::all: Full access to Oracle Integration APIs
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with Oracle Integration credentials.

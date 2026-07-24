@@ -1,0 +1,202 @@
+openapi: 3.0.3
+info:
+  title: Oracle Integration Developer Adapters Packages API
+  description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
+  version: 1.0.0
+  contact:
+    name: Oracle Integration Support
+    email: oracle-integration-support@oracle.com
+    url: https://www.oracle.com/support/
+  license:
+    name: Oracle Terms of Service
+    url: https://www.oracle.com/legal/terms.html
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{instance}.integration.ocp.oraclecloud.com
+  description: Oracle Integration Cloud Instance
+  variables:
+    instance:
+      default: myinstance
+      description: Oracle Integration instance name
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: Packages
+  description: Manage packages for grouping integrations.
+paths:
+  /ic/api/integration/v1/packages:
+    get:
+      operationId: listPackages
+      summary: Oracle Integration List Packages
+      description: Retrieve a list of all packages.
+      tags:
+      - Packages
+      parameters:
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Successfully retrieved packages.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/packages/{packagename}:
+    get:
+      operationId: getPackage
+      summary: Oracle Integration Get Package
+      description: Retrieve a specific package by name.
+      tags:
+      - Packages
+      parameters:
+      - name: packagename
+        in: path
+        required: true
+        description: Package name.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Package details retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Package'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deletePackage
+      summary: Oracle Integration Delete Package
+      description: Delete a package.
+      tags:
+      - Packages
+      parameters:
+      - name: packagename
+        in: path
+        required: true
+        description: Package name.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Package deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Error type URI.
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+        title:
+          type: string
+          description: Short error title.
+          example: Bad Request
+        detail:
+          type: string
+          description: Detailed error message.
+          example: Invalid connection identifier format.
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
+    Package:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Package code.
+          example: MY_PACKAGE
+        name:
+          type: string
+          description: Package display name.
+          example: My Integration Package
+        description:
+          type: string
+          description: Package description.
+          example: Package containing ERP integration flows.
+        lastUpdatedBy:
+          type: string
+          description: User who last updated.
+          example: admin@example.com
+        lastUpdated:
+          type: string
+          format: date-time
+          example: '2026-04-15T10:30:00Z'
+    PackageList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Package'
+        totalResults:
+          type: integer
+          example: 8
+        hasMore:
+          type: boolean
+          example: false
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 20
+        example: 20
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip before returning results.
+      schema:
+        type: integer
+        default: 0
+        example: 0
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Oracle Identity Cloud Service (IDCS).
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
+          tokenUrl: https://{idcs-url}/oauth2/v1/token
+          scopes:
+            urn:opc:resource:consumer::all: Full access to Oracle Integration APIs
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with Oracle Integration credentials.

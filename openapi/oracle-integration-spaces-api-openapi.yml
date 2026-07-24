@@ -1,0 +1,197 @@
+openapi: 3.0.3
+info:
+  title: Oracle Integration Developer Adapters Spaces API
+  description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
+  version: 1.0.0
+  contact:
+    name: Oracle Integration Support
+    email: oracle-integration-support@oracle.com
+    url: https://www.oracle.com/support/
+  license:
+    name: Oracle Terms of Service
+    url: https://www.oracle.com/legal/terms.html
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{instance}.integration.ocp.oraclecloud.com
+  description: Oracle Integration Cloud Instance
+  variables:
+    instance:
+      default: myinstance
+      description: Oracle Integration instance name
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: Spaces
+  description: Manage workspace spaces.
+paths:
+  /ic/api/process/v1/spaces:
+    get:
+      operationId: listSpaces
+      summary: Oracle Integration List Spaces
+      description: Retrieve a list of all workspace spaces.
+      tags:
+      - Spaces
+      responses:
+        '200':
+          description: Spaces retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceSpaceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createSpace
+      summary: Oracle Integration Create Space
+      description: Create a new workspace space.
+      tags:
+      - Spaces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpaceCreate'
+      responses:
+        '201':
+          description: Space created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceSpace'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/spaces/{spaceId}:
+    get:
+      operationId: getSpace
+      summary: Oracle Integration Get Space
+      description: Retrieve a specific workspace space.
+      tags:
+      - Spaces
+      parameters:
+      - $ref: '#/components/parameters/spaceIdParam'
+      responses:
+        '200':
+          description: Space details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceSpace'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteSpace
+      summary: Oracle Integration Delete Space
+      description: Delete a workspace space.
+      tags:
+      - Spaces
+      parameters:
+      - $ref: '#/components/parameters/spaceIdParam'
+      responses:
+        '204':
+          description: Space deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+        title:
+          type: string
+          example: Not Found
+        detail:
+          type: string
+          example: Process instance not found.
+        status:
+          type: integer
+          example: 404
+    SpaceCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Space name.
+          example: Production Space
+        description:
+          type: string
+          description: Space description.
+          example: Space for production process projects.
+    WorkspaceSpace:
+      type: object
+      properties:
+        spaceId:
+          type: string
+          description: Space identifier.
+          example: default
+        name:
+          type: string
+          description: Space name.
+          example: Default Space
+        description:
+          type: string
+          description: Space description.
+          example: Default workspace for projects.
+    WorkspaceSpaceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkspaceSpace'
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    spaceIdParam:
+      name: spaceId
+      in: path
+      required: true
+      description: Space identifier.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Oracle Identity Cloud Service (IDCS).
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
+          tokenUrl: https://{idcs-url}/oauth2/v1/token
+          scopes:
+            urn:opc:resource:consumer::all: Full access to Oracle Integration APIs
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with Oracle Integration credentials.

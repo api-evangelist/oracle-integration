@@ -1,0 +1,250 @@
+openapi: 3.0.3
+info:
+  title: Oracle Integration Developer Adapters API
+  description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
+  version: 1.0.0
+  contact:
+    name: Oracle Integration Support
+    email: oracle-integration-support@oracle.com
+    url: https://www.oracle.com/support/
+  license:
+    name: Oracle Terms of Service
+    url: https://www.oracle.com/legal/terms.html
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{instance}.integration.ocp.oraclecloud.com
+  description: Oracle Integration Cloud Instance
+  variables:
+    instance:
+      default: myinstance
+      description: Oracle Integration instance name
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: Adapters
+  description: Rapid Adapter Builder for custom adapters.
+paths:
+  /ic/api/adapters/v1/adapterBundles:
+    get:
+      operationId: listAdapterBundles
+      summary: Oracle Integration List Adapter Bundles
+      description: Retrieve a list of all custom adapter bundles.
+      tags:
+      - Adapters
+      responses:
+        '200':
+          description: Adapter bundles retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdapterBundleList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: registerAdapterBundle
+      summary: Oracle Integration Register Adapter Bundle
+      description: Register a new custom adapter bundle.
+      tags:
+      - Adapters
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Adapter bundle archive file.
+      responses:
+        '201':
+          description: Adapter bundle registered.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdapterBundle'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/adapters/v1/adapterBundles/{id}:
+    get:
+      operationId: getAdapterBundle
+      summary: Oracle Integration Get Adapter Bundle
+      description: Retrieve a specific adapter bundle by identifier.
+      tags:
+      - Adapters
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Adapter bundle identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Adapter bundle details retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdapterBundle'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateAdapterBundle
+      summary: Oracle Integration Update Adapter Bundle
+      description: Update an existing adapter bundle.
+      tags:
+      - Adapters
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Adapter bundle identifier.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Adapter bundle updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdapterBundle'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteAdapterBundle
+      summary: Oracle Integration Delete Adapter Bundle
+      description: Delete a custom adapter bundle.
+      tags:
+      - Adapters
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Adapter bundle identifier.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Adapter bundle deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Error type URI.
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+        title:
+          type: string
+          description: Short error title.
+          example: Bad Request
+        detail:
+          type: string
+          description: Detailed error message.
+          example: Invalid connection identifier format.
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
+    AdapterBundleList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdapterBundle'
+    AdapterBundle:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Adapter bundle identifier.
+          example: MY_CUSTOM_ADAPTER
+        name:
+          type: string
+          description: Adapter bundle name.
+          example: Custom REST Adapter
+        description:
+          type: string
+          description: Adapter bundle description.
+          example: Custom adapter for proprietary REST API.
+        version:
+          type: string
+          description: Adapter version.
+          example: 1.0.0
+        status:
+          type: string
+          description: Adapter registration status.
+          example: REGISTERED
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request - invalid input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Oracle Identity Cloud Service (IDCS).
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
+          tokenUrl: https://{idcs-url}/oauth2/v1/token
+          scopes:
+            urn:opc:resource:consumer::all: Full access to Oracle Integration APIs
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with Oracle Integration credentials.

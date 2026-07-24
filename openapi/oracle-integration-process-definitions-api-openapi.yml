@@ -1,0 +1,162 @@
+openapi: 3.0.3
+info:
+  title: Oracle Integration Developer Adapters Process Definitions API
+  description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
+  version: 1.0.0
+  contact:
+    name: Oracle Integration Support
+    email: oracle-integration-support@oracle.com
+    url: https://www.oracle.com/support/
+  license:
+    name: Oracle Terms of Service
+    url: https://www.oracle.com/legal/terms.html
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{instance}.integration.ocp.oraclecloud.com
+  description: Oracle Integration Cloud Instance
+  variables:
+    instance:
+      default: myinstance
+      description: Oracle Integration instance name
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: Process Definitions
+  description: Retrieve process definition metadata and configurations.
+paths:
+  /ic/api/process/v1/process-definitions:
+    get:
+      operationId: listProcessDefinitions
+      summary: Oracle Integration List Process Definitions
+      description: Retrieve a list of all process definitions.
+      tags:
+      - Process Definitions
+      responses:
+        '200':
+          description: Process definitions retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessDefinitionList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/process-definitions/{processDefId}/process-metadata:
+    get:
+      operationId: getProcessMetadata
+      summary: Oracle Integration Get Process Metadata
+      description: Retrieve metadata for a specific process definition.
+      tags:
+      - Process Definitions
+      parameters:
+      - name: processDefId
+        in: path
+        required: true
+        description: Process definition identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Process metadata retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessMetadata'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+        title:
+          type: string
+          example: Not Found
+        detail:
+          type: string
+          example: Process instance not found.
+        status:
+          type: integer
+          example: 404
+    ProcessMetadata:
+      type: object
+      properties:
+        processDefId:
+          type: string
+          example: default~OrderApproval~1.0
+        activities:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: ReviewOrder
+              type:
+                type: string
+                example: HUMAN_TASK
+    ProcessDefinitionList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessDefinition'
+    ProcessDefinition:
+      type: object
+      properties:
+        processDefId:
+          type: string
+          description: Process definition identifier.
+          example: default~OrderApproval~1.0
+        processName:
+          type: string
+          description: Process name.
+          example: Order Approval
+        revision:
+          type: string
+          description: Process revision.
+          example: '1.0'
+        status:
+          type: string
+          description: Definition status.
+          example: ACTIVE
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Oracle Identity Cloud Service (IDCS).
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
+          tokenUrl: https://{idcs-url}/oauth2/v1/token
+          scopes:
+            urn:opc:resource:consumer::all: Full access to Oracle Integration APIs
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with Oracle Integration credentials.

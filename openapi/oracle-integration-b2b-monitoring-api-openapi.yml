@@ -1,0 +1,182 @@
+openapi: 3.0.3
+info:
+  title: Oracle Integration Developer Adapters B2B Monitoring API
+  description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
+  version: 1.0.0
+  contact:
+    name: Oracle Integration Support
+    email: oracle-integration-support@oracle.com
+    url: https://www.oracle.com/support/
+  license:
+    name: Oracle Terms of Service
+    url: https://www.oracle.com/legal/terms.html
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{instance}.integration.ocp.oraclecloud.com
+  description: Oracle Integration Cloud Instance
+  variables:
+    instance:
+      default: myinstance
+      description: Oracle Integration instance name
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: B2B Monitoring
+  description: Monitor B2B business and wire messages.
+paths:
+  /ic/api/b2b/v1/monitoring/businessmessages:
+    get:
+      operationId: listBusinessMessages
+      summary: Oracle Integration List Business Messages
+      description: Retrieve a list of B2B business messages.
+      tags:
+      - B2B Monitoring
+      parameters:
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Business messages retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessMessageList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/b2b/v1/monitoring/wiremessages:
+    get:
+      operationId: listWireMessages
+      summary: Oracle Integration List Wire Messages
+      description: Retrieve a list of B2B wire messages.
+      tags:
+      - B2B Monitoring
+      parameters:
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Wire messages retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WireMessageList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Error type URI.
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+        title:
+          type: string
+          description: Short error title.
+          example: Bad Request
+        detail:
+          type: string
+          description: Detailed error message.
+          example: Invalid connection identifier format.
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
+    WireMessageList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: '700456'
+              protocol:
+                type: string
+                example: AS2
+              direction:
+                type: string
+                example: INBOUND
+              status:
+                type: string
+                example: SUCCESS
+              timestamp:
+                type: string
+                format: date-time
+                example: '2026-04-18T10:00:00Z'
+    BusinessMessageList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: '700123'
+              direction:
+                type: string
+                example: INBOUND
+              status:
+                type: string
+                example: COMPLETED
+              tradingPartner:
+                type: string
+                example: Acme Corp
+              documentType:
+                type: string
+                example: '850'
+              timestamp:
+                type: string
+                format: date-time
+                example: '2026-04-18T10:00:00Z'
+  responses:
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 20
+        example: 20
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip before returning results.
+      schema:
+        type: integer
+        default: 0
+        example: 0
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Oracle Identity Cloud Service (IDCS).
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
+          tokenUrl: https://{idcs-url}/oauth2/v1/token
+          scopes:
+            urn:opc:resource:consumer::all: Full access to Oracle Integration APIs
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with Oracle Integration credentials.

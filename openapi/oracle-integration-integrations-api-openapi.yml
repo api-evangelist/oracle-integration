@@ -1,0 +1,439 @@
+openapi: 3.0.3
+info:
+  title: Oracle Integration Developer Adapters Integrations API
+  description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
+  version: 1.0.0
+  contact:
+    name: Oracle Integration Support
+    email: oracle-integration-support@oracle.com
+    url: https://www.oracle.com/support/
+  license:
+    name: Oracle Terms of Service
+    url: https://www.oracle.com/legal/terms.html
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{instance}.integration.ocp.oraclecloud.com
+  description: Oracle Integration Cloud Instance
+  variables:
+    instance:
+      default: myinstance
+      description: Oracle Integration instance name
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: Integrations
+  description: Create, manage, and deploy integrations.
+paths:
+  /ic/api/integration/v1/integrations:
+    get:
+      operationId: listIntegrations
+      summary: Oracle Integration List Integrations
+      description: Retrieve a list of all integrations.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - name: q
+        in: query
+        description: Filter query string.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved integrations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/integrations/{id}:
+    get:
+      operationId: getIntegration
+      summary: Oracle Integration Get Integration
+      description: Retrieve a specific integration by its identifier.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/integrationIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved the integration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: updateIntegrationStatus
+      summary: Oracle Integration Activate or Deactivate Integration
+      description: Activate or deactivate an integration.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/integrationIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationStatusUpdate'
+      responses:
+        '200':
+          description: Integration status updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteIntegration
+      summary: Oracle Integration Delete Integration Version
+      description: Delete an integration version.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/integrationIdParam'
+      responses:
+        '204':
+          description: Successfully deleted the integration version.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/integrations/{id}/clone:
+    post:
+      operationId: cloneIntegration
+      summary: Oracle Integration Clone Integration
+      description: Clone an existing integration.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/integrationIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloneRequest'
+      responses:
+        '200':
+          description: Integration cloned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/integrations/{id}/archive:
+    get:
+      operationId: exportIntegration
+      summary: Oracle Integration Export Integration
+      description: Export an integration as an archive file.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/integrationIdParam'
+      responses:
+        '200':
+          description: Integration archive file.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/integrations/archive:
+    post:
+      operationId: importIntegration
+      summary: Oracle Integration Import Integration
+      description: Import an integration from an archive file.
+      tags:
+      - Integrations
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Integration imported successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: replaceIntegration
+      summary: Oracle Integration Replace Integration
+      description: Import and replace an existing integration from an archive file.
+      tags:
+      - Integrations
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Integration replaced successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/integration/v1/integrations/{id}/activationStatus:
+    get:
+      operationId: getIntegrationActivationStatus
+      summary: Oracle Integration Get Activation Status
+      description: Retrieve the activation status of an integration.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/integrationIdParam'
+      responses:
+        '200':
+          description: Activation status retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivationStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    IntegrationStatusUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Desired integration status.
+          enum:
+          - ACTIVATED
+          - CONFIGURED
+          example: ACTIVATED
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Error type URI.
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+        title:
+          type: string
+          description: Short error title.
+          example: Bad Request
+        detail:
+          type: string
+          description: Detailed error message.
+          example: Invalid connection identifier format.
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
+    CloneRequest:
+      type: object
+      properties:
+        code:
+          type: string
+          description: New code for the cloned resource.
+          example: HELLO_WORLD_CLONE
+        name:
+          type: string
+          description: New name for the cloned resource.
+          example: Hello World Clone
+    ActivationStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Current activation status.
+          example: ACTIVATED
+        version:
+          type: string
+          description: Integration version.
+          example: 01.00.0000
+    IntegrationList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Integration'
+        totalResults:
+          type: integer
+          description: Total number of integrations.
+          example: 42
+        hasMore:
+          type: boolean
+          description: Whether more results are available.
+          example: true
+    Integration:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Integration identifier.
+          example: HELLO_WORLD|01.00.0000
+        code:
+          type: string
+          description: Integration code.
+          example: HELLO_WORLD
+        version:
+          type: string
+          description: Integration version.
+          example: 01.00.0000
+        name:
+          type: string
+          description: Integration display name.
+          example: Hello World Integration
+        description:
+          type: string
+          description: Integration description.
+          example: A simple hello world integration flow.
+        status:
+          type: string
+          description: Integration status.
+          enum:
+          - CONFIGURED
+          - ACTIVATED
+          - DRAFT
+          example: ACTIVATED
+        pattern:
+          type: string
+          description: Integration pattern type.
+          example: Orchestration
+        style:
+          type: string
+          description: Integration style.
+          example: FREEFORM
+        lockedFlag:
+          type: boolean
+          description: Whether the integration is locked.
+          example: false
+        lastUpdatedBy:
+          type: string
+          description: User who last updated.
+          example: admin@example.com
+        lastUpdated:
+          type: string
+          format: date-time
+          description: Last update timestamp.
+          example: '2026-04-15T10:30:00Z'
+        packageName:
+          type: string
+          description: Package name the integration belongs to.
+          example: MY_PACKAGE
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request - invalid input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 20
+        example: 20
+    integrationIdParam:
+      name: id
+      in: path
+      required: true
+      description: Integration identifier in the format CODE|VERSION.
+      schema:
+        type: string
+        example: HELLO_WORLD|01.00.0000
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip before returning results.
+      schema:
+        type: integer
+        default: 0
+        example: 0
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Oracle Identity Cloud Service (IDCS).
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
+          tokenUrl: https://{idcs-url}/oauth2/v1/token
+          scopes:
+            urn:opc:resource:consumer::all: Full access to Oracle Integration APIs
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with Oracle Integration credentials.

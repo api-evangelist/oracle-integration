@@ -1,0 +1,426 @@
+openapi: 3.0.3
+info:
+  title: Oracle Integration Developer Adapters Process Instances API
+  description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
+  version: 1.0.0
+  contact:
+    name: Oracle Integration Support
+    email: oracle-integration-support@oracle.com
+    url: https://www.oracle.com/support/
+  license:
+    name: Oracle Terms of Service
+    url: https://www.oracle.com/legal/terms.html
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{instance}.integration.ocp.oraclecloud.com
+  description: Oracle Integration Cloud Instance
+  variables:
+    instance:
+      default: myinstance
+      description: Oracle Integration instance name
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: Process Instances
+  description: Manage process instances and related data.
+paths:
+  /ic/api/process/v1/processes:
+    get:
+      operationId: listProcessInstances
+      summary: Oracle Integration List Process Instances
+      description: Retrieve a list of process instances.
+      tags:
+      - Process Instances
+      parameters:
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - name: q
+        in: query
+        description: Filter query string.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Process instances retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessInstanceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createProcessInstance
+      summary: Oracle Integration Create Process Instance
+      description: Create a new process instance.
+      tags:
+      - Process Instances
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProcessInstanceCreate'
+      responses:
+        '201':
+          description: Process instance created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessInstance'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/processes/{processId}:
+    get:
+      operationId: getProcessInstance
+      summary: Oracle Integration Get Process Instance
+      description: Retrieve a specific process instance.
+      tags:
+      - Process Instances
+      parameters:
+      - $ref: '#/components/parameters/processIdParam'
+      responses:
+        '200':
+          description: Process instance details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessInstance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateProcessState
+      summary: Oracle Integration Update Process State
+      description: Update the state of a process instance.
+      tags:
+      - Process Instances
+      parameters:
+      - $ref: '#/components/parameters/processIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProcessStateUpdate'
+      responses:
+        '200':
+          description: Process state updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessInstance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/processes/{processId}/comments:
+    get:
+      operationId: listProcessComments
+      summary: Oracle Integration List Process Comments
+      description: Retrieve comments for a process instance.
+      tags:
+      - Process Instances
+      parameters:
+      - $ref: '#/components/parameters/processIdParam'
+      responses:
+        '200':
+          description: Comments retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: addProcessComment
+      summary: Oracle Integration Add Process Comment
+      description: Add a comment to a process instance.
+      tags:
+      - Process Instances
+      parameters:
+      - $ref: '#/components/parameters/processIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentCreate'
+      responses:
+        '201':
+          description: Comment added.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/processes/{processId}/attachments:
+    get:
+      operationId: listProcessAttachments
+      summary: Oracle Integration List Process Attachments
+      description: Retrieve attachments for a process instance.
+      tags:
+      - Process Instances
+      parameters:
+      - $ref: '#/components/parameters/processIdParam'
+      responses:
+        '200':
+          description: Attachments retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttachmentList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ic/api/process/v1/processes/instance-metrics:
+    get:
+      operationId: getInstanceMetrics
+      summary: Oracle Integration Get Instance Metrics
+      description: Retrieve process instance metrics.
+      tags:
+      - Process Instances
+      responses:
+        '200':
+          description: Instance metrics retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceMetrics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ProcessInstanceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessInstance'
+        totalResults:
+          type: integer
+          example: 150
+        hasMore:
+          type: boolean
+          example: true
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+        title:
+          type: string
+          example: Not Found
+        detail:
+          type: string
+          example: Process instance not found.
+        status:
+          type: integer
+          example: 404
+    AttachmentList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              attachmentName:
+                type: string
+                example: purchase_order.pdf
+              mimeType:
+                type: string
+                example: application/pdf
+              attachmentId:
+                type: string
+                example: '900123'
+    CommentList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Please review this order.
+              user:
+                type: string
+                example: admin@example.com
+              timestamp:
+                type: string
+                format: date-time
+                example: '2026-04-18T10:30:00Z'
+    ProcessStateUpdate:
+      type: object
+      properties:
+        state:
+          type: string
+          description: New process state.
+          enum:
+          - COMPLETED
+          - ABORTED
+          example: ABORTED
+    ProcessInstance:
+      type: object
+      properties:
+        processId:
+          type: string
+          description: Process instance identifier.
+          example: '300456'
+        processName:
+          type: string
+          description: Process name.
+          example: Order Approval
+        processDefId:
+          type: string
+          description: Process definition identifier.
+          example: default~OrderApproval~1.0
+        state:
+          type: string
+          description: Process state.
+          enum:
+          - OPEN
+          - COMPLETED
+          - FAULTED
+          - ABORTED
+          example: OPEN
+        priority:
+          type: integer
+          description: Process priority.
+          example: 3
+        title:
+          type: string
+          description: Process title.
+          example: Order
+        createdBy:
+          type: string
+          description: User who created the instance.
+          example: admin@example.com
+        createdDate:
+          type: string
+          format: date-time
+          description: Creation timestamp.
+          example: '2026-04-18T10:00:00Z'
+    InstanceMetrics:
+      type: object
+      properties:
+        totalInstances:
+          type: integer
+          example: 500
+        openInstances:
+          type: integer
+          example: 45
+        completedInstances:
+          type: integer
+          example: 440
+        faultedInstances:
+          type: integer
+          example: 15
+    CommentCreate:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Comment text.
+          example: Approved. Proceed with fulfillment.
+    ProcessInstanceCreate:
+      type: object
+      properties:
+        processDefId:
+          type: string
+          description: Process definition identifier.
+          example: default~OrderApproval~1.0
+        serviceName:
+          type: string
+          description: Service name.
+          example: OrderApprovalService
+        title:
+          type: string
+          description: Instance title.
+          example: Order
+        payload:
+          type: object
+          description: Process input payload.
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    processIdParam:
+      name: processId
+      in: path
+      required: true
+      description: Process instance identifier.
+      schema:
+        type: string
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 20
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip.
+      schema:
+        type: integer
+        default: 0
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Oracle Identity Cloud Service (IDCS).
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
+          tokenUrl: https://{idcs-url}/oauth2/v1/token
+          scopes:
+            urn:opc:resource:consumer::all: Full access to Oracle Integration APIs
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with Oracle Integration credentials.
