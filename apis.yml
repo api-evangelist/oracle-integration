@@ -5,9 +5,22 @@ description: Oracle Integration provides native connectivity to Oracle and non-O
   It combines application integration, process automation, visual application building, and integration analytics into a single
   unified cloud service.
 type: Index
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/oracle-integration.png
 created: '2024-01-15'
 modified: '2026-05-19'
 specificationVersion: '0.19'
@@ -22,43 +35,68 @@ tags:
 - iPaaS
 - Process Automation
 apis:
-- name: Oracle Integration Developer API
-  description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages,
-    libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter
-    building.
+- name: Oracle Integration File Server API
+  description: >-
+    REST API for configuring and administering the Oracle Integration File Server, an SFTP-compliant file
+    repository for managing file-based integrations.
   image: https://www.oracle.com/assets/ocom-logo-og-1200x628-1-5046771.jpg
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api-fs/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/fileserver/v1
+  tags:
+  - File Management
+  - File Server
+  - SFTP
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api-fs/index.html
+  contact:
+  - FN: Oracle Integration Support
+    email: oracle-integration-support@oracle.com
+- name: Oracle Integration Administrative API
+  description: >-
+    OCI control plane API for provisioning and managing Oracle Integration instances, custom endpoints,
+    and data retention configuration.
+  image: https://www.oracle.com/assets/ocom-logo-og-1200x628-1-5046771.jpg
+  humanURL: https://docs.oracle.com/en-us/iaas/api/#/en/integration/20190131/
+  baseURL: https://integration.{region}.oci.oraclecloud.com
+  tags:
+  - Administration
+  - Lifecycle Management
+  - Provisioning
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/integration/20190131/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/integration/20190131/
+  contact:
+  - FN: Oracle Integration Support
+    email: oracle-integration-support@oracle.com
+- aid: oracle-integration:oracle-integration-adapters-api
+  name: Oracle Integration Adapters API
+  description: Rapid Adapter Builder for custom adapters.
   humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
   baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
   tags:
-  - B2B
-  - Connections
-  - Integration Management
-  - Monitoring
-  - Orchestration
-  - Packages
-  - REST API
-  - Scheduled Integrations
+  - Adapters
   properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-adapters-api-openapi.yml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
   - type: APIReference
-    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
   - type: Authentication
-    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
-  - type: OpenAPI
-    url: openapi/oracle-integration-developer-api.yaml
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
   - type: JSONSchema
     url: json-schema/developer-api-connection-schema.json
-    title: Connection Schema
   - type: JSONSchema
     url: json-schema/developer-api-integration-schema.json
-    title: Integration Schema
   - type: JSONSchema
     url: json-schema/developer-api-monitoring-instance-schema.json
-    title: Monitoring Instance Schema
   - type: JSONSchema
     url: json-schema/developer-api-trading-partner-schema.json
-    title: Trading Partner Schema
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
   - type: X-NaftikoCapability
@@ -89,34 +127,15 @@ apis:
     url: capabilities/developer-scheduled-integrations.yaml
   - type: X-NaftikoCapability
     url: capabilities/developer-trading-partners.yaml
-  contact:
-  - FN: Oracle Integration Support
-    email: oracle-integration-support@oracle.com
-- name: Oracle Integration Process Automation API
-  description: REST API for Oracle Cloud Infrastructure Process Automation enabling management of process definitions, process
-    instances, tasks, decision models, dynamic processes, identities, spaces, analytics, and QuickStart applications.
-  image: https://www.oracle.com/assets/ocom-logo-og-1200x628-1-5046771.jpg
-  humanURL: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
-  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1
-  tags:
-  - BPM
-  - Decision Models
-  - Process Automation
-  - Tasks
-  - Workflows
-  properties:
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
-    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
-  - type: OpenAPI
-    url: openapi/oracle-integration-process-automation-api.yaml
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
   - type: JSONSchema
     url: json-schema/process-automation-api-process-instance-schema.json
-    title: Process Instance Schema
   - type: JSONSchema
     url: json-schema/process-automation-api-task-schema.json
-    title: Task Schema
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
   - type: X-NaftikoCapability
@@ -137,43 +156,1876 @@ apis:
     url: capabilities/process-automation-spaces.yaml
   - type: X-NaftikoCapability
     url: capabilities/process-automation-tasks.yaml
-  contact:
-  - FN: Oracle Integration Support
-    email: oracle-integration-support@oracle.com
-- name: Oracle Integration File Server API
-  description: REST API for configuring and administering the Oracle Integration File Server, an SFTP-compliant file repository
-    for managing file-based integrations.
-  image: https://www.oracle.com/assets/ocom-logo-og-1200x628-1-5046771.jpg
-  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api-fs/index.html
-  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/fileserver/v1
+- aid: oracle-integration:oracle-integration-analytics-api
+  name: Oracle Integration Analytics API
+  description: Process analytics queries and data.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
   tags:
-  - File Management
-  - File Server
-  - SFTP
+  - Analytics
   properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-analytics-api-openapi.yml
   - type: Documentation
-    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api-fs/index.html
-  contact:
-  - FN: Oracle Integration Support
-    email: oracle-integration-support@oracle.com
-- name: Oracle Integration Administrative API
-  description: OCI control plane API for provisioning and managing Oracle Integration instances, custom endpoints, and data
-    retention configuration.
-  image: https://www.oracle.com/assets/ocom-logo-og-1200x628-1-5046771.jpg
-  humanURL: https://docs.oracle.com/en-us/iaas/api/#/en/integration/20190131/
-  baseURL: https://integration.{region}.oci.oraclecloud.com
-  tags:
-  - Administration
-  - Lifecycle Management
-  - Provisioning
-  properties:
-  - type: Documentation
-    url: https://docs.oracle.com/en-us/iaas/api/#/en/integration/20190131/
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
   - type: APIReference
-    url: https://docs.oracle.com/en-us/iaas/api/#/en/integration/20190131/
-  contact:
-  - FN: Oracle Integration Support
-    email: oracle-integration-support@oracle.com
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-b2b-documents-api
+  name: Oracle Integration B2B Documents API
+  description: B2B document customization and schema management.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - B2B Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-b2b-documents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-b2b-monitoring-api
+  name: Oracle Integration B2B Monitoring API
+  description: Monitor B2B business and wire messages.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - B2B Monitoring
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-b2b-monitoring-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-certificates-api
+  name: Oracle Integration Certificates API
+  description: Manage SSL certificates for secure connections.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Certificates
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-certificates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-connections-api
+  name: Oracle Integration Connections API
+  description: Manage connections that define integration endpoints.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Connections
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-connections-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-decision-models-api
+  name: Oracle Integration Decision Models API
+  description: Manage DMN decision models and services.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Decision Models
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-decision-models-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-deployed-projects-api
+  name: Oracle Integration Deployed Projects API
+  description: Manage deployed BPM projects.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Deployed Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-deployed-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-dynamic-processes-api
+  name: Oracle Integration Dynamic Processes API
+  description: Manage dynamic process definitions and instances.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Dynamic Processes
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-dynamic-processes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-environment-api
+  name: Oracle Integration Environment API
+  description: Configure CORS and environment settings.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Environment
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-environment-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-identities-api
+  name: Oracle Integration Identities API
+  description: Manage users, groups, and roles.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Identities
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-identities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-integrations-api
+  name: Oracle Integration Integrations API
+  description: Create, manage, and deploy integrations.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-libraries-api
+  name: Oracle Integration Libraries API
+  description: Manage JavaScript libraries for use in integrations.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Libraries
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-libraries-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-lookups-api
+  name: Oracle Integration Lookups API
+  description: Manage lookup tables for data mapping.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Lookups
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-lookups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-monitoring-api
+  name: Oracle Integration Monitoring API
+  description: Monitor and manage integration instances.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Monitoring
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-monitoring-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-packages-api
+  name: Oracle Integration Packages API
+  description: Manage packages for grouping integrations.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Packages
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-packages-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-process-definitions-api
+  name: Oracle Integration Process Definitions API
+  description: Retrieve process definition metadata and configurations.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Process Definitions
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-process-definitions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-process-instances-api
+  name: Oracle Integration Process Instances API
+  description: Manage process instances and related data.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Process Instances
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-process-instances-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-projects-api
+  name: Oracle Integration Projects API
+  description: Manage integration projects and deployments.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-scheduled-integrations-api
+  name: Oracle Integration Scheduled Integrations API
+  description: Manage scheduled integration execution.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Scheduled Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-scheduled-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-spaces-api
+  name: Oracle Integration Spaces API
+  description: Manage workspace spaces.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Spaces
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-spaces-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-tasks-api
+  name: Oracle Integration Tasks API
+  description: Manage user tasks and task actions.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
+- aid: oracle-integration:oracle-integration-trading-partners-api
+  name: Oracle Integration Trading Partners API
+  description: Manage B2B trading partners and agreements.
+  humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
+  tags:
+  - Trading Partners
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-integration-trading-partners-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html
+  - type: Authentication
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html
+  - type: JSONSchema
+    url: json-schema/developer-api-connection-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-monitoring-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/developer-api-trading-partner-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-developer-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/developer-adapters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-documents.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-b2b-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-certificates.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-connections.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-environment.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-libraries.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-lookups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-monitoring.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-packages.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-scheduled-integrations.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/developer-trading-partners.yaml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
+  - type: APIReference
+    url: >-
+      https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html
+  - type: JSONSchema
+    url: json-schema/process-automation-api-process-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/process-automation-api-task-schema.json
+  - type: JSONLD
+    url: json-ld/oracle-integration-process-automation-api-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-analytics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-decision-models.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-deployed-projects.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-dynamic-processes.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-identities.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-definitions.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-process-instances.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-spaces.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/process-automation-tasks.yaml
 common:
   - type: AgenticAccess
     url: agentic-access/oracle-integration-agentic-access.yml
