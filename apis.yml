@@ -99,34 +99,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -138,24 +110,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-analytics-api
   name: Oracle Integration Analytics API
   description: Process analytics queries and data.
@@ -184,34 +138,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -223,24 +149,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-b2b-documents-api
   name: Oracle Integration B2B Documents API
   description: B2B document customization and schema management.
@@ -269,34 +177,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -308,24 +188,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-b2b-monitoring-api
   name: Oracle Integration B2B Monitoring API
   description: Monitor B2B business and wire messages.
@@ -354,34 +216,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -393,24 +227,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-certificates-api
   name: Oracle Integration Certificates API
   description: Manage SSL certificates for secure connections.
@@ -439,34 +255,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -478,24 +266,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-connections-api
   name: Oracle Integration Connections API
   description: Manage connections that define integration endpoints.
@@ -524,34 +294,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -563,24 +305,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-decision-models-api
   name: Oracle Integration Decision Models API
   description: Manage DMN decision models and services.
@@ -609,34 +333,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -648,24 +344,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-deployed-projects-api
   name: Oracle Integration Deployed Projects API
   description: Manage deployed BPM projects.
@@ -694,34 +372,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -733,24 +383,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-dynamic-processes-api
   name: Oracle Integration Dynamic Processes API
   description: Manage dynamic process definitions and instances.
@@ -779,34 +411,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -818,24 +422,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-environment-api
   name: Oracle Integration Environment API
   description: Configure CORS and environment settings.
@@ -864,34 +450,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -903,24 +461,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-identities-api
   name: Oracle Integration Identities API
   description: Manage users, groups, and roles.
@@ -949,34 +489,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -988,24 +500,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-integrations-api
   name: Oracle Integration Integrations API
   description: Create, manage, and deploy integrations.
@@ -1034,34 +528,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -1073,24 +539,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-libraries-api
   name: Oracle Integration Libraries API
   description: Manage JavaScript libraries for use in integrations.
@@ -1119,34 +567,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -1158,24 +578,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-lookups-api
   name: Oracle Integration Lookups API
   description: Manage lookup tables for data mapping.
@@ -1204,34 +606,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -1243,24 +617,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-monitoring-api
   name: Oracle Integration Monitoring API
   description: Monitor and manage integration instances.
@@ -1289,34 +645,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -1328,24 +656,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-packages-api
   name: Oracle Integration Packages API
   description: Manage packages for grouping integrations.
@@ -1374,34 +684,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -1413,24 +695,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-process-definitions-api
   name: Oracle Integration Process Definitions API
   description: Retrieve process definition metadata and configurations.
@@ -1459,34 +723,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -1498,24 +734,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-process-instances-api
   name: Oracle Integration Process Instances API
   description: Manage process instances and related data.
@@ -1544,34 +762,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -1583,24 +773,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-projects-api
   name: Oracle Integration Projects API
   description: Manage integration projects and deployments.
@@ -1629,34 +801,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -1668,24 +812,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-scheduled-integrations-api
   name: Oracle Integration Scheduled Integrations API
   description: Manage scheduled integration execution.
@@ -1714,34 +840,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -1753,24 +851,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-spaces-api
   name: Oracle Integration Spaces API
   description: Manage workspace spaces.
@@ -1799,34 +879,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -1838,24 +890,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-tasks-api
   name: Oracle Integration Tasks API
   description: Manage user tasks and task actions.
@@ -1884,34 +918,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -1923,24 +929,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 - aid: oracle-integration:oracle-integration-trading-partners-api
   name: Oracle Integration Trading Partners API
   description: Manage B2B trading partners and agreements.
@@ -1969,34 +957,6 @@ apis:
     url: json-schema/developer-api-trading-partner-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-developer-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/developer-adapters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-documents.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-b2b-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-certificates.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-connections.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-environment.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-libraries.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-lookups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-monitoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-packages.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-scheduled-integrations.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/developer-trading-partners.yaml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html
   - type: APIReference
@@ -2008,24 +968,6 @@ apis:
     url: json-schema/process-automation-api-task-schema.json
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-analytics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-decision-models.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-deployed-projects.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-dynamic-processes.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-identities.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-process-instances.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-spaces.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/process-automation-tasks.yaml
 common:
   - type: AgenticAccess
     url: agentic-access/oracle-integration-agentic-access.yml
