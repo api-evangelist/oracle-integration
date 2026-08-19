@@ -1,0 +1,723 @@
+{
+  "item": [
+    {
+      "id": "df6a07b8-5b46-4888-901c-ee7252118cb7",
+      "name": "Libraries",
+      "description": {
+        "content": "Manage JavaScript libraries for use in integrations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "550992ed-38f0-4f5f-9fbf-e102e7a1593f",
+          "name": "Oracle Integration List Libraries",
+          "request": {
+            "name": "Oracle Integration List Libraries",
+            "description": {
+              "content": "Retrieve a list of all JavaScript libraries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "integration",
+                "v1",
+                "libraries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of items to skip before returning results."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ca39a35c-45aa-485e-8635-cae123f08daa",
+              "name": "Successfully retrieved libraries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "integration",
+                    "v1",
+                    "libraries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"MY_LIBRARY|01.00.0000\",\n      \"name\": \"Utility Functions\",\n      \"description\": \"Common JavaScript utility functions.\",\n      \"version\": \"01.00.0000\"\n    },\n    {\n      \"id\": \"MY_LIBRARY|01.00.0000\",\n      \"name\": \"Utility Functions\",\n      \"description\": \"Common JavaScript utility functions.\",\n      \"version\": \"01.00.0000\"\n    }\n  ],\n  \"totalResults\": 3,\n  \"hasMore\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94f57e39-85af-402c-89ab-7e16c9a7f0e4",
+              "name": "Authentication required or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "integration",
+                    "v1",
+                    "libraries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1cdb5725-dc98-4f7d-8daf-4826e38d74b0",
+          "name": "Oracle Integration Get Library",
+          "request": {
+            "name": "Oracle Integration Get Library",
+            "description": {
+              "content": "Retrieve a specific library by identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "integration",
+                "v1",
+                "libraries",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Library identifier."
+                },
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69903f4f-8a57-43c8-9861-d4183def6ac2",
+              "name": "Library details retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "integration",
+                    "v1",
+                    "libraries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Library identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"MY_LIBRARY|01.00.0000\",\n  \"name\": \"Utility Functions\",\n  \"description\": \"Common JavaScript utility functions.\",\n  \"version\": \"01.00.0000\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08d85b4b-10c4-40f6-9b9b-5fddfeed0d06",
+              "name": "Authentication required or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "integration",
+                    "v1",
+                    "libraries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Library identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6377c48e-6c6e-4fc0-8012-93783f207449",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "integration",
+                    "v1",
+                    "libraries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Library identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ddbf5ee-f242-4ce4-abb0-f0cd92235f07",
+          "name": "Oracle Integration Delete Library Version",
+          "request": {
+            "name": "Oracle Integration Delete Library Version",
+            "description": {
+              "content": "Delete a library version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "integration",
+                "v1",
+                "libraries",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Library identifier."
+                },
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0af8e9a9-0bf0-4c26-835f-20372edfa811",
+              "name": "Library version deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "integration",
+                    "v1",
+                    "libraries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Library identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "298ce319-608d-465e-a3ee-549aed6dad5f",
+              "name": "Authentication required or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "integration",
+                    "v1",
+                    "libraries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Library identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d912c51b-9d87-4c4e-bb21-d204c787b671",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "integration",
+                    "v1",
+                    "libraries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Library identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Oracle Integration instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "myinstance",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.integration.ocp.oraclecloud.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "urn:opc:resource:consumer::all"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{idcs-url}/oauth2/v1/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{idcs-url}/oauth2/v1/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "35a36012-af32-4548-be90-39135d3c84f5",
+    "name": "Oracle Integration Developer Adapters Libraries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.\n\nContact Support:\n Name: Oracle Integration Support\n Email: oracle-integration-support@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

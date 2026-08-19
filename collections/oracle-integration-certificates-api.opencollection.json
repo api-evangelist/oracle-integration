@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Integration Developer Adapters Certificates API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{idcs-url}/oauth2/v1/authorize",
+      "accessTokenUrl": "https://{idcs-url}/oauth2/v1/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Certificates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Integration List Certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/certificates"
+          },
+          "docs": "Retrieve a list of all certificates."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Upload Certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/certificates",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "type",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload a new certificate."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

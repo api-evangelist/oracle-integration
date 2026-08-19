@@ -1,0 +1,1607 @@
+{
+  "item": [
+    {
+      "id": "d735e3c0-e9e5-4f2c-8cc3-cbb258f31426",
+      "name": "Trading Partners",
+      "description": {
+        "content": "Manage B2B trading partners and agreements.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c4039ea-cc51-45b0-b914-a8670775fab5",
+          "name": "Oracle Integration List Trading Partners",
+          "request": {
+            "name": "Oracle Integration List Trading Partners",
+            "description": {
+              "content": "Retrieve a list of all trading partners.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "b2b",
+                "v1",
+                "tpm",
+                "partners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of items to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of items to skip before returning results."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3718a954-58d4-4566-a854-b29db52063ce",
+              "name": "Trading partners retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "partners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"TP_ACME\",\n      \"name\": \"Acme Corporation\",\n      \"description\": \"Primary supplier for raw materials.\",\n      \"status\": \"ACTIVE\",\n      \"contactName\": \"Jane Smith\",\n      \"contactEmail\": \"jane.smith@acme.com\"\n    },\n    {\n      \"id\": \"TP_ACME\",\n      \"name\": \"Acme Corporation\",\n      \"description\": \"Primary supplier for raw materials.\",\n      \"status\": \"ACTIVE\",\n      \"contactName\": \"Jane Smith\",\n      \"contactEmail\": \"jane.smith@acme.com\"\n    }\n  ],\n  \"totalResults\": 25,\n  \"hasMore\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94243fbd-bc07-4f6f-a99d-8a0454b26b34",
+              "name": "Authentication required or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "partners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7efa1207-ba42-4fc3-9735-a4a326e1dd77",
+          "name": "Oracle Integration Create Trading Partner",
+          "request": {
+            "name": "Oracle Integration Create Trading Partner",
+            "description": {
+              "content": "Create a new trading partner.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "b2b",
+                "v1",
+                "tpm",
+                "partners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9f907f3d-e42a-489c-a07f-dbddecc0b128",
+              "name": "Trading partner created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "partners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Acme Corporation\",\n  \"description\": \"Primary supplier for raw materials.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"TP_ACME\",\n  \"name\": \"Acme Corporation\",\n  \"description\": \"Primary supplier for raw materials.\",\n  \"status\": \"ACTIVE\",\n  \"contactName\": \"Jane Smith\",\n  \"contactEmail\": \"jane.smith@acme.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9a00378-8dd9-47b9-865e-2027b016f2db",
+              "name": "Bad request - invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "partners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Acme Corporation\",\n  \"description\": \"Primary supplier for raw materials.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5daf90ef-9263-4401-8696-bc28804857ef",
+              "name": "Authentication required or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "partners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Acme Corporation\",\n  \"description\": \"Primary supplier for raw materials.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac184fea-73c8-4e85-9395-4811d0680eac",
+          "name": "Oracle Integration Get Trading Partner",
+          "request": {
+            "name": "Oracle Integration Get Trading Partner",
+            "description": {
+              "content": "Retrieve a specific trading partner.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "b2b",
+                "v1",
+                "tpm",
+                "partners",
+                ":tpId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tpId",
+                  "description": "(Required) Trading partner identifier."
+                },
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40cb46a1-03db-41bc-9f4a-4930df8b0ac1",
+              "name": "Trading partner details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "partners",
+                    ":tpId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tpId",
+                      "description": "(Required) Trading partner identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"TP_ACME\",\n  \"name\": \"Acme Corporation\",\n  \"description\": \"Primary supplier for raw materials.\",\n  \"status\": \"ACTIVE\",\n  \"contactName\": \"Jane Smith\",\n  \"contactEmail\": \"jane.smith@acme.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bed0d73-8055-41bc-a2f0-411bf6cfc8db",
+              "name": "Authentication required or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "partners",
+                    ":tpId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tpId",
+                      "description": "(Required) Trading partner identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a68c1311-ef29-49c9-9b4d-b10910a1cf59",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "partners",
+                    ":tpId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tpId",
+                      "description": "(Required) Trading partner identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d80a72a0-71de-40a4-a21d-6609449d3ffa",
+          "name": "Oracle Integration Update Trading Partner",
+          "request": {
+            "name": "Oracle Integration Update Trading Partner",
+            "description": {
+              "content": "Update an existing trading partner.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "b2b",
+                "v1",
+                "tpm",
+                "partners",
+                ":tpId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tpId",
+                  "description": "(Required) Trading partner identifier."
+                },
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "37743f90-f3b5-4450-8ff5-71075b062a52",
+              "name": "Trading partner updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "partners",
+                    ":tpId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tpId",
+                      "description": "(Required) Trading partner identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Acme Corporation\",\n  \"description\": \"Primary supplier for raw materials.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"TP_ACME\",\n  \"name\": \"Acme Corporation\",\n  \"description\": \"Primary supplier for raw materials.\",\n  \"status\": \"ACTIVE\",\n  \"contactName\": \"Jane Smith\",\n  \"contactEmail\": \"jane.smith@acme.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3b43996-357f-42b4-993f-070ab98a16f8",
+              "name": "Authentication required or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "partners",
+                    ":tpId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tpId",
+                      "description": "(Required) Trading partner identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Acme Corporation\",\n  \"description\": \"Primary supplier for raw materials.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85299c1c-72ba-4260-8f6d-b6cc0a847e9f",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "partners",
+                    ":tpId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tpId",
+                      "description": "(Required) Trading partner identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Acme Corporation\",\n  \"description\": \"Primary supplier for raw materials.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40e5ce94-5ad2-4711-8eee-d6134c06110e",
+          "name": "Oracle Integration Delete Trading Partner",
+          "request": {
+            "name": "Oracle Integration Delete Trading Partner",
+            "description": {
+              "content": "Delete a trading partner.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "b2b",
+                "v1",
+                "tpm",
+                "partners",
+                ":tpId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tpId",
+                  "description": "(Required) Trading partner identifier."
+                },
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e216549a-f922-4ff4-afd3-85835c2e197e",
+              "name": "Trading partner deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "partners",
+                    ":tpId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tpId",
+                      "description": "(Required) Trading partner identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "234e8b05-37b8-4dd9-b3f8-da0a196ae72c",
+              "name": "Authentication required or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "partners",
+                    ":tpId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tpId",
+                      "description": "(Required) Trading partner identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9d76a43-6a4e-481b-a9ca-a32880ba894d",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "partners",
+                    ":tpId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tpId",
+                      "description": "(Required) Trading partner identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "771dd3c3-8f1f-40ff-8f58-6617aa6a12f9",
+          "name": "Oracle Integration Get Host Profile",
+          "request": {
+            "name": "Oracle Integration Get Host Profile",
+            "description": {
+              "content": "Retrieve the B2B host profile.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "b2b",
+                "v1",
+                "tpm",
+                "host"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48a57c0c-80fa-48c5-91d3-2ba8df044755",
+              "name": "Host profile retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "host"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"MyCompany B2B Host\",\n  \"identifiers\": [\n    {\n      \"type\": \"DUNS\",\n      \"value\": \"123456789\"\n    },\n    {\n      \"type\": \"DUNS\",\n      \"value\": \"123456789\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34a5bd63-38e0-4339-a6c7-18e661f5ef97",
+              "name": "Authentication required or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "host"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab920b4a-d3dc-437b-bc92-c5c6f2e93ece",
+          "name": "Oracle Integration Create or Update Host Profile",
+          "request": {
+            "name": "Oracle Integration Create or Update Host Profile",
+            "description": {
+              "content": "Create or update the B2B host profile.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "b2b",
+                "v1",
+                "tpm",
+                "host"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"identifiers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e32033e6-f637-4746-8393-0690262db3c6",
+              "name": "Host profile updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "host"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"MyCompany B2B Host\",\n  \"identifiers\": [\n    {\n      \"type\": \"DUNS\",\n      \"value\": \"123456789\"\n    },\n    {\n      \"type\": \"DUNS\",\n      \"value\": \"123456789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"MyCompany B2B Host\",\n  \"identifiers\": [\n    {\n      \"type\": \"DUNS\",\n      \"value\": \"123456789\"\n    },\n    {\n      \"type\": \"DUNS\",\n      \"value\": \"123456789\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef526bad-c836-4ec3-8b1b-436dd92c15ff",
+              "name": "Authentication required or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "b2b",
+                    "v1",
+                    "tpm",
+                    "host"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"MyCompany B2B Host\",\n  \"identifiers\": [\n    {\n      \"type\": \"DUNS\",\n      \"value\": \"123456789\"\n    },\n    {\n      \"type\": \"DUNS\",\n      \"value\": \"123456789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Oracle Integration instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "myinstance",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.integration.ocp.oraclecloud.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "urn:opc:resource:consumer::all"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{idcs-url}/oauth2/v1/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{idcs-url}/oauth2/v1/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7618740d-f81f-4d7d-b763-adc181140dcc",
+    "name": "Oracle Integration Developer Adapters Trading Partners API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.\n\nContact Support:\n Name: Oracle Integration Support\n Email: oracle-integration-support@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

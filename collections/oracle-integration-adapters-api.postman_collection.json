@@ -1,0 +1,1246 @@
+{
+  "item": [
+    {
+      "id": "b3ca284a-8a41-4cf1-bcdf-d98f6ff5a91b",
+      "name": "Adapters",
+      "description": {
+        "content": "Rapid Adapter Builder for custom adapters.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f3482e96-ea3c-4805-991e-0eb9c4d24d01",
+          "name": "Oracle Integration List Adapter Bundles",
+          "request": {
+            "name": "Oracle Integration List Adapter Bundles",
+            "description": {
+              "content": "Retrieve a list of all custom adapter bundles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "adapters",
+                "v1",
+                "adapterBundles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "149c41f4-1705-4753-b29b-09d27263224c",
+              "name": "Adapter bundles retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "adapters",
+                    "v1",
+                    "adapterBundles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"MY_CUSTOM_ADAPTER\",\n      \"name\": \"Custom REST Adapter\",\n      \"description\": \"Custom adapter for proprietary REST API.\",\n      \"version\": \"1.0.0\",\n      \"status\": \"REGISTERED\"\n    },\n    {\n      \"id\": \"MY_CUSTOM_ADAPTER\",\n      \"name\": \"Custom REST Adapter\",\n      \"description\": \"Custom adapter for proprietary REST API.\",\n      \"version\": \"1.0.0\",\n      \"status\": \"REGISTERED\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b33439d1-5f97-4572-bb38-44fd53f29472",
+              "name": "Authentication required or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "adapters",
+                    "v1",
+                    "adapterBundles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c5dc6d3-d2be-428d-88db-0a2694d90ccb",
+          "name": "Oracle Integration Register Adapter Bundle",
+          "request": {
+            "name": "Oracle Integration Register Adapter Bundle",
+            "description": {
+              "content": "Register a new custom adapter bundle.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "adapters",
+                "v1",
+                "adapterBundles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "Adapter bundle archive file."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4d807264-60df-43ba-82ca-1cf94e347932",
+              "name": "Adapter bundle registered.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "adapters",
+                    "v1",
+                    "adapterBundles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Adapter bundle archive file.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"MY_CUSTOM_ADAPTER\",\n  \"name\": \"Custom REST Adapter\",\n  \"description\": \"Custom adapter for proprietary REST API.\",\n  \"version\": \"1.0.0\",\n  \"status\": \"REGISTERED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d06c6e2-9651-408d-840a-2c36eac99841",
+              "name": "Bad request - invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "adapters",
+                    "v1",
+                    "adapterBundles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Adapter bundle archive file.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ea303b1-ad1b-40eb-8911-5a06b8ad0736",
+              "name": "Authentication required or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "adapters",
+                    "v1",
+                    "adapterBundles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Adapter bundle archive file.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d317934-e0c3-40ae-a797-ad9e885acf6f",
+          "name": "Oracle Integration Get Adapter Bundle",
+          "request": {
+            "name": "Oracle Integration Get Adapter Bundle",
+            "description": {
+              "content": "Retrieve a specific adapter bundle by identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "adapters",
+                "v1",
+                "adapterBundles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Adapter bundle identifier."
+                },
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e451eb27-2b4e-43df-bbe4-2caee721da4e",
+              "name": "Adapter bundle details retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "adapters",
+                    "v1",
+                    "adapterBundles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Adapter bundle identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"MY_CUSTOM_ADAPTER\",\n  \"name\": \"Custom REST Adapter\",\n  \"description\": \"Custom adapter for proprietary REST API.\",\n  \"version\": \"1.0.0\",\n  \"status\": \"REGISTERED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7c2624e-d1fd-405b-a3d4-7c71e7f0d63f",
+              "name": "Authentication required or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "adapters",
+                    "v1",
+                    "adapterBundles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Adapter bundle identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9d63327-5bad-4801-983e-6909cbaaf011",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "adapters",
+                    "v1",
+                    "adapterBundles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Adapter bundle identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7676f675-dbb0-4115-8a91-df509096e7aa",
+          "name": "Oracle Integration Update Adapter Bundle",
+          "request": {
+            "name": "Oracle Integration Update Adapter Bundle",
+            "description": {
+              "content": "Update an existing adapter bundle.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "adapters",
+                "v1",
+                "adapterBundles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Adapter bundle identifier."
+                },
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "04228f69-6455-4430-bc6b-105e7c28a97e",
+              "name": "Adapter bundle updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "adapters",
+                    "v1",
+                    "adapterBundles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Adapter bundle identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"MY_CUSTOM_ADAPTER\",\n  \"name\": \"Custom REST Adapter\",\n  \"description\": \"Custom adapter for proprietary REST API.\",\n  \"version\": \"1.0.0\",\n  \"status\": \"REGISTERED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d04e66d-feaa-43a7-9937-3c79087dac2d",
+              "name": "Authentication required or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "adapters",
+                    "v1",
+                    "adapterBundles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Adapter bundle identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d25e612a-0ebf-4d3c-be32-6b1538517b61",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "adapters",
+                    "v1",
+                    "adapterBundles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Adapter bundle identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e587dcd0-489d-46f6-9d66-16eb2f6417bc",
+          "name": "Oracle Integration Delete Adapter Bundle",
+          "request": {
+            "name": "Oracle Integration Delete Adapter Bundle",
+            "description": {
+              "content": "Delete a custom adapter bundle.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "adapters",
+                "v1",
+                "adapterBundles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Adapter bundle identifier."
+                },
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "33be64b1-b528-4b37-8916-5a17011ce990",
+              "name": "Adapter bundle deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "adapters",
+                    "v1",
+                    "adapterBundles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Adapter bundle identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1fc856a4-1f21-4f7c-92a8-3b610235a2d6",
+              "name": "Authentication required or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "adapters",
+                    "v1",
+                    "adapterBundles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Adapter bundle identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f6f8d3a-6f9d-48d1-849b-841b966bc13f",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "adapters",
+                    "v1",
+                    "adapterBundles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Adapter bundle identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Invalid connection identifier format.\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Oracle Integration instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "myinstance",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.integration.ocp.oraclecloud.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "urn:opc:resource:consumer::all"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{idcs-url}/oauth2/v1/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{idcs-url}/oauth2/v1/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "10e7d83a-fcb7-46bc-bac9-bcfd52989de9",
+    "name": "Oracle Integration Developer Adapters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.\n\nContact Support:\n Name: Oracle Integration Support\n Email: oracle-integration-support@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

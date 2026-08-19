@@ -1,0 +1,875 @@
+{
+  "item": [
+    {
+      "id": "efe80f05-c019-4f7d-bc9a-e3b51ac33dc5",
+      "name": "Spaces",
+      "description": {
+        "content": "Manage workspace spaces.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d14f39fa-1fcd-4979-9faf-e6e7aa7297ad",
+          "name": "Oracle Integration List Spaces",
+          "request": {
+            "name": "Oracle Integration List Spaces",
+            "description": {
+              "content": "Retrieve a list of all workspace spaces.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "process",
+                "v1",
+                "spaces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b03249f0-cc2c-42df-afa7-f620431a38ff",
+              "name": "Spaces retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "process",
+                    "v1",
+                    "spaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"spaceId\": \"default\",\n      \"name\": \"Default Space\",\n      \"description\": \"Default workspace for projects.\"\n    },\n    {\n      \"spaceId\": \"default\",\n      \"name\": \"Default Space\",\n      \"description\": \"Default workspace for projects.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7d3ef94-0d33-4fcb-a0e0-8e87b05133b0",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "process",
+                    "v1",
+                    "spaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Process instance not found.\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c97e84e0-cfd9-4463-bae3-f06ba07384a0",
+          "name": "Oracle Integration Create Space",
+          "request": {
+            "name": "Oracle Integration Create Space",
+            "description": {
+              "content": "Create a new workspace space.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "process",
+                "v1",
+                "spaces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "04743975-a0e6-4109-9bcf-8f8ee8ad763d",
+              "name": "Space created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "process",
+                    "v1",
+                    "spaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Production Space\",\n  \"description\": \"Space for production process projects.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"spaceId\": \"default\",\n  \"name\": \"Default Space\",\n  \"description\": \"Default workspace for projects.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49683f66-da47-4d64-9b2d-6b50cbc69092",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "process",
+                    "v1",
+                    "spaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Production Space\",\n  \"description\": \"Space for production process projects.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Process instance not found.\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "48fb9254-6910-45b9-a0b1-28009a766f2e",
+          "name": "Oracle Integration Get Space",
+          "request": {
+            "name": "Oracle Integration Get Space",
+            "description": {
+              "content": "Retrieve a specific workspace space.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "process",
+                "v1",
+                "spaces",
+                ":spaceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "spaceId",
+                  "description": "(Required) Space identifier."
+                },
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2bac6c11-daf6-4226-b02b-59dcbaa9ee62",
+              "name": "Space details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "process",
+                    "v1",
+                    "spaces",
+                    ":spaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) Space identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"spaceId\": \"default\",\n  \"name\": \"Default Space\",\n  \"description\": \"Default workspace for projects.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34d1bc17-9a84-4e76-b792-b4e4640bb4ba",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "process",
+                    "v1",
+                    "spaces",
+                    ":spaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) Space identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Process instance not found.\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2914ee7c-6f6a-433b-a82e-c55e3b1280a8",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "process",
+                    "v1",
+                    "spaces",
+                    ":spaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) Space identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Process instance not found.\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e98f167a-ac7a-4705-9c9f-c08a2faf0da9",
+          "name": "Oracle Integration Delete Space",
+          "request": {
+            "name": "Oracle Integration Delete Space",
+            "description": {
+              "content": "Delete a workspace space.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "process",
+                "v1",
+                "spaces",
+                ":spaceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "spaceId",
+                  "description": "(Required) Space identifier."
+                },
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d0e49b7-236e-49e1-ae29-4d47c6569f30",
+              "name": "Space deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "process",
+                    "v1",
+                    "spaces",
+                    ":spaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) Space identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c6634f37-1b5f-45c6-9326-e4f5f798ab6e",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "process",
+                    "v1",
+                    "spaces",
+                    ":spaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) Space identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Process instance not found.\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dddb530e-4615-4303-abd3-4e73327ff862",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "process",
+                    "v1",
+                    "spaces",
+                    ":spaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spaceId",
+                      "description": "(Required) Space identifier."
+                    },
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Process instance not found.\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Oracle Integration instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "myinstance",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.integration.ocp.oraclecloud.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "urn:opc:resource:consumer::all"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{idcs-url}/oauth2/v1/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{idcs-url}/oauth2/v1/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1dc86a1b-bb0d-47ec-844e-d5ffcbbce47b",
+    "name": "Oracle Integration Developer Adapters Spaces API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.\n\nContact Support:\n Name: Oracle Integration Support\n Email: oracle-integration-support@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,373 @@
+{
+  "item": [
+    {
+      "id": "badaba49-dc28-46fd-9521-9d2a35d02cd1",
+      "name": "Identities",
+      "description": {
+        "content": "Manage users, groups, and roles.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d9a39e74-11a7-4ff0-a116-22fa40153dbb",
+          "name": "Oracle Integration List Identities",
+          "request": {
+            "name": "Oracle Integration List Identities",
+            "description": {
+              "content": "Retrieve a list of users, groups, and roles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "process",
+                "v1",
+                "identities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "342acde4-6a68-478f-8875-52cc3ded2371",
+              "name": "Identities retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "process",
+                    "v1",
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"admin@example.com\",\n      \"firstName\": \"John\",\n      \"lastName\": \"Smith\",\n      \"email\": \"admin@example.com\"\n    },\n    {\n      \"id\": \"admin@example.com\",\n      \"firstName\": \"John\",\n      \"lastName\": \"Smith\",\n      \"email\": \"admin@example.com\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50232fd8-744a-416c-b1fa-4ec56a8d5ff9",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "process",
+                    "v1",
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Process instance not found.\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbb0364a-43b0-4b4e-8f0d-b92d304f99ea",
+          "name": "Oracle Integration Get Logged in User",
+          "request": {
+            "name": "Oracle Integration Get Logged in User",
+            "description": {
+              "content": "Retrieve the currently logged in user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ic",
+                "api",
+                "process",
+                "v1",
+                "identities",
+                "loggedInUser"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Oracle Integration instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "25fe8198-c0cd-493a-add0-e6c911276c60",
+              "name": "User details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "process",
+                    "v1",
+                    "identities",
+                    "loggedInUser"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"admin@example.com\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"email\": \"admin@example.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a406948c-55d4-42b2-bbab-661af32b3ea0",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ic",
+                    "api",
+                    "process",
+                    "v1",
+                    "identities",
+                    "loggedInUser"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Oracle Integration instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Process instance not found.\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Oracle Integration instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "myinstance",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.integration.ocp.oraclecloud.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "urn:opc:resource:consumer::all"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{idcs-url}/oauth2/v1/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{idcs-url}/oauth2/v1/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "09862b0a-81ab-4559-9a69-6c2c46f89aa3",
+    "name": "Oracle Integration Developer Adapters Identities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.\n\nContact Support:\n Name: Oracle Integration Support\n Email: oracle-integration-support@oracle.com",
+      "type": "text/plain"
+    }
+  }
+}

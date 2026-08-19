@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Integration Developer Adapters B2B Documents API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{idcs-url}/oauth2/v1/authorize",
+      "accessTokenUrl": "https://{idcs-url}/oauth2/v1/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "B2B Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Integration List B2B Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/b2b/v1/b2bdocuments",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip before returning results."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all B2B documents."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Create B2B Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/b2b/v1/b2bdocuments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new B2B document."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Get B2B Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/b2b/v1/b2bdocuments/:documentId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "B2B document identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific B2B document."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Update B2B Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/b2b/v1/b2bdocuments/:documentId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "B2B document identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing B2B document."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Delete B2B Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/b2b/v1/b2bdocuments/:documentId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "B2B document identifier."
+              }
+            ]
+          },
+          "docs": "Delete a B2B document."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration List B2B Schemas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/b2b/v1/schemas"
+          },
+          "docs": "Retrieve a list of all B2B schemas."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration List B2B Document Standards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/b2b/v1/standards"
+          },
+          "docs": "Retrieve all B2B document standards."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

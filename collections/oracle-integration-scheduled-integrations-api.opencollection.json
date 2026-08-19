@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Integration Developer Adapters Scheduled Integrations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{idcs-url}/oauth2/v1/authorize",
+      "accessTokenUrl": "https://{idcs-url}/oauth2/v1/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scheduled Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Integration Start Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/integrations/:id/schedule/start",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integration identifier in the format CODE|VERSION."
+              }
+            ]
+          },
+          "docs": "Start an integration schedule."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Stop Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/integrations/:id/schedule/stop",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integration identifier in the format CODE|VERSION."
+              }
+            ]
+          },
+          "docs": "Stop an integration schedule."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Pause Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/integrations/:id/schedule/pause",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integration identifier in the format CODE|VERSION."
+              }
+            ]
+          },
+          "docs": "Pause an integration schedule."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Resume Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/integrations/:id/schedule/resume",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integration identifier in the format CODE|VERSION."
+              }
+            ]
+          },
+          "docs": "Resume a paused integration schedule."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Run Scheduled Integration Now",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/integrations/:id/schedule/jobs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integration identifier in the format CODE|VERSION."
+              }
+            ]
+          },
+          "docs": "Trigger an immediate run of a scheduled integration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

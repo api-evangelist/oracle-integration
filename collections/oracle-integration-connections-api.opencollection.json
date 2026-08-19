@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Integration Developer Adapters Connections API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{idcs-url}/oauth2/v1/authorize",
+      "accessTokenUrl": "https://{idcs-url}/oauth2/v1/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Integration List Connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/connections",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip before returning results."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Filter query string."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all connections configured in the instance."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Get Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/connections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Connection identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific connection by its identifier."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Update Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/connections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Connection identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing connection's properties."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Delete Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/connections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Connection identifier."
+              }
+            ]
+          },
+          "docs": "Delete a connection by its identifier."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Test Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/connections/:id/test",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Connection identifier."
+              }
+            ]
+          },
+          "docs": "Test a connection to verify connectivity."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Refresh Connection Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/connections/:id/metadata",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Connection identifier."
+              }
+            ]
+          },
+          "docs": "Refresh metadata for a connection."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

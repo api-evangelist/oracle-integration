@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Integration Developer Adapters B2B Monitoring API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{idcs-url}/oauth2/v1/authorize",
+      "accessTokenUrl": "https://{idcs-url}/oauth2/v1/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "B2B Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Integration List Business Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/b2b/v1/monitoring/businessmessages",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip before returning results."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of B2B business messages."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration List Wire Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/b2b/v1/monitoring/wiremessages",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip before returning results."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of B2B wire messages."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

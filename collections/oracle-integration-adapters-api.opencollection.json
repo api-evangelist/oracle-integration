@@ -1,0 +1,129 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Integration Developer Adapters API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{idcs-url}/oauth2/v1/authorize",
+      "accessTokenUrl": "https://{idcs-url}/oauth2/v1/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Adapters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Integration List Adapter Bundles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/adapters/v1/adapterBundles"
+          },
+          "docs": "Retrieve a list of all custom adapter bundles."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Register Adapter Bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/adapters/v1/adapterBundles",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Register a new custom adapter bundle."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Get Adapter Bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/adapters/v1/adapterBundles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Adapter bundle identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific adapter bundle by identifier."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Update Adapter Bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/adapters/v1/adapterBundles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Adapter bundle identifier."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update an existing adapter bundle."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Delete Adapter Bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/adapters/v1/adapterBundles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Adapter bundle identifier."
+              }
+            ]
+          },
+          "docs": "Delete a custom adapter bundle."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

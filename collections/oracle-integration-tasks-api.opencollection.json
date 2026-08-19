@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Integration Developer Adapters Tasks API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{idcs-url}/oauth2/v1/authorize",
+      "accessTokenUrl": "https://{idcs-url}/oauth2/v1/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Integration List Tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1/tasks",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of user tasks."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Get Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1/tasks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Task identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific task by identifier."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Perform Task Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1/tasks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Task identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform an action on a task such as approve, reject, or reassign."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Get Task Payload",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1/tasks/:id/payload",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Task identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve the payload data for a task."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Get Task History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1/tasks/:id/history",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Task identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve the history of a task."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Get Task Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1/tasks/task-metrics"
+          },
+          "docs": "Retrieve task metrics."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

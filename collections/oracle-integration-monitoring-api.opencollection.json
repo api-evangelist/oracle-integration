@@ -1,0 +1,239 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Integration Developer Adapters Monitoring API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{idcs-url}/oauth2/v1/authorize",
+      "accessTokenUrl": "https://{idcs-url}/oauth2/v1/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Integration List Monitoring Instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/monitoring/instances",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip before returning results."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Filter query string."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of integration instances for monitoring."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Get Monitoring Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/monitoring/instances/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Instance identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific integration instance."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Get Instance Activity Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/monitoring/instances/:id/activityStream",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Instance identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve the activity stream for an integration instance."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Abort Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/monitoring/instances/:id/abort",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Instance identifier."
+              }
+            ]
+          },
+          "docs": "Abort a running integration instance."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration List Errored Instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/monitoring/errors",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip before returning results."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of errored integration instances."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Resubmit Errored Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/monitoring/errors/:id/resubmit",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Error instance identifier."
+              }
+            ]
+          },
+          "docs": "Resubmit an errored integration instance for reprocessing."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration List Monitoring Integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/monitoring/integrations"
+          },
+          "docs": "Retrieve monitoring data for all integrations."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Download Log File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/monitoring/logs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Log file identifier."
+              }
+            ]
+          },
+          "docs": "Download a log file for an integration."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration List Audit Records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/monitoring/auditRecords",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip before returning results."
+              }
+            ]
+          },
+          "docs": "Retrieve audit records for integration activities."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration List Agent Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/monitoring/agentgroups"
+          },
+          "docs": "Retrieve the status of all agent groups."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Get Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/usage"
+          },
+          "docs": "Retrieve integration usage metrics."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

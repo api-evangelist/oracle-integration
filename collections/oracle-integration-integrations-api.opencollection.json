@@ -1,0 +1,205 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Integration Developer Adapters Integrations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{idcs-url}/oauth2/v1/authorize",
+      "accessTokenUrl": "https://{idcs-url}/oauth2/v1/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Integration List Integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/integrations",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip before returning results."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Filter query string."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all integrations."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Get Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/integrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integration identifier in the format CODE|VERSION."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific integration by its identifier."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Activate or Deactivate Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/integrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integration identifier in the format CODE|VERSION."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activate or deactivate an integration."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Delete Integration Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/integrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integration identifier in the format CODE|VERSION."
+              }
+            ]
+          },
+          "docs": "Delete an integration version."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Clone Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/integrations/:id/clone",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integration identifier in the format CODE|VERSION."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Clone an existing integration."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Export Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/integrations/:id/archive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integration identifier in the format CODE|VERSION."
+              }
+            ]
+          },
+          "docs": "Export an integration as an archive file."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Import Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/integrations/archive"
+          },
+          "docs": "Import an integration from an archive file."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Replace Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/integrations/archive"
+          },
+          "docs": "Import and replace an existing integration from an archive file."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Get Activation Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1/integrations/:id/activationStatus",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integration identifier in the format CODE|VERSION."
+              }
+            ]
+          },
+          "docs": "Retrieve the activation status of an integration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

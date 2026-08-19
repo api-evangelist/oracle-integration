@@ -1,0 +1,135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Integration Developer Adapters Decision Models API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{idcs-url}/oauth2/v1/authorize",
+      "accessTokenUrl": "https://{idcs-url}/oauth2/v1/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Decision Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Integration List DMN Spaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1/dmn/spaces"
+          },
+          "docs": "Retrieve a list of all DMN spaces."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration List Decision Models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1/dmn/spaces/:spaceId/decision-models",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space identifier."
+              }
+            ]
+          },
+          "docs": "List decision model names in a space."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Get Decision Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1/dmn/spaces/:spaceId/decision-models/:decisionModelName",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space identifier."
+              },
+              {
+                "name": "decisionModelName",
+                "value": "",
+                "type": "path",
+                "description": "Decision model name."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific decision model."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Create Decision Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1/dmn/spaces/:spaceId/decision-models/:decisionModelName",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space identifier."
+              },
+              {
+                "name": "decisionModelName",
+                "value": "",
+                "type": "path",
+                "description": "Decision model name."
+              }
+            ]
+          },
+          "docs": "Create an empty decision model."
+        },
+        {
+          "info": {
+            "name": "Oracle Integration Delete Decision Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.integration.ocp.oraclecloud.com/ic/api/process/v1/dmn/spaces/:spaceId/decision-models/:decisionModelName",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space identifier."
+              },
+              {
+                "name": "decisionModelName",
+                "value": "",
+                "type": "path",
+                "description": "Decision model name."
+              }
+            ]
+          },
+          "docs": "Delete a decision model and all its snapshots."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
