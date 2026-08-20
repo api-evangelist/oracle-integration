@@ -506,6 +506,8 @@ apis:
   humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
   baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
   tags:
+  - Integration
+  tags_raw:
   - Integrations
   properties:
   - type: OpenAPI
@@ -779,6 +781,8 @@ apis:
   humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
   baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -896,6 +900,8 @@ apis:
   humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
   baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
