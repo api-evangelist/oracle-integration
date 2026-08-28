@@ -12,8 +12,8 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: developerApi
-  url: ../openapi/oracle-integration-developer-api.yaml
+- name: integrationsApi
+  url: ../openapi/oracle-integration-integrations-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: activate-integration

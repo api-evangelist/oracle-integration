@@ -11,8 +11,8 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: processApi
-  url: ../openapi/oracle-integration-process-automation-api.yaml
+- name: processInstancesApi
+  url: ../openapi/oracle-integration-process-instances-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: abort-process-with-comment

@@ -12,8 +12,8 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: developerApi
-  url: ../openapi/oracle-integration-developer-api.yaml
+- name: lookupsApi
+  url: ../openapi/oracle-integration-lookups-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: upsert-lookup

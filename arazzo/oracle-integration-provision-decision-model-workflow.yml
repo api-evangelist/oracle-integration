@@ -11,8 +11,11 @@ info:
     and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: processApi
-  url: ../openapi/oracle-integration-process-automation-api.yaml
+- name: decisionModelsApi
+  url: ../openapi/oracle-integration-decision-models-api-openapi.yml
+  type: openapi
+- name: spacesApi
+  url: ../openapi/oracle-integration-spaces-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: provision-decision-model

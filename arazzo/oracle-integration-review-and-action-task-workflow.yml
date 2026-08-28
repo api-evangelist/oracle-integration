@@ -11,8 +11,8 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: processApi
-  url: ../openapi/oracle-integration-process-automation-api.yaml
+- name: tasksApi
+  url: ../openapi/oracle-integration-tasks-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: review-and-action-task
