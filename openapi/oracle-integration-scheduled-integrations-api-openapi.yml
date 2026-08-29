@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Oracle Integration Developer Adapters Scheduled Integrations API
   description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
@@ -126,7 +126,45 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    integrationIdParam:
+      name: id
+      in: path
+      required: true
+      description: Integration identifier in the format CODE|VERSION.
+      schema:
+        type: string
+        example: HELLO_WORLD|01.00.0000
   schemas:
+    ScheduledJob:
+      type: object
+      properties:
+        jobId:
+          type: string
+          description: Scheduled job identifier.
+          example: '500123'
+        status:
+          type: string
+          description: Job status.
+          example: RUNNING
+        startTime:
+          type: string
+          format: date-time
+          description: Job start time.
+          example: '2026-04-18T14:30:00Z'
     ErrorResponse:
       type: object
       properties:
@@ -146,44 +184,6 @@ components:
           type: integer
           description: HTTP status code.
           example: 400
-    ScheduledJob:
-      type: object
-      properties:
-        jobId:
-          type: string
-          description: Scheduled job identifier.
-          example: '500123'
-        status:
-          type: string
-          description: Job status.
-          example: RUNNING
-        startTime:
-          type: string
-          format: date-time
-          description: Job start time.
-          example: '2026-04-18T14:30:00Z'
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    integrationIdParam:
-      name: id
-      in: path
-      required: true
-      description: Integration identifier in the format CODE|VERSION.
-      schema:
-        type: string
-        example: HELLO_WORLD|01.00.0000
   securitySchemes:
     oauth2:
       type: oauth2

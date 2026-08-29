@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Oracle Integration Developer Adapters B2B Monitoring API
   description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
@@ -71,26 +71,14 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Error type URI.
-          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
-        title:
-          type: string
-          description: Short error title.
-          example: Bad Request
-        detail:
-          type: string
-          description: Detailed error message.
-          example: Invalid connection identifier format.
-        status:
-          type: integer
-          description: HTTP status code.
-          example: 400
     WireMessageList:
       type: object
       properties:
@@ -142,13 +130,25 @@ components:
                 type: string
                 format: date-time
                 example: '2026-04-18T10:00:00Z'
-  responses:
-    Unauthorized:
-      description: Authentication required or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Error type URI.
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+        title:
+          type: string
+          description: Short error title.
+          example: Bad Request
+        detail:
+          type: string
+          description: Detailed error message.
+          example: Invalid connection identifier format.
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
   parameters:
     limitParam:
       name: limit

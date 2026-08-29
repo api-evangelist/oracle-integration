@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Oracle Integration Developer Adapters Decision Models API
   description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
@@ -131,37 +131,20 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    decisionModelNameParam:
-      name: decisionModelName
-      in: path
-      required: true
-      description: Decision model name.
-      schema:
-        type: string
-    spaceIdParam:
-      name: spaceId
-      in: path
-      required: true
-      description: Space identifier.
-      schema:
-        type: string
+  responses:
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
-        title:
-          type: string
-          example: Not Found
-        detail:
-          type: string
-          example: Process instance not found.
-        status:
-          type: integer
-          example: 404
     SpaceList:
       type: object
       properties:
@@ -198,19 +181,36 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DecisionModel'
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+        title:
+          type: string
+          example: Not Found
+        detail:
+          type: string
+          example: Process instance not found.
+        status:
+          type: integer
+          example: 404
+  parameters:
+    spaceIdParam:
+      name: spaceId
+      in: path
+      required: true
+      description: Space identifier.
+      schema:
+        type: string
+    decisionModelNameParam:
+      name: decisionModelName
+      in: path
+      required: true
+      description: Decision model name.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

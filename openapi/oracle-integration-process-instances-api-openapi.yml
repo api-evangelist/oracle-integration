@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Oracle Integration Developer Adapters Process Instances API
   description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
@@ -215,51 +215,46 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ProcessInstanceList:
+    ProcessInstanceCreate:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessInstance'
-        totalResults:
-          type: integer
-          example: 150
-        hasMore:
-          type: boolean
-          example: true
-    ErrorResponse:
-      type: object
-      properties:
-        type:
+        processDefId:
           type: string
-          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+          description: Process definition identifier.
+          example: default~OrderApproval~1.0
+        serviceName:
+          type: string
+          description: Service name.
+          example: OrderApprovalService
         title:
           type: string
-          example: Not Found
-        detail:
-          type: string
-          example: Process instance not found.
-        status:
-          type: integer
-          example: 404
-    AttachmentList:
+          description: Instance title.
+          example: Order
+        payload:
+          type: object
+          description: Process input payload.
+    InstanceMetrics:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              attachmentName:
-                type: string
-                example: purchase_order.pdf
-              mimeType:
-                type: string
-                example: application/pdf
-              attachmentId:
-                type: string
-                example: '900123'
+        totalInstances:
+          type: integer
+          example: 500
+        openInstances:
+          type: integer
+          example: 45
+        completedInstances:
+          type: integer
+          example: 440
+        faultedInstances:
+          type: integer
+          example: 15
+    CommentCreate:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Comment text.
+          example: Approved. Proceed with fulfillment.
     CommentList:
       type: object
       properties:
@@ -278,16 +273,36 @@ components:
                 type: string
                 format: date-time
                 example: '2026-04-18T10:30:00Z'
-    ProcessStateUpdate:
+    ProcessInstanceList:
       type: object
       properties:
-        state:
-          type: string
-          description: New process state.
-          enum:
-          - COMPLETED
-          - ABORTED
-          example: ABORTED
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessInstance'
+        totalResults:
+          type: integer
+          example: 150
+        hasMore:
+          type: boolean
+          example: true
+    AttachmentList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              attachmentName:
+                type: string
+                example: purchase_order.pdf
+              mimeType:
+                type: string
+                example: application/pdf
+              attachmentId:
+                type: string
+                example: '900123'
     ProcessInstance:
       type: object
       properties:
@@ -329,47 +344,38 @@ components:
           format: date-time
           description: Creation timestamp.
           example: '2026-04-18T10:00:00Z'
-    InstanceMetrics:
+    ErrorResponse:
       type: object
       properties:
-        totalInstances:
-          type: integer
-          example: 500
-        openInstances:
-          type: integer
-          example: 45
-        completedInstances:
-          type: integer
-          example: 440
-        faultedInstances:
-          type: integer
-          example: 15
-    CommentCreate:
-      type: object
-      properties:
-        message:
+        type:
           type: string
-          description: Comment text.
-          example: Approved. Proceed with fulfillment.
-    ProcessInstanceCreate:
-      type: object
-      properties:
-        processDefId:
-          type: string
-          description: Process definition identifier.
-          example: default~OrderApproval~1.0
-        serviceName:
-          type: string
-          description: Service name.
-          example: OrderApprovalService
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
         title:
           type: string
-          description: Instance title.
-          example: Order
-        payload:
-          type: object
-          description: Process input payload.
+          example: Not Found
+        detail:
+          type: string
+          example: Process instance not found.
+        status:
+          type: integer
+          example: 404
+    ProcessStateUpdate:
+      type: object
+      properties:
+        state:
+          type: string
+          description: New process state.
+          enum:
+          - COMPLETED
+          - ABORTED
+          example: ABORTED
   responses:
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Resource not found.
       content:
@@ -382,27 +388,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    processIdParam:
-      name: processId
-      in: path
-      required: true
-      description: Process instance identifier.
-      schema:
-        type: string
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of items to return.
-      schema:
-        type: integer
-        default: 20
     offsetParam:
       name: offset
       in: query
@@ -410,6 +396,20 @@ components:
       schema:
         type: integer
         default: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 20
+    processIdParam:
+      name: processId
+      in: path
+      required: true
+      description: Process instance identifier.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

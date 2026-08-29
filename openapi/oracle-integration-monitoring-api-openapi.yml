@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Oracle Integration Developer Adapters Monitoring API
   description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
@@ -288,74 +288,20 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    MonitoringInstanceList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MonitoringInstance'
-        totalResults:
-          type: integer
-          example: 1250
-        hasMore:
-          type: boolean
-          example: true
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Error type URI.
-          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
-        title:
-          type: string
-          description: Short error title.
-          example: Bad Request
-        detail:
-          type: string
-          description: Detailed error message.
-          example: Invalid connection identifier format.
-        status:
-          type: integer
-          description: HTTP status code.
-          example: 400
-    UsageMetrics:
-      type: object
-      properties:
-        messageCount:
-          type: integer
-          description: Total message count.
-          example: 15000
-        period:
-          type: string
-          description: Reporting period.
-          example: 2026-04
-    AuditRecordList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                example: '800123'
-              action:
-                type: string
-                example: ACTIVATE
-              target:
-                type: string
-                example: HELLO_WORLD|01.00.0000
-              user:
-                type: string
-                example: admin@example.com
-              timestamp:
-                type: string
-                format: date-time
-                example: '2026-04-15T10:30:00Z'
     ActivityStream:
       type: object
       properties:
@@ -381,6 +327,39 @@ components:
                 format: date-time
                 description: Activity timestamp.
                 example: '2026-04-18T10:00:01Z'
+    MonitoringInstanceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonitoringInstance'
+        totalResults:
+          type: integer
+          example: 1250
+        hasMore:
+          type: boolean
+          example: true
+    AgentGroupList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: AG_001
+              name:
+                type: string
+                example: On-Premises Agent Group
+              status:
+                type: string
+                example: RUNNING
+              agentCount:
+                type: integer
+                example: 2
     MonitoringIntegrationList:
       type: object
       properties:
@@ -401,19 +380,6 @@ components:
               status:
                 type: string
                 example: ACTIVATED
-    ErroredInstanceList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MonitoringInstance'
-        totalResults:
-          type: integer
-          example: 5
-        hasMore:
-          type: boolean
-          example: false
     MonitoringInstance:
       type: object
       properties:
@@ -448,7 +414,7 @@ components:
           type: string
           description: Business identifier for the instance.
           example: ORD-2026-001
-    AgentGroupList:
+    AuditRecordList:
       type: object
       properties:
         items:
@@ -458,29 +424,63 @@ components:
             properties:
               id:
                 type: string
-                example: AG_001
-              name:
+                example: '800123'
+              action:
                 type: string
-                example: On-Premises Agent Group
-              status:
+                example: ACTIVATE
+              target:
                 type: string
-                example: RUNNING
-              agentCount:
-                type: integer
-                example: 2
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+                example: HELLO_WORLD|01.00.0000
+              user:
+                type: string
+                example: admin@example.com
+              timestamp:
+                type: string
+                format: date-time
+                example: '2026-04-15T10:30:00Z'
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Error type URI.
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+        title:
+          type: string
+          description: Short error title.
+          example: Bad Request
+        detail:
+          type: string
+          description: Detailed error message.
+          example: Invalid connection identifier format.
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
+    ErroredInstanceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonitoringInstance'
+        totalResults:
+          type: integer
+          example: 5
+        hasMore:
+          type: boolean
+          example: false
+    UsageMetrics:
+      type: object
+      properties:
+        messageCount:
+          type: integer
+          description: Total message count.
+          example: 15000
+        period:
+          type: string
+          description: Reporting period.
+          example: 2026-04
   parameters:
     limitParam:
       name: limit

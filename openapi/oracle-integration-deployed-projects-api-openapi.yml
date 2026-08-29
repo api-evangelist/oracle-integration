@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Oracle Integration Developer Adapters Deployed Projects API
   description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
@@ -54,20 +54,6 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    QuickStartAppList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              quickStartAppId:
-                type: string
-                example: QS_TRAVEL_REQUEST
-              name:
-                type: string
-                example: Travel Request
     ErrorResponse:
       type: object
       properties:
@@ -83,6 +69,20 @@ components:
         status:
           type: integer
           example: 404
+    QuickStartAppList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              quickStartAppId:
+                type: string
+                example: QS_TRAVEL_REQUEST
+              name:
+                type: string
+                example: Travel Request
   securitySchemes:
     oauth2:
       type: oauth2
