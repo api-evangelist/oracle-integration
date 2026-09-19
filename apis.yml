@@ -812,6 +812,8 @@ apis:
   humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
   baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
   tags:
+  - Space
+  tags_raw:
   - Spaces
   properties:
   - type: OpenAPI
