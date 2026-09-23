@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Oracle Integration Developer Adapters Projects API
+  title: Oracle Integration Developer Projects API
   description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
   version: 1.0.0
   contact:
@@ -126,58 +126,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request - invalid input.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of items to return.
-      schema:
-        type: integer
-        default: 20
-        example: 20
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of items to skip before returning results.
-      schema:
-        type: integer
-        default: 0
-        example: 0
   schemas:
-    ProjectCreate:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Project identifier.
-          example: MY_PROJECT
-        name:
-          type: string
-          description: Project name.
-          example: ERP Integration Project
-        description:
-          type: string
-          description: Project description.
-          example: Project for ERP integration flows.
     ErrorResponse:
       type: object
       properties:
@@ -197,19 +146,21 @@ components:
           type: integer
           description: HTTP status code.
           example: 400
-    ProjectList:
+    ProjectCreate:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Project'
-        totalResults:
-          type: integer
-          example: 12
-        hasMore:
-          type: boolean
-          example: false
+        id:
+          type: string
+          description: Project identifier.
+          example: MY_PROJECT
+        name:
+          type: string
+          description: Project name.
+          example: ERP Integration Project
+        description:
+          type: string
+          description: Project description.
+          example: Project for ERP integration flows.
     Project:
       type: object
       properties:
@@ -232,6 +183,55 @@ components:
           type: string
           format: date-time
           example: '2026-04-15T10:30:00Z'
+    ProjectList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+        totalResults:
+          type: integer
+          example: 12
+        hasMore:
+          type: boolean
+          example: false
+  responses:
+    BadRequest:
+      description: Bad request - invalid input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip before returning results.
+      schema:
+        type: integer
+        default: 0
+        example: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 20
+        example: 20
   securitySchemes:
     oauth2:
       type: oauth2

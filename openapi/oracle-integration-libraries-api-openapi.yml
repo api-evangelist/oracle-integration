@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Oracle Integration Developer Adapters Libraries API
+  title: Oracle Integration Developer Libraries API
   description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
   version: 1.0.0
   contact:
@@ -100,56 +100,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of items to return.
-      schema:
-        type: integer
-        default: 20
-        example: 20
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of items to skip before returning results.
-      schema:
-        type: integer
-        default: 0
-        example: 0
   schemas:
-    Library:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Library identifier.
-          example: MY_LIBRARY|01.00.0000
-        name:
-          type: string
-          description: Library name.
-          example: Utility Functions
-        description:
-          type: string
-          description: Library description.
-          example: Common JavaScript utility functions.
-        version:
-          type: string
-          description: Library version.
-          example: 01.00.0000
     ErrorResponse:
       type: object
       properties:
@@ -182,6 +133,55 @@ components:
         hasMore:
           type: boolean
           example: false
+    Library:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Library identifier.
+          example: MY_LIBRARY|01.00.0000
+        name:
+          type: string
+          description: Library name.
+          example: Utility Functions
+        description:
+          type: string
+          description: Library description.
+          example: Common JavaScript utility functions.
+        version:
+          type: string
+          description: Library version.
+          example: 01.00.0000
+  responses:
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip before returning results.
+      schema:
+        type: integer
+        default: 0
+        example: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 20
+        example: 20
   securitySchemes:
     oauth2:
       type: oauth2

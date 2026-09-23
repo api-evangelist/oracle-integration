@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Oracle Integration Developer Adapters Connections API
+  title: Oracle Integration Developer Connections API
   description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
   version: 1.0.0
   contact:
@@ -174,20 +174,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ConnectionTestResult:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Test result status.
-          enum:
-          - SUCCESS
-          - FAILURE
-          example: SUCCESS
-        message:
-          type: string
-          description: Test result message.
-          example: Connection test was successful.
     ErrorResponse:
       type: object
       properties:
@@ -207,21 +193,6 @@ components:
           type: integer
           description: HTTP status code.
           example: 400
-    ConnectionList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Connection'
-        totalResults:
-          type: integer
-          description: Total number of connections.
-          example: 15
-        hasMore:
-          type: boolean
-          description: Whether more results are available.
-          example: false
     Connection:
       type: object
       properties:
@@ -270,6 +241,21 @@ components:
           format: date-time
           description: Last update timestamp.
           example: '2026-04-15T10:30:00Z'
+    ConnectionList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Connection'
+        totalResults:
+          type: integer
+          description: Total number of connections.
+          example: 15
+        hasMore:
+          type: boolean
+          description: Whether more results are available.
+          example: false
     ConnectionUpdate:
       type: object
       properties:
@@ -301,6 +287,20 @@ components:
                 type: string
                 description: Security property value.
                 example: admin@salesforce.com
+    ConnectionTestResult:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Test result status.
+          enum:
+          - SUCCESS
+          - FAILURE
+          example: SUCCESS
+        message:
+          type: string
+          description: Test result message.
+          example: Connection test was successful.
   parameters:
     connectionIdParam:
       name: id
@@ -327,6 +327,12 @@ components:
         default: 20
         example: 20
   responses:
+    BadRequest:
+      description: Bad request - invalid input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required or invalid credentials.
       content:
@@ -335,12 +341,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request - invalid input.
       content:
         application/json:
           schema:

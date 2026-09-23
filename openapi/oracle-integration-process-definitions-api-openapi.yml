@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Oracle Integration Developer Adapters Process Definitions API
-  description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
+  title: Oracle Integration Process Automation Process Definitions…
+  description: REST API for Oracle Cloud Infrastructure Process Automation enabling management of process definitions, process instances, tasks, decision models, dynamic processes, identities, spaces, analytics, and QuickStart applications.
   version: 1.0.0
   contact:
     name: Oracle Integration Support
@@ -74,44 +74,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ProcessDefinitionList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessDefinition'
-    ProcessMetadata:
-      type: object
-      properties:
-        processDefId:
-          type: string
-          example: default~OrderApproval~1.0
-        activities:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                example: ReviewOrder
-              type:
-                type: string
-                example: HUMAN_TASK
     ProcessDefinition:
       type: object
       properties:
@@ -146,16 +109,53 @@ components:
         status:
           type: integer
           example: 404
+    ProcessMetadata:
+      type: object
+      properties:
+        processDefId:
+          type: string
+          example: default~OrderApproval~1.0
+        activities:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: ReviewOrder
+              type:
+                type: string
+                example: HUMAN_TASK
+    ProcessDefinitionList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessDefinition'
+  responses:
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2
-      description: OAuth 2.0 authentication via Oracle Identity Cloud Service (IDCS).
+      description: OAuth 2.0 authentication via Oracle Identity Cloud Service.
       flows:
         authorizationCode:
           authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
           tokenUrl: https://{idcs-url}/oauth2/v1/token
           scopes:
-            urn:opc:resource:consumer::all: Full access to Oracle Integration APIs
+            urn:opc:resource:consumer::all: Full access
     basicAuth:
       type: http
       scheme: basic

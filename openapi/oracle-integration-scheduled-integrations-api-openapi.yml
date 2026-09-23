@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Oracle Integration Developer Adapters Scheduled Integrations API
+  title: Oracle Integration Developer Scheduled Integrations API
   description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
   version: 1.0.0
   contact:
@@ -126,28 +126,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    integrationIdParam:
-      name: id
-      in: path
-      required: true
-      description: Integration identifier in the format CODE|VERSION.
-      schema:
-        type: string
-        example: HELLO_WORLD|01.00.0000
   schemas:
     ScheduledJob:
       type: object
@@ -184,6 +162,28 @@ components:
           type: integer
           description: HTTP status code.
           example: 400
+  responses:
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    integrationIdParam:
+      name: id
+      in: path
+      required: true
+      description: Integration identifier in the format CODE|VERSION.
+      schema:
+        type: string
+        example: HELLO_WORLD|01.00.0000
   securitySchemes:
     oauth2:
       type: oauth2

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Oracle Integration Developer Adapters B2B Documents API
+  title: Oracle Integration Developer B2B Documents API
   description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
   version: 1.0.0
   contact:
@@ -198,89 +198,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    B2BStandardList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                example: X12
-              name:
-                type: string
-                example: ANSI ASC X12
-              versions:
-                type: array
-                items:
-                  type: string
-                example:
-                - '004010'
-                - '005010'
-    B2BDocumentList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/B2BDocument'
-        totalResults:
-          type: integer
-          example: 12
-        hasMore:
-          type: boolean
-          example: false
-    B2BDocument:
-      type: object
-      properties:
-        id:
-          type: string
-          description: B2B document identifier.
-          example: '500789'
-        name:
-          type: string
-          description: Document name.
-          example: Purchase Order 850
-        standard:
-          type: string
-          description: B2B document standard.
-          example: X12
-        version:
-          type: string
-          description: Document version.
-          example: '005010'
-        transactionType:
-          type: string
-          description: Transaction type code.
-          example: '850'
-        direction:
-          type: string
-          description: Document direction.
-          enum:
-          - INBOUND
-          - OUTBOUND
-          example: INBOUND
-    B2BDocumentCreate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Document name.
-          example: Invoice 810
-        standard:
-          type: string
-          description: B2B standard.
-          example: X12
-        version:
-          type: string
-          description: Standard version.
-          example: '005010'
-        transactionType:
-          type: string
-          description: Transaction type.
-          example: '810'
     ErrorResponse:
       type: object
       properties:
@@ -317,7 +234,96 @@ components:
               standard:
                 type: string
                 example: X12
+    B2BDocument:
+      type: object
+      properties:
+        id:
+          type: string
+          description: B2B document identifier.
+          example: '500789'
+        name:
+          type: string
+          description: Document name.
+          example: Purchase Order 850
+        standard:
+          type: string
+          description: B2B document standard.
+          example: X12
+        version:
+          type: string
+          description: Document version.
+          example: '005010'
+        transactionType:
+          type: string
+          description: Transaction type code.
+          example: '850'
+        direction:
+          type: string
+          description: Document direction.
+          enum:
+          - INBOUND
+          - OUTBOUND
+          example: INBOUND
+    B2BDocumentList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/B2BDocument'
+        totalResults:
+          type: integer
+          example: 12
+        hasMore:
+          type: boolean
+          example: false
+    B2BStandardList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: X12
+              name:
+                type: string
+                example: ANSI ASC X12
+              versions:
+                type: array
+                items:
+                  type: string
+                example:
+                - '004010'
+                - '005010'
+    B2BDocumentCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Document name.
+          example: Invoice 810
+        standard:
+          type: string
+          description: B2B standard.
+          example: X12
+        version:
+          type: string
+          description: Standard version.
+          example: '005010'
+        transactionType:
+          type: string
+          description: Transaction type.
+          example: '810'
   responses:
+    BadRequest:
+      description: Bad request - invalid input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required or invalid credentials.
       content:
@@ -326,12 +332,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request - invalid input.
       content:
         application/json:
           schema:

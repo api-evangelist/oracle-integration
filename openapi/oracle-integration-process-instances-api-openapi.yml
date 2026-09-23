@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Oracle Integration Developer Adapters Process Instances API
-  description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
+  title: Oracle Integration Process Automation Process Instances API
+  description: REST API for Oracle Cloud Infrastructure Process Automation enabling management of process definitions, process instances, tasks, decision models, dynamic processes, identities, spaces, analytics, and QuickStart applications.
   version: 1.0.0
   contact:
     name: Oracle Integration Support
@@ -215,6 +215,21 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+        title:
+          type: string
+          example: Not Found
+        detail:
+          type: string
+          example: Process instance not found.
+        status:
+          type: integer
+          example: 404
     ProcessInstanceCreate:
       type: object
       properties:
@@ -233,76 +248,6 @@ components:
         payload:
           type: object
           description: Process input payload.
-    InstanceMetrics:
-      type: object
-      properties:
-        totalInstances:
-          type: integer
-          example: 500
-        openInstances:
-          type: integer
-          example: 45
-        completedInstances:
-          type: integer
-          example: 440
-        faultedInstances:
-          type: integer
-          example: 15
-    CommentCreate:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Comment text.
-          example: Approved. Proceed with fulfillment.
-    CommentList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-                example: Please review this order.
-              user:
-                type: string
-                example: admin@example.com
-              timestamp:
-                type: string
-                format: date-time
-                example: '2026-04-18T10:30:00Z'
-    ProcessInstanceList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessInstance'
-        totalResults:
-          type: integer
-          example: 150
-        hasMore:
-          type: boolean
-          example: true
-    AttachmentList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              attachmentName:
-                type: string
-                example: purchase_order.pdf
-              mimeType:
-                type: string
-                example: application/pdf
-              attachmentId:
-                type: string
-                example: '900123'
     ProcessInstance:
       type: object
       properties:
@@ -344,21 +289,59 @@ components:
           format: date-time
           description: Creation timestamp.
           example: '2026-04-18T10:00:00Z'
-    ErrorResponse:
+    CommentCreate:
       type: object
       properties:
-        type:
+        message:
           type: string
-          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
-        title:
-          type: string
-          example: Not Found
-        detail:
-          type: string
-          example: Process instance not found.
-        status:
+          description: Comment text.
+          example: Approved. Proceed with fulfillment.
+    InstanceMetrics:
+      type: object
+      properties:
+        totalInstances:
           type: integer
-          example: 404
+          example: 500
+        openInstances:
+          type: integer
+          example: 45
+        completedInstances:
+          type: integer
+          example: 440
+        faultedInstances:
+          type: integer
+          example: 15
+    ProcessInstanceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessInstance'
+        totalResults:
+          type: integer
+          example: 150
+        hasMore:
+          type: boolean
+          example: true
+    CommentList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Please review this order.
+              user:
+                type: string
+                example: admin@example.com
+              timestamp:
+                type: string
+                format: date-time
+                example: '2026-04-18T10:30:00Z'
     ProcessStateUpdate:
       type: object
       properties:
@@ -369,7 +352,30 @@ components:
           - COMPLETED
           - ABORTED
           example: ABORTED
+    AttachmentList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              attachmentName:
+                type: string
+                example: purchase_order.pdf
+              mimeType:
+                type: string
+                example: application/pdf
+              attachmentId:
+                type: string
+                example: '900123'
   responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required.
       content:
@@ -382,13 +388,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    processIdParam:
+      name: processId
+      in: path
+      required: true
+      description: Process instance identifier.
+      schema:
+        type: string
     offsetParam:
       name: offset
       in: query
@@ -403,23 +410,16 @@ components:
       schema:
         type: integer
         default: 20
-    processIdParam:
-      name: processId
-      in: path
-      required: true
-      description: Process instance identifier.
-      schema:
-        type: string
   securitySchemes:
     oauth2:
       type: oauth2
-      description: OAuth 2.0 authentication via Oracle Identity Cloud Service (IDCS).
+      description: OAuth 2.0 authentication via Oracle Identity Cloud Service.
       flows:
         authorizationCode:
           authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
           tokenUrl: https://{idcs-url}/oauth2/v1/token
           scopes:
-            urn:opc:resource:consumer::all: Full access to Oracle Integration APIs
+            urn:opc:resource:consumer::all: Full access
     basicAuth:
       type: http
       scheme: basic

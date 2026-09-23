@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Oracle Integration Developer Adapters Trading Partners API
+  title: Oracle Integration Developer Trading Partners API
   description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
   version: 1.0.0
   contact:
@@ -202,26 +202,56 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request - invalid input.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Error type URI.
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+        title:
+          type: string
+          description: Short error title.
+          example: Bad Request
+        detail:
+          type: string
+          description: Detailed error message.
+          example: Invalid connection identifier format.
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
+    TradingPartnerCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Trading partner name.
+          example: Acme Corporation
+        description:
+          type: string
+          description: Trading partner description.
+          example: Primary supplier for raw materials.
+    HostProfile:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Host profile name.
+          example: MyCompany B2B Host
+        identifiers:
+          type: array
+          description: Host identifiers.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: DUNS
+              value:
+                type: string
+                example: '123456789'
     TradingPartner:
       type: object
       properties:
@@ -253,36 +283,6 @@ components:
           format: email
           description: Contact email address.
           example: jane.smith@acme.com
-    TradingPartnerCreate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Trading partner name.
-          example: Acme Corporation
-        description:
-          type: string
-          description: Trading partner description.
-          example: Primary supplier for raw materials.
-    HostProfile:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Host profile name.
-          example: MyCompany B2B Host
-        identifiers:
-          type: array
-          description: Host identifiers.
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-                example: DUNS
-              value:
-                type: string
-                example: '123456789'
     TradingPartnerList:
       type: object
       properties:
@@ -296,25 +296,25 @@ components:
         hasMore:
           type: boolean
           example: false
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Error type URI.
-          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
-        title:
-          type: string
-          description: Short error title.
-          example: Bad Request
-        detail:
-          type: string
-          description: Detailed error message.
-          example: Invalid connection identifier format.
-        status:
-          type: integer
-          description: HTTP status code.
-          example: 400
+  responses:
+    BadRequest:
+      description: Bad request - invalid input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     offsetParam:
       name: offset

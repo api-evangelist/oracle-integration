@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Oracle Integration Developer Adapters Lookups API
+  title: Oracle Integration Developer Lookups API
   description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
   version: 1.0.0
   contact:
@@ -160,25 +160,25 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    LookupCreate:
+    ErrorResponse:
       type: object
       properties:
-        name:
+        type:
           type: string
-          description: Lookup name.
-          example: COUNTRY_CODES
-        description:
+          description: Error type URI.
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+        title:
           type: string
-          description: Lookup description.
-          example: Country code mapping table.
-        columns:
-          type: array
-          items:
-            type: string
-          example:
-          - Common
-          - Oracle
-          - Salesforce
+          description: Short error title.
+          example: Bad Request
+        detail:
+          type: string
+          description: Detailed error message.
+          example: Invalid connection identifier format.
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
     LookupList:
       type: object
       properties:
@@ -219,26 +219,32 @@ components:
             type: object
             additionalProperties:
               type: string
-    ErrorResponse:
+    LookupCreate:
       type: object
       properties:
-        type:
+        name:
           type: string
-          description: Error type URI.
-          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
-        title:
+          description: Lookup name.
+          example: COUNTRY_CODES
+        description:
           type: string
-          description: Short error title.
-          example: Bad Request
-        detail:
-          type: string
-          description: Detailed error message.
-          example: Invalid connection identifier format.
-        status:
-          type: integer
-          description: HTTP status code.
-          example: 400
+          description: Lookup description.
+          example: Country code mapping table.
+        columns:
+          type: array
+          items:
+            type: string
+          example:
+          - Common
+          - Oracle
+          - Salesforce
   responses:
+    BadRequest:
+      description: Bad request - invalid input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required or invalid credentials.
       content:
@@ -247,12 +253,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request - invalid input.
       content:
         application/json:
           schema:

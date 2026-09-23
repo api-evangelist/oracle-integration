@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Oracle Integration Developer Adapters Deployed Projects API
-  description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
+  title: Oracle Integration Process Automation Deployed Projects API
+  description: REST API for Oracle Cloud Infrastructure Process Automation enabling management of process definitions, process instances, tasks, decision models, dynamic processes, identities, spaces, analytics, and QuickStart applications.
   version: 1.0.0
   contact:
     name: Oracle Integration Support
@@ -86,13 +86,13 @@ components:
   securitySchemes:
     oauth2:
       type: oauth2
-      description: OAuth 2.0 authentication via Oracle Identity Cloud Service (IDCS).
+      description: OAuth 2.0 authentication via Oracle Identity Cloud Service.
       flows:
         authorizationCode:
           authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
           tokenUrl: https://{idcs-url}/oauth2/v1/token
           scopes:
-            urn:opc:resource:consumer::all: Full access to Oracle Integration APIs
+            urn:opc:resource:consumer::all: Full access
     basicAuth:
       type: http
       scheme: basic

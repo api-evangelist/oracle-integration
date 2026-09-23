@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Oracle Integration Developer Adapters Tasks API
-  description: Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
+  title: Oracle Integration Process Automation Tasks API
+  description: REST API for Oracle Cloud Infrastructure Process Automation enabling management of process definitions, process instances, tasks, decision models, dynamic processes, identities, spaces, analytics, and QuickStart applications.
   version: 1.0.0
   contact:
     name: Oracle Integration Support
@@ -166,57 +166,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    TaskAction:
-      type: object
-      properties:
-        action:
-          type: string
-          description: Action to perform.
-          enum:
-          - APPROVE
-          - REJECT
-          - REASSIGN
-          - ESCALATE
-          - WITHDRAW
-          - SUSPEND
-          - RESUME
-          example: APPROVE
-        comment:
-          type: string
-          description: Comment for the action.
-          example: Approved as per policy.
-        assignee:
-          type: string
-          description: New assignee for reassign action.
-          example: manager@example.com
-    TaskList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Task'
-        totalResults:
-          type: integer
-          example: 25
-        hasMore:
-          type: boolean
-          example: false
-    TaskMetrics:
-      type: object
-      properties:
-        totalTasks:
-          type: integer
-          example: 150
-        assignedTasks:
-          type: integer
-          example: 25
-        completedTasks:
-          type: integer
-          example: 120
-        expiredTasks:
-          type: integer
-          example: 5
     ErrorResponse:
       type: object
       properties:
@@ -232,6 +181,55 @@ components:
         status:
           type: integer
           example: 404
+    TaskMetrics:
+      type: object
+      properties:
+        totalTasks:
+          type: integer
+          example: 150
+        assignedTasks:
+          type: integer
+          example: 25
+        completedTasks:
+          type: integer
+          example: 120
+        expiredTasks:
+          type: integer
+          example: 5
+    TaskHistoryList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              action:
+                type: string
+                example: ASSIGN
+              user:
+                type: string
+                example: admin@example.com
+              timestamp:
+                type: string
+                format: date-time
+                example: '2026-04-18T10:00:00Z'
+              comment:
+                type: string
+                example: Task assigned to reviewer.
+    TaskList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        totalResults:
+          type: integer
+          example: 25
+        hasMore:
+          type: boolean
+          example: false
     Task:
       type: object
       properties:
@@ -284,27 +282,29 @@ components:
           type: string
           description: Task outcome.
           example: APPROVE
-    TaskHistoryList:
+    TaskAction:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              action:
-                type: string
-                example: ASSIGN
-              user:
-                type: string
-                example: admin@example.com
-              timestamp:
-                type: string
-                format: date-time
-                example: '2026-04-18T10:00:00Z'
-              comment:
-                type: string
-                example: Task assigned to reviewer.
+        action:
+          type: string
+          description: Action to perform.
+          enum:
+          - APPROVE
+          - REJECT
+          - REASSIGN
+          - ESCALATE
+          - WITHDRAW
+          - SUSPEND
+          - RESUME
+          example: APPROVE
+        comment:
+          type: string
+          description: Comment for the action.
+          example: Approved as per policy.
+        assignee:
+          type: string
+          description: New assignee for reassign action.
+          example: manager@example.com
   responses:
     Unauthorized:
       description: Authentication required.
@@ -319,6 +319,13 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip.
+      schema:
+        type: integer
+        default: 0
     limitParam:
       name: limit
       in: query
@@ -333,23 +340,16 @@ components:
       description: Task identifier.
       schema:
         type: string
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of items to skip.
-      schema:
-        type: integer
-        default: 0
   securitySchemes:
     oauth2:
       type: oauth2
-      description: OAuth 2.0 authentication via Oracle Identity Cloud Service (IDCS).
+      description: OAuth 2.0 authentication via Oracle Identity Cloud Service.
       flows:
         authorizationCode:
           authorizationUrl: https://{idcs-url}/oauth2/v1/authorize
           tokenUrl: https://{idcs-url}/oauth2/v1/token
           scopes:
-            urn:opc:resource:consumer::all: Full access to Oracle Integration APIs
+            urn:opc:resource:consumer::all: Full access
     basicAuth:
       type: http
       scheme: basic
