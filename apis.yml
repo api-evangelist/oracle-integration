@@ -6,17 +6,22 @@ description: Oracle Integration provides native connectivity to Oracle and non-O
   application building, and integration analytics into a single unified cloud service.
 type: Index
 deliveryModel:
-  model: unknown
+  model: saas
+  license_evidence:
+    not_product:
+    - oracle/oci-cli
+    - oracle/oci-go-sdk
+    - oracle/oci-python-sdk
   open_source: unknown
   commercial: true
   callable_host: true
-  label: Delivery model not determined — needs a product licence on record
+  label: Hosted service · you call their endpoint
   confidence: low
   source:
   - openapi
   - pricing
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: paid
@@ -522,6 +527,8 @@ apis:
   humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
   baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
   tags:
+  - Library
+  tags_raw:
   - Libraries
   properties:
   - type: OpenAPI
@@ -812,9 +819,11 @@ apis:
   humanURL: https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html
   baseURL: https://{instance}.integration.ocp.oraclecloud.com/ic/api/integration/v1
   tags:
+  - Spaces
   - Space
   tags_raw:
   - Spaces
+  - Space
   properties:
   - type: OpenAPI
     url: openapi/oracle-integration-spaces-api-openapi.yml

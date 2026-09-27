@@ -111,22 +111,28 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    spaceIdParam:
+      name: spaceId
+      in: path
+      required: true
+      description: Space identifier.
+      schema:
+        type: string
   schemas:
-    WorkspaceSpace:
-      type: object
-      properties:
-        spaceId:
-          type: string
-          description: Space identifier.
-          example: default
-        name:
-          type: string
-          description: Space name.
-          example: Default Space
-        description:
-          type: string
-          description: Space description.
-          example: Default workspace for projects.
     ErrorResponse:
       type: object
       properties:
@@ -142,6 +148,21 @@ components:
         status:
           type: integer
           example: 404
+    WorkspaceSpace:
+      type: object
+      properties:
+        spaceId:
+          type: string
+          description: Space identifier.
+          example: default
+        name:
+          type: string
+          description: Space name.
+          example: Default Space
+        description:
+          type: string
+          description: Space description.
+          example: Default workspace for projects.
     SpaceCreate:
       type: object
       properties:
@@ -160,27 +181,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WorkspaceSpace'
-  parameters:
-    spaceIdParam:
-      name: spaceId
-      in: path
-      required: true
-      description: Space identifier.
-      schema:
-        type: string
-  responses:
-    Unauthorized:
-      description: Authentication required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

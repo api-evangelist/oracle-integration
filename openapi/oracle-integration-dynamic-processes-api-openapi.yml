@@ -89,6 +89,13 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     ErrorResponse:
       type: object
@@ -105,6 +112,36 @@ components:
         status:
           type: integer
           example: 404
+    DynamicProcessInstanceCreate:
+      type: object
+      properties:
+        definitionId:
+          type: string
+          example: DP_ORDER_PROCESSING
+        title:
+          type: string
+          example: Order Processing Case
+    DynamicProcessInstanceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicProcessInstance'
+    DynamicProcessDefinitionList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: DP_ORDER_PROCESSING
+              name:
+                type: string
+                example: Order Processing
     DynamicProcessInstance:
       type: object
       properties:
@@ -121,43 +158,6 @@ components:
           type: string
           format: date-time
           example: '2026-04-18T10:00:00Z'
-    DynamicProcessInstanceCreate:
-      type: object
-      properties:
-        definitionId:
-          type: string
-          example: DP_ORDER_PROCESSING
-        title:
-          type: string
-          example: Order Processing Case
-    DynamicProcessDefinitionList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                example: DP_ORDER_PROCESSING
-              name:
-                type: string
-                example: Order Processing
-    DynamicProcessInstanceList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicProcessInstance'
-  responses:
-    Unauthorized:
-      description: Authentication required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

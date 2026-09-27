@@ -214,22 +214,36 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ErrorResponse:
+    ProcessStateUpdate:
       type: object
       properties:
-        type:
+        state:
           type: string
-          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
-        title:
-          type: string
-          example: Not Found
-        detail:
-          type: string
-          example: Process instance not found.
-        status:
-          type: integer
-          example: 404
+          description: New process state.
+          enum:
+          - COMPLETED
+          - ABORTED
+          example: ABORTED
     ProcessInstanceCreate:
       type: object
       properties:
@@ -248,6 +262,74 @@ components:
         payload:
           type: object
           description: Process input payload.
+    InstanceMetrics:
+      type: object
+      properties:
+        totalInstances:
+          type: integer
+          example: 500
+        openInstances:
+          type: integer
+          example: 45
+        completedInstances:
+          type: integer
+          example: 440
+        faultedInstances:
+          type: integer
+          example: 15
+    ProcessInstanceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessInstance'
+        totalResults:
+          type: integer
+          example: 150
+        hasMore:
+          type: boolean
+          example: true
+    CommentCreate:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Comment text.
+          example: Approved. Proceed with fulfillment.
+    CommentList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Please review this order.
+              user:
+                type: string
+                example: admin@example.com
+              timestamp:
+                type: string
+                format: date-time
+                example: '2026-04-18T10:30:00Z'
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+        title:
+          type: string
+          example: Not Found
+        detail:
+          type: string
+          example: Process instance not found.
+        status:
+          type: integer
+          example: 404
     ProcessInstance:
       type: object
       properties:
@@ -289,69 +371,6 @@ components:
           format: date-time
           description: Creation timestamp.
           example: '2026-04-18T10:00:00Z'
-    CommentCreate:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Comment text.
-          example: Approved. Proceed with fulfillment.
-    InstanceMetrics:
-      type: object
-      properties:
-        totalInstances:
-          type: integer
-          example: 500
-        openInstances:
-          type: integer
-          example: 45
-        completedInstances:
-          type: integer
-          example: 440
-        faultedInstances:
-          type: integer
-          example: 15
-    ProcessInstanceList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessInstance'
-        totalResults:
-          type: integer
-          example: 150
-        hasMore:
-          type: boolean
-          example: true
-    CommentList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-                example: Please review this order.
-              user:
-                type: string
-                example: admin@example.com
-              timestamp:
-                type: string
-                format: date-time
-                example: '2026-04-18T10:30:00Z'
-    ProcessStateUpdate:
-      type: object
-      properties:
-        state:
-          type: string
-          description: New process state.
-          enum:
-          - COMPLETED
-          - ABORTED
-          example: ABORTED
     AttachmentList:
       type: object
       properties:
@@ -369,40 +388,7 @@ components:
               attachmentId:
                 type: string
                 example: '900123'
-  responses:
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    processIdParam:
-      name: processId
-      in: path
-      required: true
-      description: Process instance identifier.
-      schema:
-        type: string
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of items to skip.
-      schema:
-        type: integer
-        default: 0
     limitParam:
       name: limit
       in: query
@@ -410,6 +396,20 @@ components:
       schema:
         type: integer
         default: 20
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip.
+      schema:
+        type: integer
+        default: 0
+    processIdParam:
+      name: processId
+      in: path
+      required: true
+      description: Process instance identifier.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

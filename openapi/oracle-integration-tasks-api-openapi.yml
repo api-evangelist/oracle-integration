@@ -166,36 +166,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
-        title:
-          type: string
-          example: Not Found
-        detail:
-          type: string
-          example: Process instance not found.
-        status:
-          type: integer
-          example: 404
-    TaskMetrics:
-      type: object
-      properties:
-        totalTasks:
-          type: integer
-          example: 150
-        assignedTasks:
-          type: integer
-          example: 25
-        completedTasks:
-          type: integer
-          example: 120
-        expiredTasks:
-          type: integer
-          example: 5
     TaskHistoryList:
       type: object
       properties:
@@ -282,6 +252,36 @@ components:
           type: string
           description: Task outcome.
           example: APPROVE
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+        title:
+          type: string
+          example: Not Found
+        detail:
+          type: string
+          example: Process instance not found.
+        status:
+          type: integer
+          example: 404
+    TaskMetrics:
+      type: object
+      properties:
+        totalTasks:
+          type: integer
+          example: 150
+        assignedTasks:
+          type: integer
+          example: 25
+        completedTasks:
+          type: integer
+          example: 120
+        expiredTasks:
+          type: integer
+          example: 5
     TaskAction:
       type: object
       properties:
@@ -319,20 +319,6 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of items to skip.
-      schema:
-        type: integer
-        default: 0
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of items to return.
-      schema:
-        type: integer
-        default: 20
     taskIdParam:
       name: id
       in: path
@@ -340,6 +326,20 @@ components:
       description: Task identifier.
       schema:
         type: string
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 20
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip.
+      schema:
+        type: integer
+        default: 0
   securitySchemes:
     oauth2:
       type: oauth2
