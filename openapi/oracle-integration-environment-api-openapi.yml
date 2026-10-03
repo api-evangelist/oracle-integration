@@ -71,6 +71,17 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CorsDomainList:
+      type: object
+      properties:
+        allowedOrigins:
+          type: array
+          description: List of allowed CORS origins.
+          items:
+            type: string
+          example:
+          - https://myapp.example.com
+          - https://portal.example.com
     ErrorResponse:
       type: object
       properties:
@@ -90,17 +101,6 @@ components:
           type: integer
           description: HTTP status code.
           example: 400
-    CorsDomainList:
-      type: object
-      properties:
-        allowedOrigins:
-          type: array
-          description: List of allowed CORS origins.
-          items:
-            type: string
-          example:
-          - https://myapp.example.com
-          - https://portal.example.com
   responses:
     Unauthorized:
       description: Authentication required or invalid credentials.

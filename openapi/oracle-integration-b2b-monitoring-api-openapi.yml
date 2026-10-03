@@ -71,38 +71,26 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    WireMessageList:
+    ErrorResponse:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                example: '700456'
-              protocol:
-                type: string
-                example: AS2
-              direction:
-                type: string
-                example: INBOUND
-              status:
-                type: string
-                example: SUCCESS
-              timestamp:
-                type: string
-                format: date-time
-                example: '2026-04-18T10:00:00Z'
+        type:
+          type: string
+          description: Error type URI.
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+        title:
+          type: string
+          description: Short error title.
+          example: Bad Request
+        detail:
+          type: string
+          description: Detailed error message.
+          example: Invalid connection identifier format.
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
     BusinessMessageList:
       type: object
       properties:
@@ -130,34 +118,38 @@ components:
                 type: string
                 format: date-time
                 example: '2026-04-18T10:00:00Z'
-    ErrorResponse:
+    WireMessageList:
       type: object
       properties:
-        type:
-          type: string
-          description: Error type URI.
-          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
-        title:
-          type: string
-          description: Short error title.
-          example: Bad Request
-        detail:
-          type: string
-          description: Detailed error message.
-          example: Invalid connection identifier format.
-        status:
-          type: integer
-          description: HTTP status code.
-          example: 400
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: '700456'
+              protocol:
+                type: string
+                example: AS2
+              direction:
+                type: string
+                example: INBOUND
+              status:
+                type: string
+                example: SUCCESS
+              timestamp:
+                type: string
+                format: date-time
+                example: '2026-04-18T10:00:00Z'
+  responses:
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of items to return.
-      schema:
-        type: integer
-        default: 20
-        example: 20
     offsetParam:
       name: offset
       in: query
@@ -166,6 +158,14 @@ components:
         type: integer
         default: 0
         example: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 20
+        example: 20
   securitySchemes:
     oauth2:
       type: oauth2

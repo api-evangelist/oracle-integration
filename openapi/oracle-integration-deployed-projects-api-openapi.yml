@@ -47,6 +47,20 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    QuickStartAppList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              quickStartAppId:
+                type: string
+                example: QS_TRAVEL_REQUEST
+              name:
+                type: string
+                example: Travel Request
     ErrorResponse:
       type: object
       properties:
@@ -62,20 +76,6 @@ components:
         status:
           type: integer
           example: 404
-    QuickStartAppList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              quickStartAppId:
-                type: string
-                example: QS_TRAVEL_REQUEST
-              name:
-                type: string
-                example: Travel Request
   responses:
     Unauthorized:
       description: Authentication required.

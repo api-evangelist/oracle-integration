@@ -112,27 +112,26 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    Unauthorized:
-      description: Authentication required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Resource not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    spaceIdParam:
-      name: spaceId
-      in: path
-      required: true
-      description: Space identifier.
-      schema:
-        type: string
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    WorkspaceSpaceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkspaceSpace'
     ErrorResponse:
       type: object
       properties:
@@ -148,6 +147,17 @@ components:
         status:
           type: integer
           example: 404
+    SpaceCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Space name.
+          example: Production Space
+        description:
+          type: string
+          description: Space description.
+          example: Space for production process projects.
     WorkspaceSpace:
       type: object
       properties:
@@ -163,24 +173,14 @@ components:
           type: string
           description: Space description.
           example: Default workspace for projects.
-    SpaceCreate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Space name.
-          example: Production Space
-        description:
-          type: string
-          description: Space description.
-          example: Space for production process projects.
-    WorkspaceSpaceList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkspaceSpace'
+  parameters:
+    spaceIdParam:
+      name: spaceId
+      in: path
+      required: true
+      description: Space identifier.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

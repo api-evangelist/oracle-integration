@@ -70,14 +70,21 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    AnalyticsQueryList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              businessQueryId:
+                type: string
+                example: '100123'
+              name:
+                type: string
+                example: Monthly Process Volume
     AnalyticsQueryCreate:
       type: object
       properties:
@@ -125,20 +132,13 @@ components:
             type: array
             items:
               type: string
-    AnalyticsQueryList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              businessQueryId:
-                type: string
-                example: '100123'
-              name:
-                type: string
-                example: Monthly Process Volume
+  responses:
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2
