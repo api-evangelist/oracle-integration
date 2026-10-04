@@ -131,6 +131,19 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     DecisionModel:
       type: object
@@ -162,6 +175,13 @@ components:
         status:
           type: integer
           example: 404
+    DecisionModelList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/DecisionModel'
     SpaceList:
       type: object
       properties:
@@ -176,39 +196,19 @@ components:
               name:
                 type: string
                 example: Default Space
-    DecisionModelList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/DecisionModel'
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    spaceIdParam:
-      name: spaceId
-      in: path
-      required: true
-      description: Space identifier.
-      schema:
-        type: string
     decisionModelNameParam:
       name: decisionModelName
       in: path
       required: true
       description: Decision model name.
+      schema:
+        type: string
+    spaceIdParam:
+      name: spaceId
+      in: path
+      required: true
+      description: Space identifier.
       schema:
         type: string
   securitySchemes:

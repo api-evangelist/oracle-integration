@@ -46,6 +46,13 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     QuickStartAppList:
       type: object
@@ -76,13 +83,6 @@ components:
         status:
           type: integer
           example: 404
-  responses:
-    Unauthorized:
-      description: Authentication required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

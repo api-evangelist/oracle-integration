@@ -89,52 +89,14 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    DynamicProcessDefinitionList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                example: DP_ORDER_PROCESSING
-              name:
-                type: string
-                example: Order Processing
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
-        title:
-          type: string
-          example: Not Found
-        detail:
-          type: string
-          example: Process instance not found.
-        status:
-          type: integer
-          example: 404
-    DynamicProcessInstanceCreate:
-      type: object
-      properties:
-        definitionId:
-          type: string
-          example: DP_ORDER_PROCESSING
-        title:
-          type: string
-          example: Order Processing Case
-    DynamicProcessInstanceList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/DynamicProcessInstance'
     DynamicProcessInstance:
       type: object
       properties:
@@ -151,13 +113,51 @@ components:
           type: string
           format: date-time
           example: '2026-04-18T10:00:00Z'
-  responses:
-    Unauthorized:
-      description: Authentication required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    DynamicProcessDefinitionList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: DP_ORDER_PROCESSING
+              name:
+                type: string
+                example: Order Processing
+    DynamicProcessInstanceCreate:
+      type: object
+      properties:
+        definitionId:
+          type: string
+          example: DP_ORDER_PROCESSING
+        title:
+          type: string
+          example: Order Processing Case
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+        title:
+          type: string
+          example: Not Found
+        detail:
+          type: string
+          example: Process instance not found.
+        status:
+          type: integer
+          example: 404
+    DynamicProcessInstanceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/DynamicProcessInstance'
   securitySchemes:
     oauth2:
       type: oauth2
