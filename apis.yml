@@ -928,6 +928,12 @@ apis:
   - type: JSONLD
     url: json-ld/oracle-integration-process-automation-api-context.jsonld
 common:
+- type: Plans
+  url: plans/oracle-integration-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/oracle-integration-rate-limits.yml
+- type: FinOps
+  url: finops/oracle-integration-finops.yml
 - type: Website
   url: https://oracle.com
 - type: IssueTracker
