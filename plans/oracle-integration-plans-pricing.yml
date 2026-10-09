@@ -161,3 +161,48 @@ plans:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  - subscription
+  units:
+  - compute
+  - data
+  plans:
+  - name: Oracle Integration - Standard Edition
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - compute
+    - other
+    periods:
+    - per-use
+  - name: Oracle Integration - Enterprise Edition
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - compute
+    - data
+    - other
+    periods:
+    - per-use
+  - name: Oracle Integration - Healthcare Edition
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - compute
+    periods:
+    - per-use
+  - name: Enterprise Agreement
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - year
