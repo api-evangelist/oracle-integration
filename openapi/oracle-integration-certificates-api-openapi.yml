@@ -86,20 +86,30 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request - invalid input.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    Certificate:
+      type: object
+      properties:
+        alias:
+          type: string
+          description: Certificate alias.
+          example: salesforce-cert
+        type:
+          type: string
+          description: Certificate type.
+          enum:
+          - trust
+          - identity
+          example: trust
+        subject:
+          type: string
+          description: Certificate subject.
+          example: CN=*.salesforce.com
+        expiry:
+          type: string
+          format: date-time
+          description: Certificate expiry date.
+          example: '2027-12-31T23:59:59Z'
     CertificateList:
       type: object
       properties:
@@ -126,29 +136,19 @@ components:
           type: integer
           description: HTTP status code.
           example: 400
-    Certificate:
-      type: object
-      properties:
-        alias:
-          type: string
-          description: Certificate alias.
-          example: salesforce-cert
-        type:
-          type: string
-          description: Certificate type.
-          enum:
-          - trust
-          - identity
-          example: trust
-        subject:
-          type: string
-          description: Certificate subject.
-          example: CN=*.salesforce.com
-        expiry:
-          type: string
-          format: date-time
-          description: Certificate expiry date.
-          example: '2027-12-31T23:59:59Z'
+  responses:
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request - invalid input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

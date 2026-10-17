@@ -179,6 +179,29 @@ components:
         hasMore:
           type: boolean
           example: false
+    TaskAction:
+      type: object
+      properties:
+        action:
+          type: string
+          description: Action to perform.
+          enum:
+          - APPROVE
+          - REJECT
+          - REASSIGN
+          - ESCALATE
+          - WITHDRAW
+          - SUSPEND
+          - RESUME
+          example: APPROVE
+        comment:
+          type: string
+          description: Comment for the action.
+          example: Approved as per policy.
+        assignee:
+          type: string
+          description: New assignee for reassign action.
+          example: manager@example.com
     Task:
       type: object
       properties:
@@ -246,29 +269,21 @@ components:
         status:
           type: integer
           example: 404
-    TaskAction:
+    TaskMetrics:
       type: object
       properties:
-        action:
-          type: string
-          description: Action to perform.
-          enum:
-          - APPROVE
-          - REJECT
-          - REASSIGN
-          - ESCALATE
-          - WITHDRAW
-          - SUSPEND
-          - RESUME
-          example: APPROVE
-        comment:
-          type: string
-          description: Comment for the action.
-          example: Approved as per policy.
-        assignee:
-          type: string
-          description: New assignee for reassign action.
-          example: manager@example.com
+        totalTasks:
+          type: integer
+          example: 150
+        assignedTasks:
+          type: integer
+          example: 25
+        completedTasks:
+          type: integer
+          example: 120
+        expiredTasks:
+          type: integer
+          example: 5
     TaskHistoryList:
       type: object
       properties:
@@ -290,29 +305,7 @@ components:
               comment:
                 type: string
                 example: Task assigned to reviewer.
-    TaskMetrics:
-      type: object
-      properties:
-        totalTasks:
-          type: integer
-          example: 150
-        assignedTasks:
-          type: integer
-          example: 25
-        completedTasks:
-          type: integer
-          example: 120
-        expiredTasks:
-          type: integer
-          example: 5
   parameters:
-    taskIdParam:
-      name: id
-      in: path
-      required: true
-      description: Task identifier.
-      schema:
-        type: string
     limitParam:
       name: limit
       in: query
@@ -327,6 +320,13 @@ components:
       schema:
         type: integer
         default: 0
+    taskIdParam:
+      name: id
+      in: path
+      required: true
+      description: Task identifier.
+      schema:
+        type: string
   responses:
     Unauthorized:
       description: Authentication required.

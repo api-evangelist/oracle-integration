@@ -131,71 +131,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  schemas:
-    DecisionModel:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Decision model name.
-          example: LoanApprovalDecision
-        description:
-          type: string
-          description: Model description.
-          example: Decision model for loan approval evaluation.
-        spaceId:
-          type: string
-          description: Space identifier.
-          example: default
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
-        title:
-          type: string
-          example: Not Found
-        detail:
-          type: string
-          example: Process instance not found.
-        status:
-          type: integer
-          example: 404
-    DecisionModelList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/DecisionModel'
-    SpaceList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              spaceId:
-                type: string
-                example: default
-              name:
-                type: string
-                example: Default Space
   parameters:
     decisionModelNameParam:
       name: decisionModelName
@@ -211,6 +146,71 @@ components:
       description: Space identifier.
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    SpaceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              spaceId:
+                type: string
+                example: default
+              name:
+                type: string
+                example: Default Space
+    DecisionModelList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/DecisionModel'
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+        title:
+          type: string
+          example: Not Found
+        detail:
+          type: string
+          example: Process instance not found.
+        status:
+          type: integer
+          example: 404
+    DecisionModel:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Decision model name.
+          example: LoanApprovalDecision
+        description:
+          type: string
+          description: Model description.
+          example: Decision model for loan approval evaluation.
+        spaceId:
+          type: string
+          description: Space identifier.
+          example: default
   securitySchemes:
     oauth2:
       type: oauth2

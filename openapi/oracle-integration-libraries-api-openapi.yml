@@ -100,6 +100,23 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 20
+        example: 20
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip before returning results.
+      schema:
+        type: integer
+        default: 0
+        example: 0
   responses:
     Unauthorized:
       description: Authentication required or invalid credentials.
@@ -133,19 +150,6 @@ components:
           type: string
           description: Library version.
           example: 01.00.0000
-    LibraryList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Library'
-        totalResults:
-          type: integer
-          example: 3
-        hasMore:
-          type: boolean
-          example: false
     ErrorResponse:
       type: object
       properties:
@@ -165,23 +169,19 @@ components:
           type: integer
           description: HTTP status code.
           example: 400
-  parameters:
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of items to return.
-      schema:
-        type: integer
-        default: 20
-        example: 20
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of items to skip before returning results.
-      schema:
-        type: integer
-        default: 0
-        example: 0
+    LibraryList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Library'
+        totalResults:
+          type: integer
+          example: 3
+        hasMore:
+          type: boolean
+          example: false
   securitySchemes:
     oauth2:
       type: oauth2

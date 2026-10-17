@@ -289,6 +289,74 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    UsageMetrics:
+      type: object
+      properties:
+        messageCount:
+          type: integer
+          description: Total message count.
+          example: 15000
+        period:
+          type: string
+          description: Reporting period.
+          example: 2026-04
+    AuditRecordList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: '800123'
+              action:
+                type: string
+                example: ACTIVATE
+              target:
+                type: string
+                example: HELLO_WORLD|01.00.0000
+              user:
+                type: string
+                example: admin@example.com
+              timestamp:
+                type: string
+                format: date-time
+                example: '2026-04-15T10:30:00Z'
+    MonitoringIntegrationList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: HELLO_WORLD|01.00.0000
+              successCount:
+                type: integer
+                example: 1200
+              failedCount:
+                type: integer
+                example: 5
+              status:
+                type: string
+                example: ACTIVATED
+    MonitoringInstanceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonitoringInstance'
+        totalResults:
+          type: integer
+          example: 1250
+        hasMore:
+          type: boolean
+          example: true
     MonitoringInstance:
       type: object
       properties:
@@ -323,30 +391,6 @@ components:
           type: string
           description: Business identifier for the instance.
           example: ORD-2026-001
-    AuditRecordList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                example: '800123'
-              action:
-                type: string
-                example: ACTIVATE
-              target:
-                type: string
-                example: HELLO_WORLD|01.00.0000
-              user:
-                type: string
-                example: admin@example.com
-              timestamp:
-                type: string
-                format: date-time
-                example: '2026-04-15T10:30:00Z'
     ErroredInstanceList:
       type: object
       properties:
@@ -360,6 +404,31 @@ components:
         hasMore:
           type: boolean
           example: false
+    ActivityStream:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              activityName:
+                type: string
+                description: Activity name.
+                example: MapData
+              activityType:
+                type: string
+                description: Activity type.
+                example: MAP
+              status:
+                type: string
+                description: Activity status.
+                example: COMPLETED
+              timestamp:
+                type: string
+                format: date-time
+                description: Activity timestamp.
+                example: '2026-04-18T10:00:01Z'
     ErrorResponse:
       type: object
       properties:
@@ -399,75 +468,6 @@ components:
               agentCount:
                 type: integer
                 example: 2
-    MonitoringIntegrationList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                example: HELLO_WORLD|01.00.0000
-              successCount:
-                type: integer
-                example: 1200
-              failedCount:
-                type: integer
-                example: 5
-              status:
-                type: string
-                example: ACTIVATED
-    UsageMetrics:
-      type: object
-      properties:
-        messageCount:
-          type: integer
-          description: Total message count.
-          example: 15000
-        period:
-          type: string
-          description: Reporting period.
-          example: 2026-04
-    MonitoringInstanceList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MonitoringInstance'
-        totalResults:
-          type: integer
-          example: 1250
-        hasMore:
-          type: boolean
-          example: true
-    ActivityStream:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              activityName:
-                type: string
-                description: Activity name.
-                example: MapData
-              activityType:
-                type: string
-                description: Activity type.
-                example: MAP
-              status:
-                type: string
-                description: Activity status.
-                example: COMPLETED
-              timestamp:
-                type: string
-                format: date-time
-                description: Activity timestamp.
-                example: '2026-04-18T10:00:01Z'
   responses:
     Unauthorized:
       description: Authentication required or invalid credentials.
@@ -482,14 +482,6 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of items to return.
-      schema:
-        type: integer
-        default: 20
-        example: 20
     offsetParam:
       name: offset
       in: query
@@ -498,6 +490,14 @@ components:
         type: integer
         default: 0
         example: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 20
+        example: 20
   securitySchemes:
     oauth2:
       type: oauth2

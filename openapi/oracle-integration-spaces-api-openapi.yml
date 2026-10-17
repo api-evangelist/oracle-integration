@@ -111,18 +111,20 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    SpaceCreate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Space name.
-          example: Production Space
-        description:
-          type: string
-          description: Space description.
-          example: Space for production process projects.
     WorkspaceSpace:
       type: object
       properties:
@@ -160,19 +162,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WorkspaceSpace'
-  responses:
-    Unauthorized:
-      description: Authentication required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    SpaceCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Space name.
+          example: Production Space
+        description:
+          type: string
+          description: Space description.
+          example: Space for production process projects.
   parameters:
     spaceIdParam:
       name: spaceId

@@ -173,31 +173,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request - invalid input.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     Connection:
       type: object
@@ -247,21 +222,6 @@ components:
           format: date-time
           description: Last update timestamp.
           example: '2026-04-15T10:30:00Z'
-    ConnectionList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Connection'
-        totalResults:
-          type: integer
-          description: Total number of connections.
-          example: 15
-        hasMore:
-          type: boolean
-          description: Whether more results are available.
-          example: false
     ConnectionUpdate:
       type: object
       properties:
@@ -293,6 +253,35 @@ components:
                 type: string
                 description: Security property value.
                 example: admin@salesforce.com
+    ConnectionTestResult:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Test result status.
+          enum:
+          - SUCCESS
+          - FAILURE
+          example: SUCCESS
+        message:
+          type: string
+          description: Test result message.
+          example: Connection test was successful.
+    ConnectionList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Connection'
+        totalResults:
+          type: integer
+          description: Total number of connections.
+          example: 15
+        hasMore:
+          type: boolean
+          description: Whether more results are available.
+          example: false
     ErrorResponse:
       type: object
       properties:
@@ -312,29 +301,32 @@ components:
           type: integer
           description: HTTP status code.
           example: 400
-    ConnectionTestResult:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Test result status.
-          enum:
-          - SUCCESS
-          - FAILURE
-          example: SUCCESS
-        message:
-          type: string
-          description: Test result message.
-          example: Connection test was successful.
+  responses:
+    Unauthorized:
+      description: Authentication required or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request - invalid input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    connectionIdParam:
-      name: id
-      in: path
-      required: true
-      description: Connection identifier.
-      schema:
-        type: string
-        example: SALESFORCE_CONNECTION
     limitParam:
       name: limit
       in: query
@@ -351,6 +343,14 @@ components:
         type: integer
         default: 0
         example: 0
+    connectionIdParam:
+      name: id
+      in: path
+      required: true
+      description: Connection identifier.
+      schema:
+        type: string
+        example: SALESFORCE_CONNECTION
   securitySchemes:
     oauth2:
       type: oauth2

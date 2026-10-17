@@ -214,43 +214,48 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      schema:
+        type: integer
+        default: 20
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip.
+      schema:
+        type: integer
+        default: 0
+    processIdParam:
+      name: processId
+      in: path
+      required: true
+      description: Process instance identifier.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ProcessInstanceCreate:
-      type: object
-      properties:
-        processDefId:
-          type: string
-          description: Process definition identifier.
-          example: default~OrderApproval~1.0
-        serviceName:
-          type: string
-          description: Service name.
-          example: OrderApprovalService
-        title:
-          type: string
-          description: Instance title.
-          example: Order
-        payload:
-          type: object
-          description: Process input payload.
-    CommentList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-                example: Please review this order.
-              user:
-                type: string
-                example: admin@example.com
-              timestamp:
-                type: string
-                format: date-time
-                example: '2026-04-18T10:30:00Z'
     ProcessInstance:
       type: object
       properties:
@@ -319,6 +324,44 @@ components:
           - COMPLETED
           - ABORTED
           example: ABORTED
+    ProcessInstanceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessInstance'
+        totalResults:
+          type: integer
+          example: 150
+        hasMore:
+          type: boolean
+          example: true
+    ProcessInstanceCreate:
+      type: object
+      properties:
+        processDefId:
+          type: string
+          description: Process definition identifier.
+          example: default~OrderApproval~1.0
+        serviceName:
+          type: string
+          description: Service name.
+          example: OrderApprovalService
+        title:
+          type: string
+          description: Instance title.
+          example: Order
+        payload:
+          type: object
+          description: Process input payload.
+    CommentCreate:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Comment text.
+          example: Approved. Proceed with fulfillment.
     ErrorResponse:
       type: object
       properties:
@@ -334,6 +377,24 @@ components:
         status:
           type: integer
           example: 404
+    CommentList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Please review this order.
+              user:
+                type: string
+                example: admin@example.com
+              timestamp:
+                type: string
+                format: date-time
+                example: '2026-04-18T10:30:00Z'
     InstanceMetrics:
       type: object
       properties:
@@ -349,67 +410,6 @@ components:
         faultedInstances:
           type: integer
           example: 15
-    ProcessInstanceList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessInstance'
-        totalResults:
-          type: integer
-          example: 150
-        hasMore:
-          type: boolean
-          example: true
-    CommentCreate:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Comment text.
-          example: Approved. Proceed with fulfillment.
-  responses:
-    Unauthorized:
-      description: Authentication required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of items to return.
-      schema:
-        type: integer
-        default: 20
-    processIdParam:
-      name: processId
-      in: path
-      required: true
-      description: Process instance identifier.
-      schema:
-        type: string
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of items to skip.
-      schema:
-        type: integer
-        default: 0
   securitySchemes:
     oauth2:
       type: oauth2

@@ -74,20 +74,31 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ProcessDefinitionList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessDefinition'
+    ProcessMetadata:
+      type: object
+      properties:
+        processDefId:
+          type: string
+          example: default~OrderApproval~1.0
+        activities:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: ReviewOrder
+              type:
+                type: string
+                example: HUMAN_TASK
     ProcessDefinition:
       type: object
       properties:
@@ -107,23 +118,6 @@ components:
           type: string
           description: Definition status.
           example: ACTIVE
-    ProcessMetadata:
-      type: object
-      properties:
-        processDefId:
-          type: string
-          example: default~OrderApproval~1.0
-        activities:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                example: ReviewOrder
-              type:
-                type: string
-                example: HUMAN_TASK
     ErrorResponse:
       type: object
       properties:
@@ -139,13 +133,19 @@ components:
         status:
           type: integer
           example: 404
-    ProcessDefinitionList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessDefinition'
+  responses:
+    Unauthorized:
+      description: Authentication required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

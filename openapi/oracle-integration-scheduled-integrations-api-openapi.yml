@@ -149,22 +149,6 @@ components:
         type: string
         example: HELLO_WORLD|01.00.0000
   schemas:
-    ScheduledJob:
-      type: object
-      properties:
-        jobId:
-          type: string
-          description: Scheduled job identifier.
-          example: '500123'
-        status:
-          type: string
-          description: Job status.
-          example: RUNNING
-        startTime:
-          type: string
-          format: date-time
-          description: Job start time.
-          example: '2026-04-18T14:30:00Z'
     ErrorResponse:
       type: object
       properties:
@@ -184,6 +168,22 @@ components:
           type: integer
           description: HTTP status code.
           example: 400
+    ScheduledJob:
+      type: object
+      properties:
+        jobId:
+          type: string
+          description: Scheduled job identifier.
+          example: '500123'
+        status:
+          type: string
+          description: Job status.
+          example: RUNNING
+        startTime:
+          type: string
+          format: date-time
+          description: Job start time.
+          example: '2026-04-18T14:30:00Z'
   securitySchemes:
     oauth2:
       type: oauth2
