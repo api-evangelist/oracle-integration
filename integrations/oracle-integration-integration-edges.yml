@@ -1,0 +1,16 @@
+generated: '2026-10-20'
+method: none
+source:
+- https://zapier.com/apps/oracle-integration/integrations
+- https://n8n.io/integrations/oracle-integration/
+- https://composio.dev/toolkits/oracle-integration
+- https://monid.ai/tools/oracle-integration
+checked:
+- https://composio.dev/toolkits/oracle-integration
+- https://monid.ai/tools/oracle-integration
+- https://n8n.io/integrations/oracle-integration/
+- https://zapier.com/apps/oracle-integration/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
