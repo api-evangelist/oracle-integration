@@ -1,4 +1,4 @@
-# Oracle Integration (oracle-integration)
+# Oracle Integration
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,229 +66,248 @@
 
 Oracle Integration provides native connectivity to Oracle and non-Oracle Software as a Service (SaaS) and on-premises applications, such as Oracle ERP Cloud, Oracle Service Cloud, HCM Cloud, Salesforce, Workday, EBS, SAP, NetSuite and others. It combines application integration, process automation, visual application building, and integration analytics into a single unified cloud service.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/oracle-integration/refs/heads/main/apis.yml)
+**Areas:** API Management · Automation · B2B Integration · Cloud Integration · Enterprise Integration · Integration · iPaaS · Process Automation
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## Oracle Integration on APIs.io
 
-## Tags:
+Everything profiled for Oracle Integration is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/oracle-integration/](https://apis.io/providers/oracle-integration/)** — or go straight to one of the APIs or properties below.
 
- - API Management, Automation, B2B Integration, Cloud Integration, Enterprise Integration, Integration, iPaaS, Process Automation
+### APIs (25)
 
-## Timestamps
+- [Oracle Integration File Server API](https://apis.io/apis/oracle-integration/oracle-integration-file-server-api/) — REST API for configuring and administering the Oracle Integration File Server, an SFTP-compliant file repository for managing file-based integrations.
+- [Oracle Integration Administrative API](https://apis.io/apis/oracle-integration/oracle-integration-administrative-api/) — OCI control plane API for provisioning and managing Oracle Integration instances, custom endpoints, and data retention configuration.
+- [Oracle Integration Adapters API](https://apis.io/apis/oracle-integration/oracle-integration-adapters-api/) — Rapid Adapter Builder for custom adapters.
+- [Oracle Integration Analytics API](https://apis.io/apis/oracle-integration/oracle-integration-analytics-api/) — Process analytics queries and data.
+- [Oracle Integration B2B Documents API](https://apis.io/apis/oracle-integration/oracle-integration-b2b-documents-api/) — B2B document customization and schema management.
+- [Oracle Integration B2B Monitoring API](https://apis.io/apis/oracle-integration/oracle-integration-b2b-monitoring-api/) — Monitor B2B business and wire messages.
+- [Oracle Integration Certificates API](https://apis.io/apis/oracle-integration/oracle-integration-certificates-api/) — Manage SSL certificates for secure connections.
+- [Oracle Integration Connections API](https://apis.io/apis/oracle-integration/oracle-integration-connections-api/) — Manage connections that define integration endpoints.
+- [Oracle Integration Decision Models API](https://apis.io/apis/oracle-integration/oracle-integration-decision-models-api/) — Manage DMN decision models and services.
+- [Oracle Integration Deployed Projects API](https://apis.io/apis/oracle-integration/oracle-integration-deployed-projects-api/) — Manage deployed BPM projects.
+- [Oracle Integration Dynamic Processes API](https://apis.io/apis/oracle-integration/oracle-integration-dynamic-processes-api/) — Manage dynamic process definitions and instances.
+- [Oracle Integration Environment API](https://apis.io/apis/oracle-integration/oracle-integration-environment-api/) — Configure CORS and environment settings.
+- [Oracle Integration Identities API](https://apis.io/apis/oracle-integration/oracle-integration-identities-api/) — Manage users, groups, and roles.
+- [Oracle Integration Integrations API](https://apis.io/apis/oracle-integration/oracle-integration-integrations-api/) — Create, manage, and deploy integrations.
+- [Oracle Integration Libraries API](https://apis.io/apis/oracle-integration/oracle-integration-libraries-api/) — Manage JavaScript libraries for use in integrations.
+- [Oracle Integration Lookups API](https://apis.io/apis/oracle-integration/oracle-integration-lookups-api/) — Manage lookup tables for data mapping.
+- [Oracle Integration Monitoring API](https://apis.io/apis/oracle-integration/oracle-integration-monitoring-api/) — Monitor and manage integration instances.
+- [Oracle Integration Packages API](https://apis.io/apis/oracle-integration/oracle-integration-packages-api/) — Manage packages for grouping integrations.
+- [Oracle Integration Process Definitions API](https://apis.io/apis/oracle-integration/oracle-integration-process-definitions-api/) — Retrieve process definition metadata and configurations.
+- [Oracle Integration Process Instances API](https://apis.io/apis/oracle-integration/oracle-integration-process-instances-api/) — Manage process instances and related data.
+- [Oracle Integration Projects API](https://apis.io/apis/oracle-integration/oracle-integration-projects-api/) — Manage integration projects and deployments.
+- [Oracle Integration Scheduled Integrations API](https://apis.io/apis/oracle-integration/oracle-integration-scheduled-integrations-api/) — Manage scheduled integration execution.
+- [Oracle Integration Spaces API](https://apis.io/apis/oracle-integration/oracle-integration-spaces-api/) — Manage workspace spaces.
+- [Oracle Integration Tasks API](https://apis.io/apis/oracle-integration/oracle-integration-tasks-api/) — Manage user tasks and task actions.
+- [Oracle Integration Trading Partners API](https://apis.io/apis/oracle-integration/oracle-integration-trading-partners-api/) — Manage B2B trading partners and agreements.
 
-- **Created:** 2024-01-15
-- **Modified:** 2026-04-18
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Oracle Integration Developer API
-Developer API for Oracle Integration 3 providing day-to-day management of integrations, connections, packages, libraries, lookups, certificates, scheduled integrations, monitoring, B2B trading partner operations, and rapid adapter building.
+#### Arazzo workflows (12)
 
-**Human URL:** [https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html](https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html)
+Multi-step workflows that chain operations into a business task.
 
-#### Tags:
+- [Oracle Integration Abort a Process with an Audit Comment](https://apis.io/arazzos/oracle-integration/oracle-integration-abort-process-with-comment-workflow/)
+- [Oracle Integration Abort a Running Instance](https://apis.io/arazzos/oracle-integration/oracle-integration-abort-running-instance-workflow/)
+- [Oracle Integration Activate an Integration](https://apis.io/arazzos/oracle-integration/oracle-integration-activate-integration-workflow/)
+- [Oracle Integration Clone and Activate an Integration](https://apis.io/arazzos/oracle-integration/oracle-integration-clone-and-activate-integration-workflow/)
+- [Oracle Integration Deactivate an Integration](https://apis.io/arazzos/oracle-integration/oracle-integration-deactivate-integration-workflow/)
+- [Oracle Integration Configure and Test a Connection](https://apis.io/arazzos/oracle-integration/oracle-integration-provision-connection-workflow/)
+- [Oracle Integration Provision a Decision Model](https://apis.io/arazzos/oracle-integration/oracle-integration-provision-decision-model-workflow/)
+- [Oracle Integration Triage and Resubmit an Errored Instance](https://apis.io/arazzos/oracle-integration/oracle-integration-resubmit-errored-instance-workflow/)
+- [Oracle Integration Review and Action a User Task](https://apis.io/arazzos/oracle-integration/oracle-integration-review-and-action-task-workflow/)
+- [Oracle Integration Start Schedule and Run Now](https://apis.io/arazzos/oracle-integration/oracle-integration-run-scheduled-integration-workflow/)
+- [Oracle Integration Start a Process and Handle Its Task](https://apis.io/arazzos/oracle-integration/oracle-integration-start-process-and-handle-task-workflow/)
+- [Oracle Integration Upsert a Lookup Table](https://apis.io/arazzos/oracle-integration/oracle-integration-upsert-lookup-workflow/)
 
- - B2B, Connections, Integration Management, Monitoring, Orchestration, Packages, REST API, Scheduled Integrations
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/index.html)
-- [APIReference](https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/rest-endpoints.html)
-- [Authentication](https://docs.oracle.com/en/cloud/paas/application-integration/rest-api/Authentication.html)
-- [OpenAPI](openapi/oracle-integration-developer-api.yaml)
-- [JSONSchema - Connection Schema](json-schema/developer-api-connection-schema.json)
-- [JSONSchema - Integration Schema](json-schema/developer-api-integration-schema.json)
-- [JSONSchema - Monitoring Instance Schema](json-schema/developer-api-monitoring-instance-schema.json)
-- [JSONSchema - Trading Partner Schema](json-schema/developer-api-trading-partner-schema.json)
-- [JSONLD](json-ld/oracle-integration-developer-api-context.jsonld)
+- [Oracle Integration Agentic Access](https://apis.io/agentic-access/oracle-integration/oracle-integration-agentic-access/)
 
-### Oracle Integration Process Automation API
-REST API for Oracle Cloud Infrastructure Process Automation enabling management of process definitions, process instances, tasks, decision models, dynamic processes, identities, spaces, analytics, and QuickStart applications.
+#### JSON Schema (6)
 
-**Human URL:** [https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html](https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html)
+The data models the API reads and writes.
 
-#### Tags:
+- [Connection](https://apis.io/schemas/oracle-integration/developer-api-connection/)
+- [Integration](https://apis.io/schemas/oracle-integration/developer-api-integration/)
+- [MonitoringInstance](https://apis.io/schemas/oracle-integration/developer-api-monitoring-instance/)
+- [TradingPartner](https://apis.io/schemas/oracle-integration/developer-api-trading-partner/)
+- [ProcessInstance](https://apis.io/schemas/oracle-integration/process-automation-api-process-instance/)
+- [Task](https://apis.io/schemas/oracle-integration/process-automation-api-task/)
 
- - BPM, Decision Models, Process Automation, Tasks, Workflows
+#### JSON Structure (6)
 
-#### Properties
+Data models expressed in JSON Structure.
 
-- [Documentation](https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/index.html)
-- [APIReference](https://docs.oracle.com/en/cloud/paas/process-automation/rest-api-proca/rest-endpoints.html)
-- [OpenAPI](openapi/oracle-integration-process-automation-api.yaml)
-- [JSONSchema - Process Instance Schema](json-schema/process-automation-api-process-instance-schema.json)
-- [JSONSchema - Task Schema](json-schema/process-automation-api-task-schema.json)
-- [JSONLD](json-ld/oracle-integration-process-automation-api-context.jsonld)
+- [Developer Api Connection Structure](https://apis.io/json-structure/oracle-integration/developer-api-connection-structure/)
+- [Developer Api Integration Structure](https://apis.io/json-structure/oracle-integration/developer-api-integration-structure/)
+- [Developer Api Monitoring Instance Structure](https://apis.io/json-structure/oracle-integration/developer-api-monitoring-instance-structure/)
+- [Developer Api Trading Partner Structure](https://apis.io/json-structure/oracle-integration/developer-api-trading-partner-structure/)
+- [Process Automation Api Process Instance Structure](https://apis.io/json-structure/oracle-integration/process-automation-api-process-instance-structure/)
+- [Process Automation Api Task Structure](https://apis.io/json-structure/oracle-integration/process-automation-api-task-structure/)
 
-### Oracle Integration File Server API
-REST API for configuring and administering the Oracle Integration File Server, an SFTP-compliant file repository for managing file-based integrations.
+#### JSON-LD (2)
 
-**Human URL:** [https://docs.oracle.com/en/cloud/paas/application-integration/rest-api-fs/index.html](https://docs.oracle.com/en/cloud/paas/application-integration/rest-api-fs/index.html)
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags:
+- [Oracle Integration Developer Api Context](https://apis.io/jsonld/oracle-integration/oracle-integration-developer-api-context/)
+- [Oracle Integration Process Automation Api Context](https://apis.io/jsonld/oracle-integration/oracle-integration-process-automation-api-context/)
 
- - File Management, File Server, SFTP
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://docs.oracle.com/en/cloud/paas/application-integration/rest-api-fs/index.html)
+- [Oracle Integration Vocabulary](https://apis.io/vocabularies/oracle-integration/oracle-integration-vocabulary/)
 
-### Oracle Integration Administrative API
-OCI control plane API for provisioning and managing Oracle Integration instances, custom endpoints, and data retention configuration.
+#### Examples (6)
 
-**Human URL:** [https://docs.oracle.com/en-us/iaas/api/#/en/integration/20190131/](https://docs.oracle.com/en-us/iaas/api/#/en/integration/20190131/)
+Example requests and responses.
 
-#### Tags:
+- [Developer Api Connection Example](https://apis.io/examples/oracle-integration/developer-api-connection-example/)
+- [Developer Api Integration Example](https://apis.io/examples/oracle-integration/developer-api-integration-example/)
+- [Developer Api Monitoring Instance Example](https://apis.io/examples/oracle-integration/developer-api-monitoring-instance-example/)
+- [Developer Api Trading Partner Example](https://apis.io/examples/oracle-integration/developer-api-trading-partner-example/)
+- [Process Automation Api Process Instance Example](https://apis.io/examples/oracle-integration/process-automation-api-process-instance-example/)
+- [Process Automation Api Task Example](https://apis.io/examples/oracle-integration/process-automation-api-task-example/)
 
- - Administration, Lifecycle Management, Provisioning
+#### Collections (25)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://docs.oracle.com/en-us/iaas/api/#/en/integration/20190131/)
-- [APIReference](https://docs.oracle.com/en-us/iaas/api/#/en/integration/20190131/)
+- [Oracle Integration Developer Adapters API](https://apis.io/collections/oracle-integration/open-oracle-integration-adapters-api/)
+- [Oracle Integration Developer Adapters Analytics API](https://apis.io/collections/oracle-integration/open-oracle-integration-analytics-api/)
+- [Oracle Integration Developer Adapters B2B Documents API](https://apis.io/collections/oracle-integration/open-oracle-integration-b2b-documents-api/)
+- [Oracle Integration Developer Adapters B2B Monitoring API](https://apis.io/collections/oracle-integration/open-oracle-integration-b2b-monitoring-api/)
+- [Oracle Integration Developer Adapters Certificates API](https://apis.io/collections/oracle-integration/open-oracle-integration-certificates-api/)
+- [Oracle Integration Developer Adapters Connections API](https://apis.io/collections/oracle-integration/open-oracle-integration-connections-api/)
+- [Oracle Integration Developer Adapters Decision Models API](https://apis.io/collections/oracle-integration/open-oracle-integration-decision-models-api/)
+- [Oracle Integration Developer Adapters Deployed Projects API](https://apis.io/collections/oracle-integration/open-oracle-integration-deployed-projects-api/)
+- [Oracle Integration Developer Adapters Dynamic Processes API](https://apis.io/collections/oracle-integration/open-oracle-integration-dynamic-processes-api/)
+- [Oracle Integration Developer Adapters Environment API](https://apis.io/collections/oracle-integration/open-oracle-integration-environment-api/)
+- [Oracle Integration Developer Adapters Identities API](https://apis.io/collections/oracle-integration/open-oracle-integration-identities-api/)
+- [Oracle Integration Developer Adapters Integrations API](https://apis.io/collections/oracle-integration/open-oracle-integration-integrations-api/)
+- [Oracle Integration Developer Adapters Libraries API](https://apis.io/collections/oracle-integration/open-oracle-integration-libraries-api/)
+- [Oracle Integration Developer Adapters Lookups API](https://apis.io/collections/oracle-integration/open-oracle-integration-lookups-api/)
+- [Oracle Integration Developer Adapters Monitoring API](https://apis.io/collections/oracle-integration/open-oracle-integration-monitoring-api/)
+- [Oracle Integration Developer Adapters Packages API](https://apis.io/collections/oracle-integration/open-oracle-integration-packages-api/)
+- [Oracle Integration Developer Adapters Process Definitions API](https://apis.io/collections/oracle-integration/open-oracle-integration-process-definitions-api/)
+- [Oracle Integration Developer Adapters Process Instances API](https://apis.io/collections/oracle-integration/open-oracle-integration-process-instances-api/)
+- [Oracle Integration Developer Adapters Projects API](https://apis.io/collections/oracle-integration/open-oracle-integration-projects-api/)
+- [Oracle Integration Developer Adapters Scheduled Integrations API](https://apis.io/collections/oracle-integration/open-oracle-integration-scheduled-integrations-api/)
+- [Oracle Integration Developer Adapters Spaces API](https://apis.io/collections/oracle-integration/open-oracle-integration-spaces-api/)
+- [Oracle Integration Developer Adapters Tasks API](https://apis.io/collections/oracle-integration/open-oracle-integration-tasks-api/)
+- [Oracle Integration Developer Adapters Trading Partners API](https://apis.io/collections/oracle-integration/open-oracle-integration-trading-partners-api/)
+- [Oracle Integration Developer API](https://apis.io/collections/oracle-integration/postman-oracle-integration-developer-api/)
+- [Oracle Integration Process Automation API](https://apis.io/collections/oracle-integration/postman-oracle-integration-process-automation-api/)
 
-## Common Properties
+#### Governance rules (2)
 
-- [Portal](https://cloud.oracle.com/integration)
-- [GettingStarted](https://docs.oracle.com/en/cloud/paas/application-integration/oracle-integration-oci/explore-oracle-integration-apis.html)
-- [Tutorials](https://docs.oracle.com/en/cloud/paas/integration-cloud/tutorials.html)
+Spectral rulesets for the provider's contracts.
+
+- [Oracle Integration — jsonschema rules](https://apis.io/rules/oracle-integration/oracle-integration-jsonschema-spectral-rules/)
+- [Oracle Integration API Rules](https://apis.io/rules/oracle-integration/oracle-integration-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Oracle Integration Authentication](https://apis.io/security/oracle-integration/oracle-integration-authentication/)
+- [Oracle Integration Domain Security](https://apis.io/security/oracle-integration/oracle-integration-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Oracle Integration Scopes](https://apis.io/scopes/oracle-integration/oracle-integration-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Oracle Integration Plans Pricing](https://apis.io/plans/oracle-integration/oracle-integration-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Oracle Integration Rate Limits](https://apis.io/rate-limits/oracle-integration/oracle-integration-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Oracle Integration Finops](https://apis.io/finops/oracle-integration/oracle-integration-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://oracle.com)
 - [Documentation](https://docs.oracle.com/en/cloud/paas/application-integration/index.html)
-- [Blog](https://blogs.oracle.com/integration/)
-- [ChangeLog](https://docs.oracle.com/en/cloud/paas/integration-cloud/whats-new/)
-- [Support](https://www.oracle.com/support/)
-- [TermsOfService](https://www.oracle.com/legal/terms.html)
-- [PrivacyPolicy](https://www.oracle.com/legal/privacy/)
-- [StatusPage](https://ocistatus.oraclecloud.com/)
+- [Getting started](https://docs.oracle.com/en/cloud/paas/application-integration/oracle-integration-oci/explore-oracle-integration-apis.html)
 - [Pricing](https://www.oracle.com/integration/pricing/)
-- [Console](https://cloud.oracle.com/integration)
-- [SDK - OCI SDKs](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm)
-- [CLI - OCI CLI](https://github.com/oracle/oci-cli)
-- [GitHubOrganization](https://github.com/oracle)
-- [GitHubRepository - OCI CLI Repository](https://github.com/oracle/oci-cli)
-- [GitHubRepository - Python SDK Repository](https://github.com/oracle/oci-python-sdk)
-- [GitHubRepository - Go SDK Repository](https://github.com/oracle/oci-go-sdk)
-- [Training](https://education.oracle.com/)
-- [Marketplace](https://cloudmarketplace.oracle.com/marketplace/en_US/homeLinkPage)
+- [Support](https://www.oracle.com/support/)
+- [Changelog](https://docs.oracle.com/en/cloud/paas/integration-cloud/whats-new/)
+- [Blog](https://blogs.oracle.com/integration/)
+- [Terms of service](https://www.oracle.com/legal/terms.html)
+- [Privacy policy](https://www.oracle.com/legal/privacy/)
+- [GitHub](https://github.com/oracle)
+- [Status](https://ocistatus.oraclecloud.com/)
 
-## Features
+## API Evangelist rating
 
-| Name | Description |
-|------|-------------|
-| Prebuilt Integrations | Library of prebuilt integration recipes and adapters for rapid deployment of common integration patterns. |
-| Application Adapters | Native connectivity to Oracle SaaS, on-premises applications, and third-party services including Salesforce, SAP, Workday, and ServiceNow. |
-| Visual Integration Designer | Low-code drag-and-drop integration designer for building integration flows without extensive coding. |
-| B2B Document Exchange | EDI and B2B document processing with support for trading partner management, document standards, and agreement lifecycle. |
-| Process Automation | Business process management with structured and unstructured workflows, case management, and task management. |
-| Decision Modeling | DMN-based decision model management for business rules execution and deployment. |
-| Scheduled Integrations | Time-based scheduling of integration flows with pause, resume, start, and stop controls. |
-| Integration Monitoring | Real-time monitoring of integration instances, error tracking, activity streams, and audit records. |
-| File Server | SFTP-compliant embedded file server for file-based integration scenarios. |
-| Rapid Adapter Builder | Custom adapter development framework for building reusable connectivity to proprietary or niche systems. |
-| AI Agents | AI agent capabilities within integration projects for intelligent automation patterns and prompt templates. |
-| Machine Learning Recommendations | ML-based guidance and recommendations for building and optimizing integrations. |
-| Integration Analytics | Built-in analytics and process analytics with custom query builders and data visualization. |
-| FHIR Support | Native Fast Healthcare Interoperability Resources support for healthcare integration workflows. |
+**Kin Score 51.9** — developing · rubric 0.25.0 · scored 2026-10-23
 
-## Use Cases
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 31.2 |
+| Contract governance | 27.3 |
+| Operational transparency | 52.6 |
+| Developer ergonomics | 72.6 |
+| Access clarity | 39.5 |
 
-| Name | Description |
-|------|-------------|
-| SaaS Application Integration | Connect Oracle SaaS applications like ERP Cloud, HCM Cloud, and CX Cloud with third-party SaaS platforms. |
-| ERP Integration | Integrate Oracle ERP Cloud or on-premises EBS with procurement, supply chain, and financial systems. |
-| HCM Integration | Synchronize human capital management data across Oracle HCM Cloud, Workday, and other HR systems. |
-| B2B Trading Partner Onboarding | Automate EDI-based trading partner setup, agreement management, and document exchange. |
-| Process Automation | Automate business processes with approval workflows, case management, and task orchestration. |
-| Healthcare Data Exchange | Build FHIR-compliant healthcare integration workflows for patient data exchange and interoperability. |
-| Hybrid Cloud Integration | Connect on-premises applications to Oracle Cloud and third-party cloud services via connectivity agents. |
-| File-Based Integration | Automate file transfers and processing with the embedded SFTP-compliant file server. |
-| CI/CD For Integrations | Manage integration lifecycle with export, import, and deployment APIs for DevOps automation. |
-| Real-Time Event Processing | Process events and messages in real time using event-driven integration patterns and stream analytics. |
+**Agent readiness 23.7** — agent-aware
 
-## Integrations
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
 
-| Name | Description |
-|------|-------------|
-| Oracle ERP Cloud | Native adapter for Oracle Enterprise Resource Planning Cloud including financials, procurement, and supply chain. |
-| Oracle HCM Cloud | Native adapter for Oracle Human Capital Management Cloud for HR, payroll, and talent management. |
-| Oracle CX Cloud | Native adapter for Oracle Customer Experience Cloud including sales, service, and marketing. |
-| Oracle NetSuite | Native adapter for Oracle NetSuite ERP and CRM cloud services. |
-| Salesforce | Prebuilt adapter for Salesforce CRM integration with Oracle cloud and on-premises applications. |
-| SAP | Adapter for SAP ERP and S/4HANA integration via IDoc, BAPI, and RFC protocols. |
-| Workday | Prebuilt adapter for Workday HCM and financial management integration. |
-| ServiceNow | Adapter for ServiceNow ITSM and ITOM integration with Oracle applications. |
-| Shopify | Adapter for Shopify e-commerce platform integration with order management and inventory systems. |
-| Snowflake | Adapter for Snowflake data warehouse integration for analytics and data pipelines. |
-| Microsoft Azure | Connectivity to Microsoft Azure services and applications for multi-cloud integration. |
-| AWS | Connectivity to Amazon Web Services for multi-cloud integration scenarios. |
-| Slack | Adapter for Slack messaging integration with workflow notifications and approvals. |
-| JIRA | Adapter for Atlassian JIRA project management and issue tracking integration. |
+**Regulatory alignment 34.3** — Horizontal (data, software, accessibility, platform)
 
-## Artifacts
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/oracle-integration/](https://apis.io/providers/oracle-integration/).
 
-Machine-readable API specifications organized by format.
+## How this profile is made
 
-### OpenAPI
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-- [Oracle Integration Developer API](openapi/oracle-integration-developer-api.yaml)
-- [Oracle Integration Process Automation API](openapi/oracle-integration-process-automation-api.yaml)
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Oracle Integration: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-### JSON Schema
+## Open an issue
 
-- [Connection](json-schema/developer-api-connection-schema.json)
-- [Integration](json-schema/developer-api-integration-schema.json)
-- [MonitoringInstance](json-schema/developer-api-monitoring-instance-schema.json)
-- [TradingPartner](json-schema/developer-api-trading-partner-schema.json)
-- [ProcessInstance](json-schema/process-automation-api-process-instance-schema.json)
-- [Task](json-schema/process-automation-api-task-schema.json)
-
-### JSON Structure
-
-- [Connection](json-structure/developer-api-connection-structure.json)
-- [Integration](json-structure/developer-api-integration-structure.json)
-- [MonitoringInstance](json-structure/developer-api-monitoring-instance-structure.json)
-- [TradingPartner](json-structure/developer-api-trading-partner-structure.json)
-- [ProcessInstance](json-structure/process-automation-api-process-instance-structure.json)
-- [Task](json-structure/process-automation-api-task-structure.json)
-
-### JSON-LD
-
-- [Developer API Context](json-ld/oracle-integration-developer-api-context.jsonld)
-- [Process Automation API Context](json-ld/oracle-integration-process-automation-api-context.jsonld)
-
-### Examples
-
-- [Connection Example](examples/developer-api-connection-example.json)
-- [Integration Example](examples/developer-api-integration-example.json)
-- [MonitoringInstance Example](examples/developer-api-monitoring-instance-example.json)
-- [TradingPartner Example](examples/developer-api-trading-partner-example.json)
-- [ProcessInstance Example](examples/process-automation-api-process-instance-example.json)
-- [Task Example](examples/process-automation-api-task-example.json)
-
-## Capabilities
-
-Naftiko capabilities organized as shared per-API definitions composed into customer-facing workflows.
-
-### Shared Per-API Definitions
-
-- [Oracle Integration Developer API](capabilities/shared/developer-api.yaml) -- 18 operations for integration, connection, monitoring, and B2B management
-- [Oracle Integration Process Automation API](capabilities/shared/process-automation-api.yaml) -- 10 operations for process, task, decision model, and analytics management
-
-### Workflow Capabilities
-
-| Workflow | APIs Combined | Tools | Persona |
-|----------|--------------|-------|---------|
-| [Integration Management](capabilities/integration-management.yaml) | Developer API + Process Automation API | 17 | Integration Developer, Platform Administrator |
-
-## Vocabulary
-
-- [Oracle Integration Vocabulary](vocabulary/oracle-integration-vocabulary.yaml) -- Unified taxonomy mapping 22 resources, 17 actions, 1 workflow, and 4 personas across operational (OpenAPI) and capability (Naftiko) dimensions
-
-## Rules
-
-- [Oracle Integration Spectral Rules](rules/oracle-integration-spectral-rules.yml) -- 38 rules across 13 categories enforcing Oracle Integration API conventions
-
-## Maintainers
-
-**FN:** Kin Lane
-
-**Email:** kin@apievangelist.com
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/oracle-integration/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
